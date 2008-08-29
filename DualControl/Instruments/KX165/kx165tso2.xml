@@ -1,0 +1,547 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>kx165tso.ac</path>
+
+ <params>
+  <comm-serviceable>/instrumentation/comm[1]/serviceable</comm-serviceable
+>
+  <nav-serviceable>/instrumentation/nav[1]/serviceable</nav-serviceable>
+  <power>/instrumentation/nav[1]/power-btn</power>
+  <comm-frq-swp>/instrumentation/comm[1]/frq-swap-btn</comm-frq-swp>
+  <comm-frq-selected>/instrumentation/comm[1]/frequencies/selected-mhz</comm-frq-selected>
+  <comm-frq-standby>/instrumentation/comm[1]/frequencies/standby-mhz</comm-frq-standby>
+  <comm-volume>/instrumentation/comm[1]/volume</comm-volume>
+  <comm-test>/instrumentation/comm[1]/test-btn</comm-test>
+
+  <nav-frq-swp>/instrumentation/nav[1]/frq-swap-btn</nav-frq-swp>
+  <nav-frq-selected>/instrumentation/nav[1]/frequencies/selected-mhz</nav-frq-selected>
+  <nav-frq-standby>/instrumentation/nav[1]/frequencies/standby-mhz</nav-frq-standby>
+  <nav-volume>/instrumentation/nav[1]/volume</nav-volume>
+  <nav-audio>/instrumentation/nav[1]/audio-btn</nav-audio>
+ </params>
+
+ <animation>
+  <type>select</type>
+  <object-name>CommUse</object-name>
+  <object-name>CommStby</object-name>
+  <object-name>NavUse</object-name>
+  <object-name>NavStby</object-name>
+  <condition>
+   <property alias="../../../params/comm-serviceable"/>
+   <property alias="../../../params/nav-serviceable"/>
+   <property alias="../../../params/power"/>
+  </condition>
+ </animation>
+
+ <!-- comm part -->
+
+ <animation>
+  <type>material</type>
+  <object-name>CommToggle</object-name>
+  <object-name>NavToggle</object-name>
+  <emission>
+   <red-prop>/sim/model/instrument-lighting/emission/red</red-prop>
+   <green-prop>/sim/model/instrument-lighting/emission/green</green-prop>
+   <blue-prop>/sim/model/instrument-lighting/emission/blue</blue-prop>
+   <factor-prop>/controls/lighting/instruments-norm</factor-prop>
+  </emission>
+ </animation>
+    
+ <animation>
+  <type>translate</type>
+  <object-name>CommToggle</object-name>
+  <property alias="../../params/comm-frq-swp"/>
+  <factor>-0.004</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommUse100M</object-name>
+  <property alias="../../params/comm-frq-selected"/>
+  <step>100</step>
+  <factor>0.001</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommUse10M</object-name>
+  <property alias="../../params/comm-frq-selected"/>
+  <step>10</step>
+  <factor>0.01</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommUse1M</object-name>
+  <property alias="../../params/comm-frq-selected"/>
+  <step>1</step>
+  <factor>0.1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommUse100K</object-name>
+  <property alias="../../params/comm-frq-selected"/>
+  <step>0.1</step>
+  <factor>1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommUse10K</object-name>
+  <property alias="../../params/comm-frq-selected"/>
+  <step>0.01</step>
+  <factor>10</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommStby100M</object-name>
+  <property alias="../../params/comm-frq-standby"/>
+  <step>100</step>
+  <factor>0.001</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommStby10M</object-name>
+  <property alias="../../params/comm-frq-standby"/>
+  <step>10</step>
+  <factor>0.01</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommStby1M</object-name>
+  <property alias="../../params/comm-frq-standby"/>
+  <step>1</step>
+  <factor>0.1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommStby100K</object-name>
+  <property alias="../../params/comm-frq-standby"/>
+  <step>0.1</step>
+  <factor>1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>CommStby10K</object-name>
+  <property alias="../../params/comm-frq-standby"/>
+  <step>0.01</step>
+  <factor>10</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <!-- NAV part -->
+
+ <animation>
+  <type>translate</type>
+  <object-name>NavToggle</object-name>
+  <property alias="../../params/nav-frq-swp"/>
+  <factor>-0.004</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavUse100M</object-name>
+  <property alias="../../params/nav-frq-selected"/>
+  <step>100</step>
+  <factor>0.001</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavUse10M</object-name>
+  <property alias="../../params/nav-frq-selected"/>
+  <step>10</step>
+  <factor>0.01</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavUse1M</object-name>
+  <property alias="../../params/nav-frq-selected"/>
+  <step>1</step>
+  <factor>0.1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavUse100K</object-name>
+  <property alias="../../params/nav-frq-selected"/>
+  <step>0.1</step>
+  <factor>1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavUse10K</object-name>
+  <property alias="../../params/nav-frq-selected"/>
+  <step>0.01</step>
+  <factor>10</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavStby100M</object-name>
+  <property alias="../../params/nav-frq-standby"/>
+  <step>100</step>
+  <factor>0.001</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavStby10M</object-name>
+  <property alias="../../params/nav-frq-standby"/>
+  <step>10</step>
+  <factor>0.01</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavStby1M</object-name>
+  <property alias="../../params/nav-frq-standby"/>
+  <step>1</step>
+  <factor>0.1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavStby100K</object-name>
+  <property alias="../../params/nav-frq-standby"/>
+  <step>0.1</step>
+  <factor>1</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>textranslate</type>
+  <object-name>NavStby10K</object-name>
+  <property alias="../../params/nav-frq-standby"/>
+  <step>0.01</step>
+  <factor>10</factor>
+  <bias>0.0005</bias>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <!-- knobs and buttons -->
+
+ <animation>
+  <type>rotate</type>
+  <object-name>CommVolume</object-name>
+  <property alias="../../params/comm-volume"/>
+  <factor>-270</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+  <center>
+   <x-m>0.0188947</x-m>
+   <y-m>-0.0620002</y-m>
+   <z-m>-0.0139999</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>CommVolume</object-name>
+  <property alias="../../params/comm-test"/>
+  <factor>0.002</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>CommKHz</object-name>
+  <property alias="../../params/comm-frq-standby"/>
+  <factor>-1200</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+  <center>
+   <x-m>0.0320882</x-m>
+   <y-m>-0.022</y-m>
+   <z-m>-0.012</z-m>
+  </center>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>NavVolume</object-name>
+  <property alias="../../params/nav-volume"/>
+  <factor>-270</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+  <center>
+   <x-m>0.0188946</x-m>
+   <y-m>0.0180001</y-m>
+   <z-m>-0.0139999</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>NavVolume</object-name>
+  <property alias="../../params/nav-audio"/>
+  <factor>0.002</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <!-- OSG Hotspots for dual control -->
+
+ <animation>
+  <type>pick</type>
+  <object-name>CommToggle</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.swap_comm(1);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>CommKHz</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(1, 0.025);</script>
+   </binding>
+  </action>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(1, -0.025);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>CommMHz</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(1, 1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(1, -1.0);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>NavToggle</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.swap_nav(1);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>NavKHz</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(1, 0.05);</script>
+   </binding>
+  </action>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(1, -0.05);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>NavMHz</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(1, 1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(1, -1.0);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>noshadow</type>
+ </animation>
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>10</max-m>
+ </animation>
+
+</PropertyList>

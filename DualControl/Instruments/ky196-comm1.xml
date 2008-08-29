@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>null.ac</path> <!-- A suitably empty AC3D file. -->
+
+ <model>
+  <path>Aircraft/Instruments-3d/ky196/ky196-comm1.xml</path>
+ </model>
+
+ <!-- Override OSG Hotspots for dual control -->
+ 
+ <animation>
+  <type>pick</type>
+  <object-name>KY196.swap</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.swap(0);</script>
+   </binding>
+  </action>
+ </animation>
+	
+ <animation>
+  <type>pick</type>
+  <object-name>Vol.down</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.set_volume(0, -0.05);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>Vol.up</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.set_volume(0, 0.05);</script>
+   </binding>
+  </action>
+ </animation>
+
+ <animation>
+  <type>pick</type>
+  <object-name>Freq.down</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.adjust_frequency(0, -0.025);</script>
+   </binding>
+  </action>
+ </animation>
+	
+ <animation>
+  <type>pick</type>
+  <object-name>Freq.down</object-name>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.adjust_frequency(0, -1.0);</script>
+   </binding>
+  </action>
+ </animation>
+	
+ <animation>
+  <type>pick</type>
+  <object-name>Freq.up</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.adjust_frequency(0, 0.025);</script>
+   </binding>
+  </action>
+ </animation>
+	
+ <animation>
+  <type>pick</type>
+  <object-name>Freq.up</object-name>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>aircraft_dual_control.ky196.adjust_frequency(0, 1.0);</script>
+   </binding>
+  </action>
+ </animation>
+
+</PropertyList>

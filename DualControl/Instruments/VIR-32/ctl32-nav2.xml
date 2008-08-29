@@ -7,6 +7,10 @@ Freq. range 108.000 - 117.975 (normal)
 Strap option 133.00 - 135.95
  05 khz spacing
 Syd Adams
+
+Adapted for dual control by Anders Gidenstam
+
+NOTE: ctl32.nas MUST be loaded as Nasal module VIR32.
  -->
 
 <PropertyList>
@@ -23,7 +27,7 @@ Syd Adams
         <object-name>freq.005</object-name>
         <condition>
             <greater-than>
-                <property>/systems/electrical/outputs/nav[0]</property>
+                <property>/systems/electrical/outputs/nav[1]</property>
                 <value>1</value>
             </greater-than>
         </condition>
@@ -39,7 +43,7 @@ Syd Adams
         <object-name>stby.005</object-name>
         <condition>
             <greater-than>
-                <property>/systems/electrical/outputs/nav[0]</property>
+                <property>/systems/electrical/outputs/nav[1]</property>
                 <value>1</value>
             </greater-than>
         </condition>
@@ -50,7 +54,7 @@ Syd Adams
         <object-name>mem.annun</object-name>
         <condition>
             <greater-than>
-                <property>/systems/electrical/outputs/nav[0]</property>
+                <property>/systems/electrical/outputs/nav[1]</property>
                 <value>1</value>
             </greater-than>
         </condition>
@@ -59,7 +63,7 @@ Syd Adams
     <animation>
         <type>rotate</type>
         <object-name>CTL-32.pwr</object-name>
-        <property>instrumentation/nav[0]/serviceable</property>
+        <property>instrumentation/nav[1]/serviceable</property>
         <interpolation>
             <entry><ind>0</ind><dep>0</dep></entry>
             <entry><ind>1.0</ind><dep>30</dep></entry>
@@ -81,7 +85,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>freq.001</object-name>
-        <property>instrumentation/nav[0]/frequencies/selected-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/selected-mhz</property>
         <factor>0.001</factor>
         <step>100</step>
         <bias>0.0005</bias>
@@ -95,7 +99,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>freq.002</object-name>
-        <property>instrumentation/nav[0]/frequencies/selected-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/selected-mhz</property>
         <factor>0.01</factor>
         <step>10</step>
         <bias>0.0005</bias>
@@ -109,7 +113,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>freq.003</object-name>
-        <property>instrumentation//nav[0]/frequencies/selected-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/selected-mhz</property>
         <factor>0.1</factor>
         <step>1</step>
         <bias>0.0005</bias>
@@ -123,7 +127,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>freq.004</object-name>
-        <property>instrumentation/nav[0]/frequencies/selected-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/selected-mhz</property>
         <factor>1</factor>
         <step>0.1</step>
         <bias>0.0005</bias>
@@ -137,7 +141,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>freq.005</object-name>
-        <property>instrumentation/nav[0]/frequencies/selected-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/selected-mhz</property>
         <factor>10</factor>
         <step>0.01</step>
         <bias>0.0005</bias>
@@ -153,7 +157,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>stby.001</object-name>
-        <property>instrumentation/nav[0]/frequencies/standby-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/standby-mhz</property>
         <factor>0.001</factor>
         <step>100</step>
         <bias>0.0005</bias>
@@ -167,7 +171,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>stby.002</object-name>
-        <property>instrumentation/nav[0]/frequencies/standby-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/standby-mhz</property>
         <factor>0.01</factor>
         <step>10</step>
         <bias>0.0005</bias>
@@ -181,7 +185,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>stby.003</object-name>
-        <property>instrumentation/nav[0]/frequencies/standby-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/standby-mhz</property>
         <factor>0.1</factor>
         <step>1</step>
         <bias>0.0005</bias>
@@ -195,7 +199,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>stby.004</object-name>
-        <property>instrumentation/nav[0]/frequencies/standby-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/standby-mhz</property>
         <factor>1</factor>
         <step>0.1</step>
         <bias>0.0005</bias>
@@ -209,7 +213,7 @@ Syd Adams
     <animation>
         <type>textranslate</type>
         <object-name>stby.005</object-name>
-        <property>instrumentation/nav[0]/frequencies/standby-mhz</property>
+        <property>instrumentation/nav[1]/frequencies/standby-mhz</property>
         <factor>10</factor>
         <step>0.01</step>
         <bias>0.0005</bias>
@@ -224,13 +228,12 @@ Syd Adams
         <type>pick</type>
         <object-name>CTL-32.xfr</object-name>
         <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-            <command>property-swap</command>
-            <property>/instrumentation/nav[0]/frequencies/selected-mhz</property>
-            <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
-        </binding>
+         <button>0</button>
+         <repeatable>false</repeatable>
+         <binding>
+          <command>nasal</command>
+          <script>VIR32.swap(1);</script>
+         </binding>
         </action>
     </animation>
 
@@ -242,7 +245,7 @@ Syd Adams
             <repeatable>false</repeatable>
             <binding>
             <command>property-assign</command>
-            <property>/instrumentation/nav[0]/serviceable</property>
+            <property>/instrumentation/nav[1]/serviceable</property>
             <value>false</value>
         </binding>
         </action>
@@ -256,7 +259,7 @@ Syd Adams
             <repeatable>false</repeatable>
             <binding>
                 <command>property-assign</command>
-                <property>/instrumentation/nav[0]/serviceable</property>
+                <property>/instrumentation/nav[1]/serviceable</property>
                 <value>true</value>
             </binding>
         </action>
@@ -270,12 +273,17 @@ Syd Adams
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
-                <step>-0.050</step>
-                <min>108.00</min>
-                <max>118.00</max>
-                <wrap>true</wrap>
+             <command>nasal</command>
+             <script>VIR32.adjust_frequency(1, -0.05);</script>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+             <command>nasal</command>
+             <script>VIR32.adjust_frequency(1, -1.0);</script>
             </binding>
         </action>
     </animation>
@@ -288,48 +296,17 @@ Syd Adams
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
-                <step>0.050</step>
-                <min>108.00</min>
-                <max>118.00</max>
-                <wrap>true</wrap>
+             <command>nasal</command>
+             <script>VIR32.adjust_frequency(1, 0.05);</script>
             </binding>
         </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>freq.dwn</object-name>
         <action>
             <button>1</button>
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
-                <step>-1.0</step>
-                <min>108.00</min>
-                <max>118.00</max>
-                <wrap>true</wrap>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>freq.up</object-name>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/nav[0]/frequencies/standby-mhz</property>
-                <step>1.0</step>
-                <min>108.00</min>
-                <max>118.000</max>
-                <wrap>true</wrap>
+             <command>nasal</command>
+             <script>VIR32.adjust_frequency(1, 1.0);</script>
             </binding>
         </action>
     </animation>

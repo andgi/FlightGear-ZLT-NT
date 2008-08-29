@@ -5,6 +5,10 @@ Active and preset displayed +
 2.375"W x 2.625"H
 Freq. range 118.000 - 135.975 (normal) @ 25 khz spacing
 Syd Adams
+
+Adapted for dual control by Anders Gidenstam
+
+NOTE: ctl22.nas MUST be loaded as Nasal module VHF22.
  -->
 
 <PropertyList>
@@ -252,13 +256,12 @@ Syd Adams
         <type>pick</type>
         <object-name>CTL-22.xfr</object-name>
         <action>
-            <button>0</button>
-            <repeatable>false</repeatable>
-            <binding>
-            <command>property-swap</command>
-            <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
-            <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
-        </binding>
+         <button>0</button>
+         <repeatable>false</repeatable>
+         <binding>
+          <command>nasal</command>
+          <script>VHF22.swap(1);</script>
+         </binding>
         </action>
     </animation>
 
@@ -298,12 +301,17 @@ Syd Adams
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
-                <step>-0.025</step>
-                <min>118.000</min>
-                <max>135.975</max>
-                <wrap>true</wrap>
+             <command>nasal</command>
+             <script>VHF22.adjust_frequency(1, -0.025);</script>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>true</repeatable>
+            <interval-sec>0.2</interval-sec>
+            <binding>
+             <command>nasal</command>
+             <script>VHF22.adjust_frequency(1, -1.0);</script>
             </binding>
         </action>
     </animation>
@@ -316,48 +324,17 @@ Syd Adams
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
-                <step>0.025</step>
-                <min>118.000</min>
-                <max>135.975</max>
-                <wrap>true</wrap>
+             <command>nasal</command>
+             <script>VHF22.adjust_frequency(1, 0.025);</script>
             </binding>
         </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>freq.dwn</object-name>
         <action>
             <button>1</button>
             <repeatable>true</repeatable>
             <interval-sec>0.2</interval-sec>
             <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
-                <step>-1.0</step>
-                <min>118.000</min>
-                <max>135.975</max>
-                <wrap>true</wrap>
-            </binding>
-        </action>
-    </animation>
-
-    <animation>
-        <type>pick</type>
-        <object-name>freq.up</object-name>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-                <command>property-adjust</command>
-                <property>/instrumentation/comm[1]/frequencies/standby-mhz</property>
-                <step>1.0</step>
-                <min>118.000</min>
-                <max>135.975</max>
-                <wrap>true</wrap>
+             <command>nasal</command>
+             <script>VHF22.adjust_frequency(1, 1.0);</script>
             </binding>
         </action>
     </animation>

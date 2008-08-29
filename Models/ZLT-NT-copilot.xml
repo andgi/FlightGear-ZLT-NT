@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>../DualControl/Instruments/null.ac</path>
+ 
+ <nasal>
+  <load>
+   cmdarg().getNode("sim/model/ac-type", 1).setValue("ZLT-NT-copilot");
+  </load>
+ </nasal>
+
+</PropertyList>
