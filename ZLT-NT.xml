@@ -1279,16 +1279,14 @@
 
    <aerosurface_scale name="fcs/side-engine-swivel-cmd-rad">
     <input>fcs/side-engine-swivel-cmd-norm</input>
-    <gain>1.0</gain>
     <domain>
-     <min>-1</min>
+     <min>0</min>
      <max>1</max>
     </domain>
     <range>
      <min>0</min>
      <max>2.0944</max>
     </range>
-    <zero_centered>0</zero_centered>
    </aerosurface_scale>
    <actuator name="fcs/left-engine-swivel-actuator">
     <input>fcs/side-engine-swivel-cmd-rad</input>
@@ -1306,16 +1304,14 @@
 
    <aerosurface_scale name="fcs/side-engine-swivel-cmd-rad[1]">
     <input>fcs/side-engine-swivel-cmd-norm</input>
-    <gain>1.0</gain>
     <domain>
-     <min>-1</min>
+     <min>0</min>
      <max>1</max>
     </domain>
     <range>
      <min>0</min>
      <max>2.0944</max>
     </range>
-    <zero_centered>0</zero_centered>
    </aerosurface_scale>
    <actuator name="fcs/right-engine-swivel-actuator">
     <input>fcs/side-engine-swivel-cmd-rad[1]</input>
@@ -1333,7 +1329,6 @@
 
    <aerosurface_scale name="fcs/rear-engine-swivel-cmd-rad">
     <input>fcs/rear-engine-swivel-cmd-norm</input>
-    <gain>1.0</gain>
     <domain>
      <min>0</min>
      <max>1</max>
@@ -1342,7 +1337,6 @@
      <min>0.0</min>
      <max>1.5708</max>
     </range>
-    <zero_centered>0</zero_centered>
    </aerosurface_scale>
    <actuator name="fcs/rear-engine-swivel-actuator">
     <input>fcs/rear-engine-swivel-cmd-rad</input>

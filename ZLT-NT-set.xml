@@ -277,15 +277,7 @@
     <binding>
      <command>nasal</command>
      <script>
-      <![CDATA[
-       var p = ZLTNT.ballonet_cmd_p[0];
-       var t = getprop(p) - 0.05;
-       if (t < -1.0) { t = -1.0; }
-       setprop(p, t);
-       gui.popupTip("Forward ballonet " ~
-                    (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
-                            : ("blower " ~ int(100*t + 0.005) ~ "%.")));
-      ]]>
+      ZLTNT.step_ballonet_cmd(0, -0.05);
      </script>
     </binding>
    </key>
@@ -296,15 +288,7 @@
     <binding>
      <command>nasal</command>
      <script>
-      <![CDATA[
-       var p = ZLTNT.ballonet_cmd_p[0];
-       var t = getprop(p) + 0.05;
-       if (t > 1.0) { t = 1.0; }
-       setprop(p, t);
-       gui.popupTip("Forward ballonet " ~
-                    (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
-                            : ("blower " ~ int(100*t + 0.005) ~ "%.")));
-      ]]>
+      ZLTNT.step_ballonet_cmd(0, 0.05);
      </script>
     </binding>
    </key>
@@ -316,15 +300,7 @@
     <binding>
      <command>nasal</command>
      <script>
-      <![CDATA[
-       var p = ZLTNT.ballonet_cmd_p[1];
-       var t = getprop(p) - 0.05;
-       if (t < -1.0) { t = -1.0; }
-       setprop(p, t);
-       gui.popupTip("Aft ballonet " ~
-                    (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
-                            : ("blower " ~ int(100*t + 0.005) ~ "%.")));
-      ]]>
+      ZLTNT.step_ballonet_cmd(1, -0.05);
      </script>
     </binding>
    </key>
@@ -335,15 +311,7 @@
     <binding>
      <command>nasal</command>
      <script>
-      <![CDATA[
-       var p = ZLTNT.ballonet_cmd_p[1];
-       var t = getprop(p) + 0.05;
-       if (t > 1.0) { t = 1.0; }
-       setprop(p, t);
-       gui.popupTip("Aft ballonet " ~
-                    (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
-                            : ("blower " ~ int(100*t + 0.005) ~ "%.")));
-      ]]>
+      ZLTNT.step_ballonet_cmd(1, 0.05);
      </script>
     </binding>
    </key>

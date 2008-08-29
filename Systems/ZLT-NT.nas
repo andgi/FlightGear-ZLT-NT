@@ -129,6 +129,18 @@ controls.gearDown = func(step) {
     gui.popupTip("Aft engine swivel " ~ int(90*v) ~ " deg.");
 }
 
+# Ballonet control
+var step_ballonet_cmd = func(n, d) {
+    var p = ballonet_cmd_p[n];
+    var t = getprop(p) + d;
+    if (t >  1.0) { t =  1.0; }
+    if (t < -1.0) { t = -1.0; }
+    setprop(p, t);
+    gui.popupTip((n ? "Aft" : "Forward") ~ " ballonet " ~
+                 (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
+                  : ("blower " ~ int(100*t + 0.005) ~ "%.")));
+}
+
 ###############################################################################
 # Debug display - stand in instrumentation.
 var debug_display_view_handler = {
