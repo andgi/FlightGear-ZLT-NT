@@ -89,7 +89,7 @@
   <type>rotate</type>
   <object-name>throttle_arm.1</object-name>
   <object-name>throttle_handle.1</object-name>
-  <property>controls/engines/engine[0]/throttle</property>
+  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[0]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -107,7 +107,7 @@
   <type>rotate</type>
   <object-name>throttle_arm.2</object-name>
   <object-name>throttle_handle.2</object-name>
-  <property>controls/engines/engine[1]/throttle</property>
+  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[1]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -125,7 +125,7 @@
   <type>rotate</type>
   <object-name>throttle_arm.3</object-name>
   <object-name>throttle_handle.3</object-name>
-  <property>controls/engines/engine[2]/throttle</property>
+  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[2]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -144,7 +144,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.1</object-name>
   <object-name>mixture_handle.1</object-name>
-  <property>controls/engines/engine[0]/mixture</property>
+  <property>fdm/jsbsim/fcs/mixture-pos-norm[0]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -162,7 +162,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.2</object-name>
   <object-name>mixture_handle.2</object-name>
-  <property>controls/engines/engine[1]/mixture</property>
+  <property>fdm/jsbsim/fcs/mixture-pos-norm[1]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -180,7 +180,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.3</object-name>
   <object-name>mixture_handle.3</object-name>
-  <property>controls/engines/engine[2]/mixture</property>
+  <property>fdm/jsbsim/fcs/mixture-pos-norm[2]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -199,7 +199,7 @@
   <type>rotate</type>
   <object-name>thrust_arm.1</object-name>
   <object-name>thrust_handle.1</object-name>
-  <property>controls/engines/engine[0]/propeller-pitch</property>
+  <property>fdm/jsbsim/fcs/advance-pos-norm[0]</property>
   <factor>-90.0</factor>
   <offset-deg>45.0</offset-deg>
   <center>
@@ -217,7 +217,7 @@
   <type>rotate</type>
   <object-name>thrust_arm.2</object-name>
   <object-name>thrust_handle.2</object-name>
-  <property>controls/engines/engine[1]/propeller-pitch</property>
+  <property>fdm/jsbsim/fcs/advance-pos-norm[1]</property>
   <factor>-90.0</factor>
   <offset-deg>45.0</offset-deg>
   <center>
@@ -235,7 +235,7 @@
   <type>rotate</type>
   <object-name>thrust_arm.3</object-name>
   <object-name>thrust_handle.3</object-name>
-  <property>controls/engines/engine[2]/propeller-pitch</property>
+  <property>fdm/jsbsim/fcs/advance-pos-norm[2]</property>
   <factor>-90.0</factor>
   <offset-deg>45.0</offset-deg>
   <center>
@@ -1012,7 +1012,7 @@ if (!contains(globals, "ZLTNT")) {
   <unload>
 ##############################################################################
 var rplayer = cmdarg();
-print("UNLOAD Submarine_Scout ", rplayer.getPath());
+print("UNLOAD ZLT-NT ", rplayer.getPath());
 # Unset aircraft type property.
 rplayer.getNode("sim/model/ac-type", 1).setValue("");
 rplayer.getNode("sim/model/ac-type", 1).remove();

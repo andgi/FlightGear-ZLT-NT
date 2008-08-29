@@ -12,7 +12,7 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <status>alpha</status>
+  <status>development</status>
   <aircraft-version>$Id$</aircraft-version>
   
   <flight-model>jsb</flight-model>
@@ -31,7 +31,7 @@
   <!-- Views -->
   <view n="0">
    <!-- Pilot's position. -->
-   <name>Pilot</name>
+   <name>Pilot View</name>
    <internal>true</internal>
    <config>
     <!-- x/y/z == right/up/back -->
@@ -39,16 +39,12 @@
     <y-offset-m type="double"> -7.75 </y-offset-m>
     <z-offset-m type="double"> 18.65 </z-offset-m>
     <pitch-offset-deg type="double"> -20.0 </pitch-offset-deg>
-<!--
-    <default-field-of-view-deg type="double"> 65 </default-field-of-view-deg>
-    <ground-level-nearplane-m type="double"> 0.5f </ground-level-nearplane-m>
--->
    </config>
   </view>
   <!-- Views -->
   <view n="100">
-   <!-- Pilot's position. -->
-   <name>Copilot</name>
+   <!-- Copilot's position. -->
+   <name>Copilot View</name>
    <internal>true</internal>
    <config>
     <!-- x/y/z == right/up/back -->
@@ -59,9 +55,6 @@
     <z-offset-m type="double"> 18.65 </z-offset-m>
     <pitch-offset-deg type="double"> -20.0 </pitch-offset-deg>
     <default-field-of-view-deg type="double"> 65 </default-field-of-view-deg>
-<!--
-    <ground-level-nearplane-m type="double"> 0.5f </ground-level-nearplane-m>
--->
    </config>
   </view>
 
@@ -116,7 +109,18 @@
     <float n="0" alias="/fdm/jsbsim/propulsion/engine[0]/pitch-angle-rad"/>
     <float n="1" alias="/fdm/jsbsim/propulsion/engine[1]/pitch-angle-rad"/>
     <float n="2" alias="/fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad"/>
-    <string n="0"></string>
+    <float n="3"
+           alias="/instrumentation/heading-indicator/indicated-heading-deg"/>
+    <float n="4"
+           alias="/instrumentation/attitude-indicator/indicated-pitch-deg"/>
+    <float n="5"
+           alias="/instrumentation/attitude-indicator/indicated-roll-deg"/>
+    <!-- float n="6"
+           alias="/instrumentation/attitude-indicator/horizon-offset-deg"/ -->
+    <int n="0" type="int">0</int>         <!-- MP switches 1 -->
+    <string n="0" type="string"></string> <!-- MP events -->
+    <string n="1" type="string"></string> <!-- MP TDM1 -->
+    <string n="2" type="string"></string> <!-- MP TDM2 -->
    </generic>
   </multiplay>
 
@@ -159,11 +163,27 @@
   <M877>
    <file>Aircraft/Instruments-3d/clock/M877/M877.nas</file>
   </M877>
+  <VHF22>
+   <file>Aircraft/ZLT-NT/DualControl/Instruments/VHF-22/ctl22.nas</file>
+  </VHF22>
+  <VIR32>
+   <file>Aircraft/ZLT-NT/DualControl/Instruments/VIR-32/ctl32.nas</file>
+  </VIR32>
   <citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
    <file>Aircraft/CitationX/Nasal/Primus1000.nas</file>
    <file>Aircraft/CitationX/Nasal/rmu.nas</file>
-   </citation>
+  </citation>
+  <!-- Dual control. -->
+  <dual_control_tools>
+   <file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
+  </dual_control_tools>
+  <aircraft_dual_control>
+   <file>Aircraft/ZLT-NT/Systems/ZLT-NT-dual-control.nas</file>
+  </aircraft_dual_control>
+  <dual_control_pilot>
+   <file>Aircraft/ZLT-NT/DualControl/pilot-dual-control.nas</file>
+  </dual_control_pilot>
  </nasal>
 
  <input>

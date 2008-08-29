@@ -904,7 +904,7 @@
     <blower_input>
      <function name="buoyant_forces/gas-cell/ballonet[0]/in-flow-ft3ps">
       <product>
-       <value> 50.0 </value>
+       <value> 100.0 </value>
        <property>fcs/blower-cmd-norm[0]</property>
       </product>
      </function>
@@ -957,7 +957,7 @@
     <blower_input>
      <function name="buoyant_forces/gas-cell/ballonet[1]/in-flow-ft3ps">
       <product>
-       <value> 50.0 </value>
+       <value> 100.0 </value>
        <property>fcs/blower-cmd-norm[1]</property>
       </product>
      </function>
@@ -1120,6 +1120,21 @@
    requests.
   </documentation>
 
+  <!-- FlightGear multiplayer dual control. -->
+  <property>fcs/dual-control/enabled</property>
+
+  <property>fcs/copilot-elevator-cmd-norm</property>
+  <property>fcs/copilot-rudder-cmd-norm</property>
+  <property>fcs/dual-control/propeller-speed-cmd-norm[0]</property>
+  <property>fcs/dual-control/propeller-speed-cmd-norm[1]</property>
+  <property>fcs/dual-control/propeller-speed-cmd-norm[2]</property>
+  <property>fcs/dual-control/thrust-cmd-norm[0]</property>
+  <property>fcs/dual-control/thrust-cmd-norm[1]</property>
+  <property>fcs/dual-control/thrust-cmd-norm[2]</property>
+  <property>fcs/dual-control/mixture-cmd-norm[0]</property>
+  <property>fcs/dual-control/mixture-cmd-norm[1]</property>
+  <property>fcs/dual-control/mixture-cmd-norm[2]</property>
+
   <!--
   === Pitch ==================================================
   -->
@@ -1128,6 +1143,7 @@
    <summer name="fcs/pitch-trim-sum">
     <input>fcs/elevator-cmd-norm</input>
     <input>fcs/pitch-trim-cmd-norm</input>
+    <input>fcs/copilot-elevator-cmd-norm</input>
     <clipto>
      <min>-1</min>
      <max>1</max>
@@ -1171,6 +1187,7 @@
     <input>fcs/rudder-cmd-norm</input>
     <input>-fcs/aileron-cmd-norm</input> <!-- Save my fragile rudder axis. --> 
     <input>fcs/yaw-trim-cmd-norm</input>
+    <input>fcs/copilot-rudder-cmd-norm</input>
     <clipto>
      <min>-1</min>
      <max>1</max>
@@ -1348,8 +1365,16 @@
   -->
   <channel name="Engine 1 throttle control">
 
+   <!-- Enable/disable dual-control. -->
+   <switch name="fcs/propeller-speed-cmd-norm[0]">
+    <default value="fcs/throttle-cmd-norm[0]"/>
+    <test logic="AND" value="fcs/dual-control/propeller-speed-cmd-norm[0]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+   </switch>
+
    <aerosurface_scale name="fcs/etc/propeller-speed-cmd-rpm[0]">
-    <input>fcs/throttle-cmd-norm[0]</input>
+    <input>fcs/propeller-speed-cmd-norm[0]</input>
     <domain>
      <min>0</min>
      <max>1</max>
@@ -1408,8 +1433,16 @@
 
   <channel name="Engine 2 throttle control">
 
+   <!-- Enable/disable dual-control. -->
+   <switch name="fcs/propeller-speed-cmd-norm[1]">
+    <default value="fcs/throttle-cmd-norm[1]"/>
+    <test logic="AND" value="fcs/dual-control/propeller-speed-cmd-norm[1]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+   </switch>
+
    <aerosurface_scale name="fcs/etc/propeller-speed-cmd-rpm[1]">
-    <input>fcs/throttle-cmd-norm[1]</input>
+    <input>fcs/propeller-speed-cmd-norm[1]</input>
     <domain>
      <min>0</min>
      <max>1</max>
@@ -1468,8 +1501,16 @@
 
   <channel name="Engine 3 throttle control">
 
+   <!-- Enable/disable dual-control. -->
+   <switch name="fcs/propeller-speed-cmd-norm[2]">
+    <default value="fcs/throttle-cmd-norm[2]"/>
+    <test logic="AND" value="fcs/dual-control/propeller-speed-cmd-norm[2]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+   </switch>
+
    <aerosurface_scale name="fcs/etc/propeller-speed-cmd-rpm[2]">
-    <input>fcs/throttle-cmd-norm[2]</input>
+    <input>fcs/propeller-speed-cmd-norm[2]</input>
     <domain>
      <min>0</min>
      <max>1</max>
@@ -1523,6 +1564,66 @@
     </clipto>
     <output>fcs/throttle-pos-norm[2]</output>
    </actuator>
+
+  </channel>
+
+  <!--
+  === Thrust control =========================================
+  -->
+  <channel name="Thrust control">
+
+   <!-- Enable/disable dual-control. -->
+   <switch name="fcs/dual-control/advance-pos-norm[0]">
+    <default value="fcs/advance-cmd-norm[0]"/>
+    <test logic="AND" value="fcs/dual-control/thrust-cmd-norm[0]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+    <output>fcs/advance-pos-norm[0]</output>
+   </switch>
+   <switch name="fcs/dual-control/advance-pos-norm[1]">
+    <default value="fcs/advance-cmd-norm[1]"/>
+    <test logic="AND" value="fcs/dual-control/thrust-cmd-norm[1]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+    <output>fcs/advance-pos-norm[1]</output>
+   </switch>
+   <switch name="fcs/dual-control/advance-pos-norm[2]">
+    <default value="fcs/advance-cmd-norm[2]"/>
+    <test logic="AND" value="fcs/dual-control/thrust-cmd-norm[2]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+    <output>fcs/advance-pos-norm[2]</output>
+   </switch>
+
+  </channel>
+
+  <!--
+  === Mixture control ========================================
+  -->
+  <channel name="Mixture control">
+
+   <!-- Enable/disable dual-control. -->
+   <switch name="fcs/dual-control/mixture-pos-norm[0]">
+    <default value="fcs/mixture-cmd-norm[0]"/>
+    <test logic="AND" value="fcs/dual-control/mixture-cmd-norm[0]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+    <output>fcs/mixture-pos-norm[0]</output>
+   </switch>
+   <switch name="fcs/dual-control/mixture-pos-norm[1]">
+    <default value="fcs/mixture-cmd-norm[1]"/>
+    <test logic="AND" value="fcs/dual-control/mixture-cmd-norm[1]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+    <output>fcs/mixture-pos-norm[1]</output>
+   </switch>
+   <switch name="fcs/dual-control/mixture-pos-norm[2]">
+    <default value="fcs/mixture-cmd-norm[2]"/>
+    <test logic="AND" value="fcs/dual-control/mixture-cmd-norm[2]">
+     fcs/dual-control/enabled GE 0.5
+    </test>
+    <output>fcs/mixture-pos-norm[2]</output>
+   </switch>
 
   </channel>
 
@@ -1709,10 +1810,10 @@
   </function>
   <!-- Tuning parameter for CM and CN due to alpha and beta. -->
   <function name="aero/envelope-pitch-moment-tweak-factor">
-   <value> 0.2 </value>
+   <value> 0.25 </value>
   </function>
   <function name="aero/envelope-yaw-moment-tweak-factor">
-   <value> 0.2 </value>
+   <value> 0.25 </value>
   </function>
 
   <!-- Relation between wind and body coordinate systems. -->

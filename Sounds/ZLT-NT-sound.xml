@@ -152,6 +152,24 @@
    </pitch>
   </engine>
 
+  <envelope_pressure>
+   <name>Envelope pressure warning</name>
+   <mode>looped</mode>
+   <path>Sounds/stall.wav</path>
+   <condition>
+    <less-than>
+     <property>fdm/jsbsim/instrumentation/gas-pressure-psf</property>
+     <value>6.5</value>
+    </less-than>    
+   </condition>
+   <position>
+    <!-- x/y/z == back/left/up -->
+    <x>  18.2 </x>
+    <y>   0.0 </y>
+    <z>  -8.8 </z>
+   </position>
+  </envelope_pressure>
+
  </fx>
 
 </PropertyList>

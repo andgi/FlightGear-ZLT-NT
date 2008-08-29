@@ -137,16 +137,9 @@ var debug_display_view_handler = {
 
         me.left  = screen.display.new(20, 10);
         me.right = screen.display.new(-250, 20);
-#    me.left.add("/orientation/pitch-deg",
-#            "/orientation/roll-deg");
-#    me.left.add("/fdm/jsbsim/fcs/side-engine-swivel-cmd-norm[0]",
-#            "/fdm/jsbsim/fcs/side-engine-swivel-cmd-norm[1]",
-#            "/fdm/jsbsim/fcs/rear-engine-swivel-cmd-norm");
         # Static condition
         me.left.add
-            ("/fdm/jsbsim/instrumentation/gas-pressure-psf",
-             "/fdm/jsbsim/instrumentation/ballonet-pressure-psf[0]",
-             "/fdm/jsbsim/instrumentation/ballonet-pressure-psf[1]");
+            ("/fdm/jsbsim/instrumentation/gas-pressure-psf");
         me.left.add
             ("/fdm/jsbsim/buoyant_forces/gas-cell/ballonet[0]/volume-ft3",
              "/fdm/jsbsim/buoyant_forces/gas-cell/ballonet[1]/volume-ft3");
@@ -189,8 +182,8 @@ var debug_display_view_handler = {
 
 # Install the debug display for some views.
 setlistener("/sim/signals/fdm-initialized", func {
-    view.manager.register("Pilot", debug_display_view_handler);
-    view.manager.register("Copilot", debug_display_view_handler);
+    view.manager.register("Pilot View", debug_display_view_handler);
+    view.manager.register("Copilot View", debug_display_view_handler);
     print("Debug instrumentation ... check");
 });
 

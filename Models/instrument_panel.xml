@@ -119,7 +119,7 @@
  <!-- Radios. Left to right -->
  <model>
   <name>Comm 1 radio</name>
-  <path>Aircraft/ZLT-NT/Models/Instruments/VHF-22/ctl22-com1.xml</path>
+  <path>Aircraft/ZLT-NT/DualControl/Instruments/VHF-22/ctl22-com1.xml</path>
   <offsets>
    <x-m> 0.040</x-m>
    <y-m>-0.197</y-m>
@@ -128,7 +128,7 @@
  </model>
  <model>
   <name>Nav 1 radio</name>
-  <path>Aircraft/ZLT-NT/Models/Instruments/VIR-32/ctl32-nav1.xml</path>
+  <path>Aircraft/ZLT-NT/DualControl/Instruments/VIR-32/ctl32-nav1.xml</path>
   <offsets>
    <x-m> 0.040</x-m>
    <y-m>-0.125</y-m>
@@ -147,7 +147,7 @@
 
  <model>
   <name>Comm 2 radio</name>
-  <path>Aircraft/ZLT-NT/Models/Instruments/VHF-22/ctl22-com2.xml</path>
+  <path>Aircraft/ZLT-NT/DualControl/Instruments/VHF-22/ctl22-com2.xml</path>
   <offsets>
    <x-m> 0.040</x-m>
    <y-m> 0.055</y-m>
@@ -156,7 +156,7 @@
  </model>
  <model>
   <name>Nav 2 radio</name>
-  <path>Aircraft/ZLT-NT/Models/Instruments/VIR-32/ctl32-nav2.xml</path>
+  <path>Aircraft/ZLT-NT/DualControl/Instruments/VIR-32/ctl32-nav2.xml</path>
   <offsets>
    <x-m> 0.040</x-m>
    <y-m> 0.125</y-m>
