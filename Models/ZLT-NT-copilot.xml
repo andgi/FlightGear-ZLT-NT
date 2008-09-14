@@ -8,6 +8,12 @@
   <load>
    cmdarg().getNode("sim/model/ac-type", 1).setValue("ZLT-NT-copilot");
   </load>
+  <unload>
+   var rplayer = cmdarg();
+   # Unset aircraft type property.
+   rplayer.getNode("sim/model/ac-type", 1).setValue("");
+   rplayer.getNode("sim/model/ac-type", 1).remove();
+  </unload>
  </nasal>
 
 </PropertyList>

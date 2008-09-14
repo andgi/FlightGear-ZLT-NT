@@ -107,7 +107,7 @@
   <type>rotate</type>
   <object-name>throttle_arm.2</object-name>
   <object-name>throttle_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[1]</property>
+  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[2]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -125,7 +125,7 @@
   <type>rotate</type>
   <object-name>throttle_arm.3</object-name>
   <object-name>throttle_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[2]</property>
+  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[1]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -162,7 +162,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.2</object-name>
   <object-name>mixture_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[1]</property>
+  <property>fdm/jsbsim/fcs/mixture-pos-norm[2]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -180,7 +180,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.3</object-name>
   <object-name>mixture_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[2]</property>
+  <property>fdm/jsbsim/fcs/mixture-pos-norm[1]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>

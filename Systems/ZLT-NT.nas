@@ -33,11 +33,11 @@ var weighoff = func {
 }
 
 var auto_weighoff = func {
-    var v = getprop(ballast_p) +
+    var v = getprop(ballast_p) + 700 +
         getprop("/fdm/jsbsim/static-condition/net-lift-lbs");
 
     interpolate(ballast_p,
-                (v > 0 ? 700.0 + v : 0),
+                (v > 0 ? v : 0),
                 0.5);
 }
 
@@ -162,17 +162,17 @@ var debug_display_view_handler = {
         me.left.add("/fdm/jsbsim/mooring/total-distance-ft");
         # Engines
         me.right.add("/fdm/jsbsim/fcs/etc/propeller-speed-cmd-rpm[0]",
-                     "/engines/engine[0]/thruster/rpm",
-                     "/fdm/jsbsim/propulsion/engine[0]/blade-angle",
-                     "/fdm/jsbsim/fcs/throttle-pos-norm[0]");
+#                     "/engines/engine[0]/thruster/rpm",
+                     "/fdm/jsbsim/propulsion/engine[0]/blade-angle");
+#                     "/fdm/jsbsim/fcs/throttle-pos-norm[0]");
         me.right.add("/fdm/jsbsim/fcs/etc/propeller-speed-cmd-rpm[1]",
-                     "/engines/engine[1]/thruster/rpm",
-                     "/fdm/jsbsim/propulsion/engine[1]/blade-angle",
-                     "/fdm/jsbsim/fcs/throttle-pos-norm[1]");
+#                     "/engines/engine[1]/thruster/rpm",
+                     "/fdm/jsbsim/propulsion/engine[1]/blade-angle");
+#                     "/fdm/jsbsim/fcs/throttle-pos-norm[1]");
         me.right.add("/fdm/jsbsim/fcs/etc/propeller-speed-cmd-rpm[2]",
-                     "/engines/engine[2]/thruster/rpm",
-                     "/fdm/jsbsim/propulsion/engine[2]/blade-angle",
-                     "/fdm/jsbsim/fcs/throttle-pos-norm[2]");
+#                     "/engines/engine[2]/thruster/rpm",
+                     "/fdm/jsbsim/propulsion/engine[2]/blade-angle");
+#                     "/fdm/jsbsim/fcs/throttle-pos-norm[2]");
         me.shown = 1;
         me.stop();
     },

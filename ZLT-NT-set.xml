@@ -121,6 +121,7 @@
     <string n="0" type="string"></string> <!-- MP events -->
     <string n="1" type="string"></string> <!-- MP TDM1 -->
     <string n="2" type="string"></string> <!-- MP TDM2 -->
+    <string n="3" type="string"></string> <!-- MP TDM3 -->
    </generic>
   </multiplay>
 
@@ -143,7 +144,7 @@
    <name type="string">Cabin payload</name>
    <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[5]"/>
    <min-lb type="double">0.0</min-lb>
-   <max-lb type="double">1040.0</max-lb>
+   <max-lb type="double">2293.0</max-lb>
   </weight>
   <weight>
    <name type="string">Ballast</name>
@@ -153,12 +154,19 @@
   </weight>
  </payload>
 
+ <limits>
+  <vne>70.0</vne>
+ </limits>
+
  <nasal>
   <ZLTNT>
    <file>Aircraft/ZLT-NT/Systems/ZLT-NT.nas</file>
    <file>Aircraft/ZLT-NT/Systems/ground_handling.nas</file>
    <file>Aircraft/ZLT-NT/Systems/mp-network.nas</file>
   </ZLTNT>
+  <limits>
+   <file>Aircraft/Generic/limits.nas</file>
+  </limits>
   <!--  Instrument drivers. -->
   <M877>
    <file>Aircraft/Instruments-3d/clock/M877/M877.nas</file>

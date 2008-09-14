@@ -1,0 +1,858 @@
+<!-- $Id$ -->
+<!--
+  Zeppelin NT07 airship.
+
+  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license v2 or later.
+-->
+<PropertyList>
+
+ <path>CenterMFD.ac</path>
+ <offsets>
+  <!-- x/y/z == back/right/up -->
+  <x-m> 0.0 </x-m>
+  <y-m> 0.0 </y-m>
+  <z-m> 0.0 </z-m>
+ </offsets>
+
+ <!-- =========================================================================
+  Manifold pressure display
+  Display range: 0 - 30? IN HG over 30mm. Z origin 0.632.
+  Note: I'm not convinced this display is ok yet.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>MP_arrow.1</object-name>
+  <property>engines/engine[0]/mp-osi</property>
+  <factor>0.001</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>MP_bar.1</object-name>
+  <property>engines/engine[0]/mp-osi</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.0333</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.632</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>MP_arrow.2</object-name>
+  <property>engines/engine[2]/mp-osi</property>
+  <factor>0.001</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>MP_bar.2</object-name>
+  <property>engines/engine[2]/mp-osi</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.0333</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.632</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>MP_arrow.3</object-name>
+  <property>engines/engine[1]/mp-osi</property>
+  <factor>0.001</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>MP_bar.3</object-name>
+  <property>engines/engine[1]/mp-osi</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.0333</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.632</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  RPM display
+  Display range: 0 - 30x100 RPM over 30mm. Z origin 0.586.
+  The maximum allowable value is 2700 RPM according to the type certificate
+  FAA AS1CE.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>RPM_arrow.1</object-name>
+  <property>engines/engine[0]/rpm</property>
+  <factor>0.00001</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>RPM_bar.1</object-name>
+  <property>engines/engine[0]/rpm</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.000333</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.586</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>RPM_arrow.2</object-name>
+  <property>engines/engine[2]/rpm</property>
+  <factor>0.00001</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>RPM_bar.2</object-name>
+  <property>engines/engine[2]/rpm</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.000333</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.586</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>RPM_arrow.3</object-name>
+  <property>engines/engine[1]/rpm</property>
+  <factor>0.00001</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>RPM_bar.3</object-name>
+  <property>engines/engine[1]/rpm</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.000333</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.586</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  Exhaust Gas Temperature display
+  Display range: 60 - 90 x10 degC over 30mm. Z origin 0.540.
+  The EGT computed by JSBSim seems low compared to the range of the
+  display. Could this be due to assumed probe location?
+  I use a bogus scaling factor to make the range 300 - 600 degC.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>EGT_arrow.1</object-name>
+  <property>engines/engine[0]/egt-degf</property>
+  <interpolation>
+   <entry><ind>572</ind> <dep>0.0</dep></entry>
+   <entry><ind>1112</ind> <dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>EGT_bar.1</object-name>
+  <property>engines/engine[0]/egt-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001853</z-factor>
+  <z-offset>-1.059</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.54</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>EGT_arrow.2</object-name>
+  <property>engines/engine[2]/egt-degf</property>
+  <interpolation>
+   <entry><ind>572</ind> <dep>0.0</dep></entry>
+   <entry><ind>1112</ind> <dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>EGT_bar.2</object-name>
+  <property>engines/engine[2]/egt-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001853</z-factor>
+  <z-offset>-1.059</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.5396</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>EGT_arrow.3</object-name>
+  <property>engines/engine[1]/egt-degf</property>
+  <interpolation>
+   <entry><ind>572</ind> <dep>0.0</dep></entry>
+   <entry><ind>1112</ind> <dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>EGT_bar.3</object-name>
+  <property>engines/engine[1]/egt-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001853</z-factor>
+  <z-offset>-1.059</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.54</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  Cylinder Head Temperature display
+  Display range: 0 - 300 degC over 30mm. Z origin 0.632.
+  The maximum allowable value is 260 degC according to the type certificate
+  FAA AS1CE.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>CHT_arrow.1</object-name>
+  <property>engines/engine[0]/cht-degf</property>
+  <interpolation>
+   <entry><ind>32</ind> <dep>0.0</dep></entry>
+   <entry><ind>572</ind><dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>CHT_bar.1</object-name>
+  <property>engines/engine[0]/cht-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001853</z-factor>
+  <z-offset>-0.05927</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.632</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>CHT_arrow.2</object-name>
+  <property>engines/engine[2]/cht-degf</property>
+  <interpolation>
+   <entry><ind>32</ind> <dep>0.0</dep></entry>
+   <entry><ind>572</ind><dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>CHT_bar.2</object-name>
+  <property>engines/engine[2]/cht-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001853</z-factor>
+  <z-offset>-0.05927</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.632</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>CHT_arrow.3</object-name>
+  <property>engines/engine[1]/cht-degf</property>
+  <interpolation>
+   <entry><ind>32</ind> <dep>0.0</dep></entry>
+   <entry><ind>572</ind><dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>CHT_bar.3</object-name>
+  <property>engines/engine[1]/cht-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001853</z-factor>
+  <z-offset>-0.05927</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.632</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  Oil temperature display
+  Display range: 0 - 150 degC over 30mm. Z origin 0.586.
+  The maximum allowable value is 118 degC (100F) and take-off
+  minimum is 37.8 degC (240F) according to the type certificates
+  FAA AS1CE and E1CE.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>OilT_arrow.1</object-name>
+  <property>engines/engine[0]/oil-temperature-degf</property>
+  <interpolation>
+   <entry><ind>32</ind> <dep>0.0</dep></entry>
+   <entry><ind>302</ind><dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>OilT_bar.1</object-name>
+  <property>engines/engine[0]/oil-temperature-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.003707</z-factor>
+  <z-offset>-0.1185</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.586</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>OilT_arrow.2</object-name>
+  <property>engines/engine[2]/oil-temperature-degf</property>
+  <interpolation>
+   <entry><ind>32</ind> <dep>0.0</dep></entry>
+   <entry><ind>302</ind><dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>OilT_bar.2</object-name>
+  <property>engines/engine[2]/oil-temperature-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.003707</z-factor>
+  <z-offset>-0.1185</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.586</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>OilT_arrow.3</object-name>
+  <property>engines/engine[1]/oil-temperature-degf</property>
+  <interpolation>
+   <entry><ind>32</ind> <dep>0.0</dep></entry>
+   <entry><ind>302</ind><dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>OilT_bar.3</object-name>
+  <property>engines/engine[1]/oil-temperature-degf</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.003707</z-factor>
+  <z-offset>-0.1185</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.586</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  Oil pressure display
+  Display range: 0 - 10 bar over 30mm. Z origin 0.540.
+  Limits according to type certificate FAA 1E10:
+    Normal max  95 psi min 55 psi
+    Idle               min 25 psi
+    Warmup max 115 psi
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>OilP_arrow.1</object-name>
+  <property>engines/engine[0]/oil-pressure-psi</property>
+  <factor>0.0002068</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>OilP_bar.1</object-name>
+  <property>engines/engine[0]/oil-pressure-psi</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.006895</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.54</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>OilP_arrow.2</object-name>
+  <property>engines/engine[2]/oil-pressure-psi</property>
+  <factor>0.0002068</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>OilP_bar.2</object-name>
+  <property>engines/engine[2]/oil-pressure-psi</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.006895</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.54</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>OilP_arrow.3</object-name>
+  <property>engines/engine[1]/oil-pressure-psi</property>
+  <factor>0.0002068</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>OilP_bar.3</object-name>
+  <property>engines/engine[1]/oil-pressure-psi</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.006895</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.54</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  Fuel quantity display
+  Display range: 0 - 280 KG over 30mm. Z origin 0.609.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>FL_arrow.1</object-name>
+  <property>consumables/fuel/tank[0]/level-lb</property>
+  <factor>0.00004860</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>FL_bar.1</object-name>
+  <property>consumables/fuel/tank[0]/level-lb</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001620</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.609</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>FL_arrow.2</object-name>
+  <property>consumables/fuel/tank[2]/level-lb</property>
+  <factor>0.00004860</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>FL_bar.2</object-name>
+  <property>consumables/fuel/tank[2]/level-lb</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001620</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.609</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>FL_arrow.3</object-name>
+  <property>consumables/fuel/tank[1]/level-lb</property>
+  <factor>0.00004860</factor>
+  <offset>0</offset>
+  <min>0.0</min>
+  <max>0.03</max>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>FL_bar.3</object-name>
+  <property>consumables/fuel/tank[1]/level-lb</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.001620</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.609</z-m>
+  </center>
+ </animation>
+
+ <!-- =========================================================================
+  Fuel flow display
+  Display range: 0 - 50 ?? over 30mm. Z origin 0.563
+  Assumption: The unit is liter per hour.
+ -->
+ <animation>
+  <type>translate</type>
+  <object-name>FF_arrow.1</object-name>
+  <property>engines/engine[0]/fuel-flow-gph</property>
+  <interpolation>
+   <entry><ind>0.0</ind>   <dep>0.0</dep></entry>
+   <entry><ind>13.21</ind> <dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>FF_bar.1</object-name>
+  <property>engines/engine[0]/fuel-flow-gph</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.07571</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.563</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>FF_arrow.2</object-name>
+  <property>engines/engine[2]/fuel-flow-gph</property>
+  <interpolation>
+   <entry><ind>0.0</ind>   <dep>0.0</dep></entry>
+   <entry><ind>13.21</ind> <dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>FF_bar.2</object-name>
+  <property>engines/engine[2]/fuel-flow-gph</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.07571</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.563</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>FF_arrow.3</object-name>
+  <property>engines/engine[1]/fuel-flow-gph</property>
+  <interpolation>
+   <entry><ind>0.0</ind>   <dep>0.0</dep></entry>
+   <entry><ind>13.21</ind> <dep>0.03</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>scale</type>
+  <object-name>FF_bar.3</object-name>
+  <property>engines/engine[1]/fuel-flow-gph</property>
+  <x-factor>0.0</x-factor>
+  <x-offset>1.0</x-offset>
+  <y-factor>0.0</y-factor>
+  <y-offset>1.0</y-offset>
+  <z-factor>0.07571</z-factor>
+  <z-offset>0.0</z-offset>
+  <z-min>0.0</z-min>
+  <z-max>1.0</z-max>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0</y-m>
+   <z-m> 0.563</z-m>
+  </center>
+ </animation>
+
+</PropertyList>

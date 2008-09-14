@@ -341,7 +341,7 @@
    </location>
   </pointmass>
   <pointmass name="Cabin payload"> <!-- n=5 -->
-   <weight unit="KG"> 0.0 </weight>
+   <weight unit="KG"> 500.0 </weight>
    <location name="POINTMASS" unit="M">
     <x> 21.0 </x>
     <y>  0.0 </y>
@@ -377,20 +377,20 @@
     <z>  0.0 </z>
    </location>
   </pointmass>
-<!--
-  <pointmass name="Aft_Tweak">
-   <weight unit="KG"> 350.0 </weight>
-   <location name="POINTMASS" unit="M">
-    <x> 75.0 </x>
-    <y>  0.0 </y>
-    <z>  0.0 </z>
-   </location>
-  </pointmass>
--->
+
   <!-- 
   === Structure ==============================================
   -->
 
+  <pointmass name="Mooring cone">
+   <!-- Pure guess. -->
+   <weight unit="KG"> 60.0 </weight>
+   <location name="POINTMASS" unit="M">
+    <x>  0.0 </x>
+    <y>  0.0 </y>
+    <z>  0.0 </z>
+   </location>
+  </pointmass>
   <pointmass name="Car">
    <!-- Pure guess. -->
    <weight unit="KG"> 1650.0 </weight>
@@ -402,7 +402,7 @@
   </pointmass>
   <pointmass name="Upper_fin">
    <!-- Pure guess. -->
-   <weight unit="KG"> 200.0 </weight>
+   <weight unit="KG"> 180.0 </weight>
    <location name="POINTMASS" unit="M">
     <x> 63.2 </x>
     <y>  0.0 </y>
@@ -411,7 +411,7 @@
   </pointmass>
   <pointmass name="Left_fin">
    <!-- Pure guess. -->
-   <weight unit="KG"> 200.0 </weight>
+   <weight unit="KG"> 180.0 </weight>
    <location name="POINTMASS" unit="M">
     <x> 63.2 </x>
     <y> -4.5 </y>
@@ -420,7 +420,7 @@
   </pointmass>
   <pointmass name="Right_fin">
    <!-- Pure guess. -->
-   <weight unit="KG"> 200.0 </weight>
+   <weight unit="KG"> 180.0 </weight>
    <location name="POINTMASS" unit="M">
     <x> 63.2 </x>
     <y>  4.5 </y>
@@ -673,9 +673,9 @@
   </tank>
   <tank type="FUEL">
    <location unit="M">
-    <x> 26.4 </x>
-    <y>  6.6 </y>
-    <z> -3.4 </z>
+    <x> 70.0 </x>
+    <y>  0.0 </y>
+    <z>  0.0 </z>
    </location>
    <!-- 275 kg AVGAS, density 0.72 kg/liter. -->
    <capacity unit="KG"> 275.0 </capacity>

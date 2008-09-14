@@ -26,6 +26,7 @@ props.initNode("/sim/remote/pilot-callsign", "", "STRING");
 var pilot_switches1_mpp  = "sim/multiplay/generic/int[0]";
 var pilot_TDM1_mpp       = "sim/multiplay/generic/string[1]";
 var pilot_TDM2_mpp       = "sim/multiplay/generic/string[2]";
+var pilot_TDM3_mpp       = "sim/multiplay/generic/string[3]";
 var pilot_hsi_head_mpp   = "sim/multiplay/generic/float[3]";
 var pilot_ai_pitch_mpp   = "sim/multiplay/generic/float[4]";
 var pilot_ai_roll_mpp    = "sim/multiplay/generic/float[5]";
@@ -67,6 +68,34 @@ var l_pilot_mixture_cmd =
     ["controls/engines/engine[0]/mixture",
      "controls/engines/engine[1]/mixture",
      "controls/engines/engine[2]/mixture"];
+var l_manifold_pressure =
+    ["engines/engine[0]/mp-osi",
+     "engines/engine[1]/mp-osi",
+     "engines/engine[2]/mp-osi"];
+var l_EGT =
+    ["engines/engine[0]/egt-degf",
+     "engines/engine[1]/egt-degf",
+     "engines/engine[2]/egt-degf"];
+var l_CHT =
+    ["engines/engine[0]/cht-degf",
+     "engines/engine[1]/cht-degf",
+     "engines/engine[2]/cht-degf"];
+var l_oil_temperature =
+    ["engines/engine[0]/oil-temperature-degf",
+     "engines/engine[1]/oil-temperature-degf",
+     "engines/engine[2]/oil-temperature-degf"];
+var l_oil_pressure =
+    ["engines/engine[0]/oil-pressure-psi",
+     "engines/engine[1]/oil-pressure-psi",
+     "engines/engine[2]/oil-pressure-psi"];
+var l_fuel_quantity =
+    ["consumables/fuel/tank[0]/level-lb",
+     "consumables/fuel/tank[1]/level-lb",
+     "consumables/fuel/tank[2]/level-lb"];
+var l_fuel_flow =
+    ["engines/engine[0]/fuel-flow-gph",
+     "engines/engine[1]/fuel-flow-gph",
+     "engines/engine[2]/fuel-flow-gph"];
 
 # Instruments
 var l_altimeter_setting = "instrumentation/altimeter/setting-inhg";
@@ -372,6 +401,41 @@ var pilot_connect_copilot = func (copilot) {
            props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_standby),
           ],
           props.globals.getNode(pilot_TDM2_mpp),
+         ),
+         ##################################################
+         # Set up TDM transmission of slow state properties.
+         DCT.TDMEncoder.new
+         ([
+           # 1 - 3 Manifold pressure
+           props.globals.getNode(l_manifold_pressure[0]),
+           props.globals.getNode(l_manifold_pressure[1]),
+           props.globals.getNode(l_manifold_pressure[2]),
+           # 4 - 6 EGT
+           props.globals.getNode(l_EGT[0]),
+           props.globals.getNode(l_EGT[1]),
+           props.globals.getNode(l_EGT[2]),
+           # 7 - 9 CHT
+           props.globals.getNode(l_CHT[0]),
+           props.globals.getNode(l_CHT[1]),
+           props.globals.getNode(l_CHT[2]),
+           # 10 - 12 Oil temperature
+           props.globals.getNode(l_oil_temperature[0]),
+           props.globals.getNode(l_oil_temperature[1]),
+           props.globals.getNode(l_oil_temperature[2]),
+           # 13 - 15 Oil pressure
+           props.globals.getNode(l_oil_pressure[0]),
+           props.globals.getNode(l_oil_pressure[1]),
+           props.globals.getNode(l_oil_pressure[2]),
+           # 16 - 18 Fuel quantity
+           props.globals.getNode(l_fuel_quantity[0]),
+           props.globals.getNode(l_fuel_quantity[1]),
+           props.globals.getNode(l_fuel_quantity[2]),
+           # 19 - 21 Fuel flow
+           props.globals.getNode(l_fuel_flow[0]),
+           props.globals.getNode(l_fuel_flow[1]),
+           props.globals.getNode(l_fuel_flow[2]),           
+          ],
+          props.globals.getNode(pilot_TDM3_mpp),
          )
         ];
 }
@@ -652,6 +716,82 @@ var copilot_connect_pilot = func (pilot) {
                    (VIR32.nav_base[0] ~ VIR32.freq_standby).setValue(v);
                pilot.getNode
                    (VIR32.nav_base[0] ~ VIR32.freq_standby, 1).setValue(v);
+           },
+          ]),
+         ##################################################
+         # Set up TDM reception of slow state properties.
+         DCT.TDMDecoder.new
+         (pilot.getNode(pilot_TDM3_mpp),
+          [
+           # 1 - 3 Manifold pressure
+           func (v) {
+               pilot.getNode(l_manifold_pressure[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_manifold_pressure[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_manifold_pressure[2]).setValue(v);
+           },
+           # 4 - 6 EGT
+           func (v) {
+               pilot.getNode(l_EGT[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_EGT[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_EGT[2]).setValue(v);
+           },
+           # 7 - 9 CHT
+           func (v) {
+               pilot.getNode(l_CHT[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_CHT[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_CHT[2]).setValue(v);
+           },
+           # 10 - 12 Oil temperature
+           func (v) {
+               pilot.getNode(l_oil_temperature[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_oil_temperature[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_oil_temperature[2]).setValue(v);
+           },
+           # 13 - 15 Oil pressure
+           func (v) {
+               pilot.getNode(l_oil_pressure[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_oil_pressure[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_oil_pressure[2]).setValue(v);
+           },
+           # 16 - 18 Fuel quantity
+           func (v) {
+               pilot.getNode(l_fuel_quantity[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_fuel_quantity[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_fuel_quantity[2]).setValue(v);
+           },
+           # 19 - 21 Fuel flow
+           func (v) {
+               pilot.getNode(l_fuel_flow[0]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_fuel_flow[1]).setValue(v);
+           },
+           func (v) {
+               pilot.getNode(l_fuel_flow[2]).setValue(v);
            },
           ]),
 
