@@ -61,6 +61,12 @@ var init_all = func(reinit=0) {
 
     fake_electrical();
 
+    # Hobbs counters.
+    if (!reinit) {
+        aircraft.timer.new("/sim/time/hobbs/envelope", 73).start();
+    }
+
+    # Timed initialization.
     settimer(func {
         # Add some AI moorings.
         mooring.add_ai_mooring(props.globals.getNode("/ai/models/carrier[0]"),
@@ -202,7 +208,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 ###############################################################################
 # fake part of the electrical system.
 var fake_electrical = func {
-    setprop("systems/electrical/ac-volts", 15);
+    setprop("systems/electrical/ac-volts", 24);
 
     setprop("/systems/electrical/outputs/comm[0]", 24.0);
     setprop("/systems/electrical/outputs/comm[1]", 24.0);

@@ -26,7 +26,7 @@ NOTE: ctl22.nas MUST be loaded as Nasal module VHF22.
         <object-name>freq.006</object-name>
         <condition>
             <greater-than>
-                <property>/systems/electrical/outputs/comm[1]</property>
+                <property>systems/electrical/outputs/comm[1]</property>
                 <value>1</value>
             </greater-than>
         </condition>
@@ -43,7 +43,7 @@ NOTE: ctl22.nas MUST be loaded as Nasal module VHF22.
         <object-name>stby.006</object-name>
         <condition>
             <greater-than>
-                <property>/systems/electrical/outputs/comm[1]</property>
+                <property>systems/electrical/outputs/comm[1]</property>
                 <value>1</value>
             </greater-than>
         </condition>
@@ -54,7 +54,7 @@ NOTE: ctl22.nas MUST be loaded as Nasal module VHF22.
         <object-name>mem.annun</object-name>
         <condition>
             <greater-than>
-                <property>/systems/electrical/outputs/comm[1]</property>
+                <property>systems/electrical/outputs/comm[1]</property>
                 <value>1</value>
             </greater-than>
         </condition>
@@ -273,7 +273,7 @@ NOTE: ctl22.nas MUST be loaded as Nasal module VHF22.
             <repeatable>false</repeatable>
             <binding>
             <command>property-assign</command>
-            <property>/instrumentation/comm[1]/serviceable</property>
+            <property>instrumentation/comm[1]/serviceable</property>
             <value>false</value>
         </binding>
         </action>
@@ -287,56 +287,88 @@ NOTE: ctl22.nas MUST be loaded as Nasal module VHF22.
             <repeatable>false</repeatable>
             <binding>
                 <command>property-assign</command>
-                <property>/instrumentation/comm[1]/serviceable</property>
+                <property>instrumentation/comm[1]/serviceable</property>
                 <value>true</value>
             </binding>
         </action>
     </animation>
 
-    <animation>
-        <type>pick</type>
-        <object-name>freq.dwn</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-             <command>nasal</command>
-             <script>VHF22.adjust_frequency(1, -0.025);</script>
-            </binding>
-        </action>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-             <command>nasal</command>
-             <script>VHF22.adjust_frequency(1, -1.0);</script>
-            </binding>
-        </action>
-    </animation>
+ <animation>
+  <type>pick</type>
+  <object-name>freq.knob.kHz</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, 0.025);</script>
+   </binding>
+  </action>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, -0.025);</script>
+   </binding>
+  </action>
+  <action>
+   <button>3</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, -0.025);</script>
+   </binding>
+  </action>
+  <action>
+   <button>4</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, 0.025);</script>
+   </binding>
+  </action>
+ </animation>
 
-    <animation>
-        <type>pick</type>
-        <object-name>freq.up</object-name>
-        <action>
-            <button>0</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-             <command>nasal</command>
-             <script>VHF22.adjust_frequency(1, 0.025);</script>
-            </binding>
-        </action>
-        <action>
-            <button>1</button>
-            <repeatable>true</repeatable>
-            <interval-sec>0.2</interval-sec>
-            <binding>
-             <command>nasal</command>
-             <script>VHF22.adjust_frequency(1, 1.0);</script>
-            </binding>
-        </action>
-    </animation>
+ <animation>
+  <type>pick</type>
+  <object-name>freq.knob.MHz</object-name>
+  <action>
+   <button>0</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, 1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>1</button>
+   <repeatable>true</repeatable>
+   <interval-sec>0.2</interval-sec>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, -1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>3</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, -1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>4</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>VHF22.adjust_frequency(1, 1.0);</script>
+   </binding>
+  </action>
+ </animation>
 
 </PropertyList>

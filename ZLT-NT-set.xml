@@ -125,6 +125,7 @@
    </generic>
   </multiplay>
 
+  <max-simtime-per-frame n="0" type="double">0.1</max-simtime-per-frame>
  </sim>
 
  <payload>

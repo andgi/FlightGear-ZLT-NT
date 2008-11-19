@@ -5,21 +5,21 @@
  <path>kx165tso.ac</path>
 
  <params>
-  <comm-serviceable>/instrumentation/comm[0]/serviceable</comm-serviceable
+  <comm-serviceable>instrumentation/comm[0]/serviceable</comm-serviceable
 >
-  <nav-serviceable>/instrumentation/nav[0]/serviceable</nav-serviceable>
-  <power>/instrumentation/nav[0]/power-btn</power>
-  <comm-frq-swp>/instrumentation/comm[0]/frq-swap-btn</comm-frq-swp>
-  <comm-frq-selected>/instrumentation/comm[0]/frequencies/selected-mhz</comm-frq-selected>
-  <comm-frq-standby>/instrumentation/comm[0]/frequencies/standby-mhz</comm-frq-standby>
-  <comm-volume>/instrumentation/comm[0]/volume</comm-volume>
-  <comm-test>/instrumentation/comm[0]/test-btn</comm-test>
+  <nav-serviceable>instrumentation/nav[0]/serviceable</nav-serviceable>
+  <power>instrumentation/nav[0]/power-btn</power>
+  <comm-frq-swp>instrumentation/comm[0]/frq-swap-btn</comm-frq-swp>
+  <comm-frq-selected>instrumentation/comm[0]/frequencies/selected-mhz</comm-frq-selected>
+  <comm-frq-standby>instrumentation/comm[0]/frequencies/standby-mhz</comm-frq-standby>
+  <comm-volume>instrumentation/comm[0]/volume</comm-volume>
+  <comm-test>instrumentation/comm[0]/test-btn</comm-test>
 
-  <nav-frq-swp>/instrumentation/nav[0]/frq-swap-btn</nav-frq-swp>
-  <nav-frq-selected>/instrumentation/nav[0]/frequencies/selected-mhz</nav-frq-selected>
-  <nav-frq-standby>/instrumentation/nav[0]/frequencies/standby-mhz</nav-frq-standby>
-  <nav-volume>/instrumentation/nav[0]/volume</nav-volume>
-  <nav-audio>/instrumentation/nav[0]/audio-btn</nav-audio>
+  <nav-frq-swp>instrumentation/nav[0]/frq-swap-btn</nav-frq-swp>
+  <nav-frq-selected>instrumentation/nav[0]/frequencies/selected-mhz</nav-frq-selected>
+  <nav-frq-standby>instrumentation/nav[0]/frequencies/standby-mhz</nav-frq-standby>
+  <nav-volume>instrumentation/nav[0]/volume</nav-volume>
+  <nav-audio>instrumentation/nav[0]/audio-btn</nav-audio>
  </params>
 
  <animation>
@@ -42,10 +42,10 @@
   <object-name>CommToggle</object-name>
   <object-name>NavToggle</object-name>
   <emission>
-   <red-prop>/sim/model/instrument-lighting/emission/red</red-prop>
-   <green-prop>/sim/model/instrument-lighting/emission/green</green-prop>
-   <blue-prop>/sim/model/instrument-lighting/emission/blue</blue-prop>
-   <factor-prop>/controls/lighting/instruments-norm</factor-prop>
+   <red-prop>sim/model/instrument-lighting/emission/red</red-prop>
+   <green-prop>sim/model/instrument-lighting/emission/green</green-prop>
+   <blue-prop>sim/model/instrument-lighting/emission/blue</blue-prop>
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
   </emission>
  </animation>
     
@@ -425,8 +425,14 @@
    <repeatable>false</repeatable>
    <binding>
     <command>nasal</command>
-    <script>KX165.swap_comm(0);</script>
+    <script>print("Comm[0] swap!"); KX165.swap_comm(0, 1);</script>
    </binding>
+   <mod-up>
+    <binding>
+     <command>nasal</command>
+     <script>KX165.swap_comm(0, 0);</script>
+    </binding>
+   </mod-up>
   </action>
  </animation>
 
@@ -451,6 +457,22 @@
     <script>KX165.adjust_comm_frequency(0, -0.025);</script>
    </binding>
   </action>
+  <action>
+   <button>3</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(0, -0.025);</script>
+   </binding>
+  </action>
+  <action>
+   <button>4</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(0, 0.025);</script>
+   </binding>
+  </action>
  </animation>
 
  <animation>
@@ -472,6 +494,22 @@
    <binding>
     <command>nasal</command>
     <script>KX165.adjust_comm_frequency(0, -1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>3</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(0, -1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>4</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_comm_frequency(0, 1.0);</script>
    </binding>
   </action>
  </animation>
@@ -510,6 +548,22 @@
     <script>KX165.adjust_nav_frequency(0, -0.05);</script>
    </binding>
   </action>
+  <action>
+   <button>3</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(0, -0.05);</script>
+   </binding>
+  </action>
+  <action>
+   <button>4</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(0, 0.05);</script>
+   </binding>
+  </action>
  </animation>
 
  <animation>
@@ -531,6 +585,22 @@
    <binding>
     <command>nasal</command>
     <script>KX165.adjust_nav_frequency(0, -1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>3</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(0, -1.0);</script>
+   </binding>
+  </action>
+  <action>
+   <button>4</button>
+   <repeatable>false</repeatable>
+   <binding>
+    <command>nasal</command>
+    <script>KX165.adjust_nav_frequency(0, 1.0);</script>
    </binding>
   </action>
  </animation>

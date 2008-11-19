@@ -13,7 +13,7 @@
 
  <sim>
 
-  <description>Zeppelin NT07 multiplayer copilot.</description>
+  <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
   <status>experimental</status>
   <aircraft-version>$Id$</aircraft-version>

@@ -162,8 +162,9 @@ swap_nav = func(n) {
 
 ###########################################################################
 # n - NavComm#
-swap_comm = func(n) {
-  kx165tso[n].swap_comm();
+swap_comm = func(n, b) {
+  kx165tso[n].comm_base.getNode(swap_btn).setValue(b);
+  if (b) kx165tso[n].swap_comm();
 }
 
 ###########################################################################

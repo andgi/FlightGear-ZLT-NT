@@ -18,7 +18,6 @@
  <!-- =========================================================================
   Manifold pressure display
   Display range: 0 - 30? IN HG over 30mm. Z origin 0.632.
-  Note: I'm not convinced this display is ok yet.
  -->
  <animation>
   <type>translate</type>
@@ -853,6 +852,12 @@
    <y-m> 0.0</y-m>
    <z-m> 0.563</z-m>
   </center>
+ </animation>
+
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>15</max-m>
  </animation>
 
 </PropertyList>
