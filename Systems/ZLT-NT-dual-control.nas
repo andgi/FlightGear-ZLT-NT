@@ -16,7 +16,7 @@ var DCT = dual_control_tools;
 var pilot_type   = "ZLT-NT";
 var copilot_type = "ZLT-NT-copilot";
 
-props.initNode("/sim/remote/pilot-callsign", "", "STRING");
+props.globals.initNode("/sim/remote/pilot-callsign", "", "STRING");
 
 ######################################################################
 # MP enabled properties.
@@ -814,11 +814,11 @@ var copilot_connect_pilot = func (pilot) {
          DCT.SwitchEncoder.new
          ([
            # 0 - 1: "flaps"/side engines up / down.
-           props.initNode(l_flap_up_cmd, 0, "BOOL"),
-           props.initNode(l_flap_down_cmd, 0, "BOOL"),
-           # 2 - 3: "gear"/rear engine up / down. 
-           props.initNode(l_gear_up_cmd, 0, "BOOL"),
-           props.initNode(l_gear_down_cmd, 0, "BOOL"),
+           props.globals.initNode(l_flap_up_cmd, 0, "BOOL"),
+           props.globals.initNode(l_flap_down_cmd, 0, "BOOL"),
+           # 2 - 3: "gear"/rear engine up / down.
+           props.globals.initNode(l_gear_up_cmd, 0, "BOOL"),
+           props.globals.initNode(l_gear_down_cmd, 0, "BOOL"),
            # 4 - 8: VHF22 Comm 1
            props.globals.getNode(VHF22.comm_base[0] ~ VHF22.swap_btn, 1),
            props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_decS, 1),
