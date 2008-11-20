@@ -170,7 +170,7 @@ var mooring = {
     update : func {
 #    if (me.mooring.getNode("wire-connected").getValue()) return;
 # The mooring might have moved..
-        var distance = geo.FT2M *
+        var distance = FT2M *
             me.active_mooring.getNode("total-distance-ft").getValue();
         var ac_pos = geo.aircraft_position();
         var found = 0;
@@ -183,7 +183,7 @@ var mooring = {
                 var pos = geo.Coord.set_latlon
                     (ai.getNode("position/latitude-deg").getValue(),
                      ai.getNode("position/longitude-deg").getValue(),
-                     geo.FT2M * ai.getNode("position/altitude-ft").getValue());
+                     FT2M * ai.getNode("position/altitude-ft").getValue());
             }
             if ((name == me.selected) or
                 (pos.direct_distance_to(ac_pos) < distance)) {
@@ -195,7 +195,7 @@ var mooring = {
                 me.active_mooring.getNode("latitude-deg").setValue(pos.lat());
                 me.active_mooring.getNode("longitude-deg").setValue(pos.lon());
                 me.active_mooring.getNode("altitude-ft").
-                    setValue(geo.M2FT * (pos.alt() +
+                    setValue(M2FT * (pos.alt() +
                                          me.moorings[name].alt_offset));
                 found = 1;
             }
