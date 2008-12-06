@@ -20,3 +20,10 @@ Jon S. Berndt et. al.
 
 David Megginson
   - Propeller 3d models. (From c172p)
+
+
+Dependencies:
+
+Aircraft/CitationX       (Nasal/flightdirector.nas,Nasal/Primus1000.nas,Nasal/rmu.nas,Models/Instruments/PFD/PFD.xml,Models/Instruments/fmc.xml)
+Aircraft/Citation-Bravo  (Models/Instruments/dme.xml)
+Aircraft/Submarine_Scout (Models/mp_broadcast.nas)

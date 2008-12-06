@@ -22,7 +22,7 @@
  <animation>
   <type>translate</type>
   <object-name>MP_arrow.1</object-name>
-  <property>engines/engine[0]/mp-osi</property>
+  <property>engines/engine[0]/mp-inhg</property>
   <factor>0.001</factor>
   <offset>0</offset>
   <min>0.0</min>
@@ -36,7 +36,7 @@
  <animation>
   <type>scale</type>
   <object-name>MP_bar.1</object-name>
-  <property>engines/engine[0]/mp-osi</property>
+  <property>engines/engine[0]/mp-inhg</property>
   <x-factor>0.0</x-factor>
   <x-offset>1.0</x-offset>
   <y-factor>0.0</y-factor>
@@ -55,7 +55,7 @@
  <animation>
   <type>translate</type>
   <object-name>MP_arrow.2</object-name>
-  <property>engines/engine[2]/mp-osi</property>
+  <property>engines/engine[2]/mp-inhg</property>
   <factor>0.001</factor>
   <offset>0</offset>
   <min>0.0</min>
@@ -69,7 +69,7 @@
  <animation>
   <type>scale</type>
   <object-name>MP_bar.2</object-name>
-  <property>engines/engine[2]/mp-osi</property>
+  <property>engines/engine[2]/mp-inhg</property>
   <x-factor>0.0</x-factor>
   <x-offset>1.0</x-offset>
   <y-factor>0.0</y-factor>
@@ -88,7 +88,7 @@
  <animation>
   <type>translate</type>
   <object-name>MP_arrow.3</object-name>
-  <property>engines/engine[1]/mp-osi</property>
+  <property>engines/engine[1]/mp-inhg</property>
   <factor>0.001</factor>
   <offset>0</offset>
   <min>0.0</min>
@@ -102,7 +102,7 @@
  <animation>
   <type>scale</type>
   <object-name>MP_bar.3</object-name>
-  <property>engines/engine[1]/mp-osi</property>
+  <property>engines/engine[1]/mp-inhg</property>
   <x-factor>0.0</x-factor>
   <x-offset>1.0</x-offset>
   <y-factor>0.0</y-factor>

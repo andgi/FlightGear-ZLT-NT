@@ -126,6 +126,21 @@
   </multiplay>
 
   <max-simtime-per-frame n="0" type="double">0.1</max-simtime-per-frame>
+
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>Zeppelin NT</label>
+     <item>
+      <label>About</label>
+      <binding>
+       <command>nasal</command>
+       <script>ZLTNT.about()</script>
+      </binding>
+     </item>
+    </menu>
+   </default>
+  </menubar>
  </sim>
 
  <payload>

@@ -17,24 +17,16 @@ var weight_on_gear_p = "/fdm/jsbsim/forces/fbz-gear-lbs";
 var ballast_p = "/fdm/jsbsim/inertia/pointmass-weight-lbs";
 
 var print_wow = func {
-  gui.popupTip("Current weight on gear " ~
-               -getprop(weight_on_gear_p) ~ " lbs.");
-}
-
-var weighoff = func {
-  var wow = getprop(weight_on_gear_p);
-  gui.popupTip("Weigh-off to 50% in progress. " ~
-               "Current weight " ~ -wow ~ " lbs.");
-  var cont = getprop(ballast_p);
-  var new  = cont + 0.50 * wow;
-  interpolate(ballast_p,
-              (new > 0 ? new : 0.0),
-              10);
+    gui.popupTip("Current weight on gear " ~
+                 -getprop(weight_on_gear_p) ~ " lbs.");
 }
 
 var auto_weighoff = func {
-    var v = getprop(ballast_p) + 700 +
-        getprop("/fdm/jsbsim/static-condition/net-lift-lbs");
+    var lift = getprop("/fdm/jsbsim/static-condition/net-lift-lbs");
+    var v = getprop(ballast_p) + 700 + lift;
+        
+    print("ZLT-NT: Auto weigh off from " ~ (-lift) ~
+          " lb heavy to 700 lb heavy.");
 
     interpolate(ballast_p,
                 (v > 0 ? v : 0),
@@ -95,6 +87,7 @@ var init_all = func(reinit=0) {
                         #print("Removed: " ~ path.getValue());
                     });
     }, 1.0);
+    print("ZLT-NT Systems ... Check");
 }
 
 setlistener("/sim/signals/fdm-initialized", func {
@@ -145,6 +138,17 @@ var step_ballonet_cmd = func(n, d) {
     gui.popupTip((n ? "Aft" : "Forward") ~ " ballonet " ~
                  (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
                   : ("blower " ~ int(100*t + 0.005) ~ "%.")));
+}
+
+# Gas valve control
+var step_gas_valve_cmd = func(n, d) {
+    var p = "/fdm/jsbsim/buoyant_forces/gas-cell/valve_open";
+    var t = getprop(p) + d;
+    if (t >  1.0) { t =  1.0; }
+    if (t <  0.0) { t =  0.0; }
+    setprop(p, t);
+    gui.popupTip("Gas valve " ~
+                 (t ? (int(100*t + 0.005) ~ "% open.") : " closed."));
 }
 
 ###############################################################################
@@ -229,4 +233,103 @@ var fake_electrical = func {
 ## NOTE: Should this be here or elsewhere?
 settimer(func { mp_network_init(1); }, 0.1);
 
+###############################################################################
+# About dialog.
 
+var ABOUT_DLG = 0;
+
+var dialog = {
+#################################################################
+    init : func (x = nil, y = nil) {
+        me.x = x;
+        me.y = y;
+        me.bg = [0, 0, 0, 0.3];    # background color
+        me.fg = [[1.0, 1.0, 1.0, 1.0]]; 
+        #
+        # "private"
+        me.title = "About";
+        me.dialog = nil;
+        me.namenode = props.Node.new({"dialog-name" : me.title });
+    },
+#################################################################
+    create : func {
+        if (me.dialog != nil)
+            me.close();
+
+        me.dialog = gui.Widget.new();
+        me.dialog.set("name", me.title);
+        if (me.x != nil)
+            me.dialog.set("x", me.x);
+        if (me.y != nil)
+            me.dialog.set("y", me.y);
+
+        me.dialog.set("layout", "vbox");
+        me.dialog.set("default-padding", 0);
+
+        var titlebar = me.dialog.addChild("group");
+        titlebar.set("layout", "hbox");
+        titlebar.addChild("empty").set("stretch", 1);
+        titlebar.addChild("text").set
+            ("label",
+             "About");
+        var w = titlebar.addChild("button");
+        w.set("pref-width", 16);
+        w.set("pref-height", 16);
+        w.set("legend", "");
+        w.set("default", 0);
+        w.set("key", "esc");
+        w.setBinding("nasal", "ZLTNT.dialog.destroy(); ");
+        w.setBinding("dialog-close");
+        me.dialog.addChild("hrule");
+
+        var content = me.dialog.addChild("group");
+        content.set("layout", "vbox");
+        content.set("halign", "center");
+        content.set("default-padding", 5);
+        props.globals.initNode("sim/about/text",
+             "Zeppelin NT07 airship for FlightGear\n" ~
+             "Copyright (C) 2008  Anders Gidenstam\n\n" ~
+             "FlightGear flight simulator\n" ~
+             "Copyright (C) 1997 - 2008  http://www.flightgear.org\n\n" ~
+             "This is free software, and you are welcome to\n" ~
+             "redistribute it under certain conditions.\n" ~
+             "See the GNU GENERAL PUBLIC LICENSE Version 2 for the details.",
+             "STRING");
+        var text = content.addChild("textbox");
+        text.set("halign", "fill");
+        #text.set("slider", 20);
+        text.set("pref-width", 400);
+        text.set("pref-height", 300);
+        text.set("editable", 0);
+        text.set("property", "sim/about/text");
+
+        #me.dialog.addChild("hrule");
+
+        fgcommand("dialog-new", me.dialog.prop());
+        fgcommand("dialog-show", me.namenode);
+    },
+#################################################################
+    close : func {
+        fgcommand("dialog-close", me.namenode);
+    },
+#################################################################
+    destroy : func {
+        ABOUT_DLG = 0;
+        me.close();
+        delete(gui.dialog, "\"" ~ me.title ~ "\"");
+    },
+#################################################################
+    show : func {
+        if (!ABOUT_DLG) {
+            ABOUT_DLG = 1;
+            me.init(400, getprop("/sim/startup/ysize") - 500);
+            me.create();
+        }
+    }
+};
+###############################################################################
+
+# Popup the about dialog.
+var about = func {
+    dialog.show();
+}

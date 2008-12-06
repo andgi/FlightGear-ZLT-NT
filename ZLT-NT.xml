@@ -140,7 +140,7 @@
      Propeller diameter 2700mm.
   </documentation>
 
-  <wingarea unit="M2"> 156.15 </wingarea>  <!-- Cross-sectional area.-->
+  <wingarea unit="M2"> 1000.0 </wingarea>  <!-- Planfold area (approximated).-->
   <wingspan unit="M">   14.1  </wingspan>  <!-- Envelope diameter. -->
   <chord unit="M">      75.0  </chord>     <!-- Envelope length. -->
   <htailarea unit="M2"> 25.2700 </htailarea> <!-- FIX these... -->
@@ -280,7 +280,7 @@
   <!--
        Ballast tanks for fine tuning the CG.
        These are controlled by the FCS.
-   --> 
+  -->
   <!-- Forward ballast n=1 -->
   <pointmass name="Ballast_Forward">
    <location unit="M">
@@ -1623,10 +1623,6 @@
 
  </flight_control>
 
- <!-- system file="fgfs4jsbsim"/ -->
- <system file="mooring-jsbsim"/>
-
-
  <!--
  ==== External reactions ====================================================
  -->
@@ -1759,6 +1755,8 @@
 
  </external_reactions>
 
+ <!-- system file="fgfs4jsbsim"/ -->
+ <system file="mooring-jsbsim"/>
 
  <!--
  ==== Aerodynamics ==========================================================

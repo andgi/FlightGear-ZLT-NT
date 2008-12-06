@@ -123,6 +123,20 @@
    <path>Aircraft/ZLT-NT/Systems/copilot-instrumentation.xml</path>
   </instrumentation>
 
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>Zeppelin NT</label>
+     <item>
+      <label>About</label>
+      <binding>
+       <command>nasal</command>
+       <script>ZLTNT.about()</script>
+      </binding>
+     </item>
+    </menu>
+   </default>
+  </menubar>
  </sim>
 
  <payload>

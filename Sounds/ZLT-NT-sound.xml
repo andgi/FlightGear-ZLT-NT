@@ -83,7 +83,7 @@
     <z> -3.4 </z>
    </position>
    <volume>
-    <property>/engines/engine/mp-osi</property>
+    <property>/engines/engine/mp-inhg</property>
     <factor>0.005</factor>
     <min>0.10</min>
     <max>0.3</max>
@@ -110,7 +110,7 @@
     <z> -3.4 </z>
    </position>
    <volume>
-    <property>/engines/engine[1]/mp-osi</property>
+    <property>/engines/engine[1]/mp-inhg</property>
     <factor>0.005</factor>
     <min>0.10</min>
     <max>0.3</max>
@@ -137,7 +137,7 @@
     <z>  0.0 </z>
    </position>
    <volume>
-    <property>/engines/engine[2]/mp-osi</property>
+    <property>/engines/engine[2]/mp-inhg</property>
     <factor>0.005</factor>
     <min>0.10</min>
     <max>0.3</max>

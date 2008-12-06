@@ -69,9 +69,9 @@ var l_pilot_mixture_cmd =
      "controls/engines/engine[1]/mixture",
      "controls/engines/engine[2]/mixture"];
 var l_manifold_pressure =
-    ["engines/engine[0]/mp-osi",
-     "engines/engine[1]/mp-osi",
-     "engines/engine[2]/mp-osi"];
+    ["engines/engine[0]/mp-inhg",
+     "engines/engine[1]/mp-inhg",
+     "engines/engine[2]/mp-inhg"];
 var l_EGT =
     ["engines/engine[0]/egt-degf",
      "engines/engine[1]/egt-degf",
@@ -918,5 +918,8 @@ var set_copilot_wrappers = func (pilot) {
         gui.popupTip((n ? "Aft" : "Forward") ~ " ballonet " ~
                      (t <= 0 ? ("valve " ~ int(-100*t + 0.005) ~ "% open.")
                       : ("blower " ~ int(100*t + 0.005) ~ "%.")));
+    }
+    # Gas valve control
+    ZLTNT.step_gas_valve_cmd = func(n, d) {
     }
 }
