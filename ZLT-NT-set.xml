@@ -14,7 +14,7 @@
   <author>Anders Gidenstam</author>
   <status>development</status>
   <aircraft-version>$Id$</aircraft-version>
-  
+
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
 
@@ -195,10 +195,12 @@
   </VIR32>
   <citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
-   <file>Aircraft/CitationX/Nasal/Primus1000.nas</file>
    <file>Aircraft/CitationX/Nasal/rmu.nas</file>
   </citation>
-  <!-- Dual control. -->
+  <efis>
+    <file>Aircraft/Instruments-3d/primus-1000/P1000.nas</file>
+  </efis>
+<!-- Dual control. -->
   <dual_control_tools>
    <file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
   </dual_control_tools>
@@ -215,15 +217,15 @@
    <!-- Keyboard commands -->
 
    <!-- Ballast commands ====================================== -->
-   <key n="87"> 
+   <key n="87">
     <name>W</name>
     <desc>Perform on-ground weigh-off.</desc>
-    <binding> 
+    <binding>
      <command>nasal</command>
      <script>
       gui.popupTip("Weigh-off in progress.");
       ZLTNT.auto_weighoff();
-     </script>     
+     </script>
     </binding>
    </key>
 

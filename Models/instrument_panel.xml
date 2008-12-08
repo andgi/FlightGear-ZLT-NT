@@ -40,7 +40,7 @@
 
  <model>
   <name>PFD</name>
-  <path>Aircraft/CitationX/Models/Instruments/PFD/PFD.xml</path>
+  <path>Aircraft/Instruments-3d/primus-1000/PFD/PFD.xml</path>
   <offsets>
    <x-m> 0.015</x-m>
    <y-m>-0.300</y-m>
