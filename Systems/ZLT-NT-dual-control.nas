@@ -541,6 +541,26 @@ var copilot_connect_pilot = func (pilot) {
          (props.globals.getNode("instrumentation/clock/m877/indicated-min"),
           pilot.getNode("instrumentation/clock/m877/indicated-min")),
          ##################################################
+         # Map KDI 572 DME indicator properties to pilot 3d model. Local replica.
+         DCT.Translator.new
+         (props.globals.getNode("instrumentation/dme/in-range"),
+          pilot.getNode("instrumentation/dme/in-range")),
+         DCT.Translator.new
+         (props.globals.getNode("instrumentation/dme/switch-position"),
+          pilot.getNode("instrumentation/dme/switch-position")),
+         DCT.Translator.new
+         (props.globals.getNode("instrumentation/dme/indicated-distance-nm"),
+          pilot.getNode("instrumentation/dme/indicated-distance-nm")),
+         DCT.Translator.new
+         (props.globals.getNode("instrumentation/dme/indicated-ground-speed-kt"),
+          pilot.getNode("instrumentation/dme/indicated-ground-speed-kt")),
+         DCT.Translator.new
+         (props.globals.getNode("instrumentation/dme/indicated-time-min"),
+          pilot.getNode("instrumentation/dme/indicated-time-min")),
+         DCT.Translator.new
+         (props.globals.getNode("systems/electrical/outputs/dme"),
+          pilot.getNode("systems/electrical/outputs/dme")),
+         ##################################################
          # Decode pilot cockpit switch states.
          #   NOTE: Actions are only triggered on change.
          DCT.SwitchDecoder.new

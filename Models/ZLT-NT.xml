@@ -1607,11 +1607,6 @@ rplayer.getNode("fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad", 1).
 
 ############################################################
 # Load the needed modules if it hasn't been done yet.
-if (!contains(globals, "mp_broadcast")) {
-  io.load_nasal(getprop("/sim/fg-root") ~
-                "/Aircraft/Submarine_Scout/Models/mp_broadcast.nas",
-                "mp_broadcast");
-}
 if (!contains(globals, "ZLTNT")) {
   io.load_nasal(getprop("/sim/fg-root") ~
                 "/Aircraft/ZLT-NT/Systems/mp-network.nas",

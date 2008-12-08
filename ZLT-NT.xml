@@ -274,7 +274,7 @@
     <y>   0.0 </y>
     <z> -8.70 </z>
    </location>
-   <weight unit="KG"> 3000 </weight>
+   <weight unit="KG"> 2000 </weight>
   </pointmass>
 
   <!--
@@ -974,7 +974,7 @@
  <system name="Weigh_Off">
   <channel name="Initial_Static_Weigh_Off">
    <!-- This system ensures that the ship starts slightly heavy. -->
-   <!-- The weight of inertia/pointmass-weight-lbs[3] is set from Nasal. -->
+   <!-- The weight of inertia/pointmass-weight-lbs[0] is set from Nasal. -->
 
    <summer name="static-condition/net-lift-lbs">
     <input> buoyant_forces/gas-cell[0]/buoyancy-lbs </input>
@@ -989,7 +989,7 @@
  -->
  <system name="Static trim">
   <!-- Note: static-trim-cmd-norm is for FDM development. -->
-  <property>fcs/static-trim-cmd-norm</property>
+  <property value="0.3">fcs/static-trim-cmd-norm</property>
 
   <channel name="StaticTrim">
    <!--

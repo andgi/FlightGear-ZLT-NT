@@ -13,7 +13,7 @@ Syd Adams
   - ADF-462 ADF radio.
   - TDR-94 transponder.
   - Primus-1000 PFD and associated scripts.
-  - DME
+  - KDI-572 DME indicator
 
 Jon S. Berndt et. al.
   - FDM engine and original propeller definition. (From JSBSim-CVS)
@@ -24,6 +24,4 @@ David Megginson
 
 Dependencies:
 
-Aircraft/CitationX       (Nasal/flightdirector.nas,Nasal/Primus1000.nas,Nasal/rmu.nas,Models/Instruments/PFD/PFD.xml,Models/Instruments/fmc.xml)
-Aircraft/Citation-Bravo  (Models/Instruments/dme.xml)
-Aircraft/Submarine_Scout (Models/mp_broadcast.nas)
+Aircraft/CitationX       (Nasal/flightdirector.nas,Nasal/rmu.nas,Models/Instruments/fmc.xml)

@@ -187,6 +187,9 @@
   <VIR32>
    <file>Aircraft/ZLT-NT/DualControl/Instruments/VIR-32/ctl32.nas</file>
   </VIR32>
+  <KDI572>
+   <file>Aircraft/ZLT-NT/DualControl/Instruments/KDI-572/kdi572.nas</file>
+  </KDI572>
   <!-- citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
    <file>Aircraft/CitationX/Nasal/Primus1000.nas</file>

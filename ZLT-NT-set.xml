@@ -193,14 +193,22 @@
   <VIR32>
    <file>Aircraft/ZLT-NT/DualControl/Instruments/VIR-32/ctl32.nas</file>
   </VIR32>
+  <KDI572>
+   <file>Aircraft/ZLT-NT/DualControl/Instruments/KDI-572/kdi572.nas</file>
+  </KDI572>
   <citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
    <file>Aircraft/CitationX/Nasal/rmu.nas</file>
   </citation>
   <efis>
-    <file>Aircraft/Instruments-3d/primus-1000/P1000.nas</file>
+   <file>Aircraft/Instruments-3d/primus-1000/P1000.nas</file>
+   <script>
+    props.globals.getNode
+    ("/instrumentation/kr-87/outputs/needle-deg", 1).
+     alias(props.globals.getNode("/instrumentation/adf/indicated-bearing-deg"));
+   </script> 
   </efis>
-<!-- Dual control. -->
+  <!-- Dual control. -->
   <dual_control_tools>
    <file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
   </dual_control_tools>

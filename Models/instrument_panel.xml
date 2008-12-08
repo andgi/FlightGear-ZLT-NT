@@ -20,7 +20,7 @@
 
  <model>
   <name>DME</name>
-  <path>Aircraft/Citation-Bravo/Models/Instruments/dme.xml</path>
+  <path>Aircraft/ZLT-NT/DualControl/Instruments/KDI-572/kdi572.xml</path>
   <offsets>
    <x-m> 0.010</x-m>
    <y-m> 0.209</y-m>

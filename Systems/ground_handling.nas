@@ -20,12 +20,12 @@ var init = func(reinit=0) {
             # Set up an initial mooring location.
             mooring.add_fixed_mooring(geo.aircraft_position(),
                                       LOCAL_MOORING_ALT_OFFSET);
-        }, 0.05);
+        }, 0.4);
         # We need the FDM to run in between.
         settimer(func {
             mooring.attach_mooring_wire();
             mooring.set_winch_speed(-1.0);
-        }, 1.0);
+        }, 0.5);
     }
 
     # Enable Alt+Click to place the mooring mast
@@ -72,7 +72,8 @@ var mooring = {
     ##################################################
     add_fixed_mooring : func(pos, alt_offset, name="local") {
         var geo_info = geodinfo(pos.lat(), pos.lon());
-        pos.set_alt(geo_info[0]); # Crash if the terrain elevation is unknown.
+        if (geo_info == nil) return;
+        pos.set_alt(geo_info[0]);
         me.moorings[name] = { position   : pos,
                               alt_offset : alt_offset };
         # Put a mooring mast model here. Note the model specific offset.
@@ -196,7 +197,7 @@ var mooring = {
                 me.active_mooring.getNode("longitude-deg").setValue(pos.lon());
                 me.active_mooring.getNode("altitude-ft").
                     setValue(M2FT * (pos.alt() +
-                                         me.moorings[name].alt_offset));
+                                     me.moorings[name].alt_offset));
                 found = 1;
             }
         }

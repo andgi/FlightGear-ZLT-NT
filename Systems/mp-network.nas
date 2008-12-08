@@ -99,7 +99,7 @@ var mp_network_init = func (active_participant=0) {
 
     if (!contains(globals, "mp_broadcast")) {
         load_nasal(getprop("/sim/fg-root") ~
-                   "/Aircraft/Submarine_Scout/Models/mp_broadcast.nas",
+                   "/Aircraft/ZLT-NT/Systems/mp_broadcast.nas",
                    "mp_broadcast");
     }
 
