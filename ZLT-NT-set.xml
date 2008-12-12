@@ -196,6 +196,9 @@
   <KDI572>
    <file>Aircraft/ZLT-NT/DualControl/Instruments/KDI-572/kdi572.nas</file>
   </KDI572>
+  <ADF462>
+   <file>Aircraft/ZLT-NT/DualControl/Instruments/ADF-462/ctl62.nas</file>
+  </ADF462>
   <citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
    <file>Aircraft/CitationX/Nasal/rmu.nas</file>

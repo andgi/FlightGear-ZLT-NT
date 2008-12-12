@@ -93,6 +93,10 @@ var ctl32 = [master_ctl32.new(0), master_ctl32.new(1)];
 
 
 ###########################################################################
+# API for pick animations and dual control setup.
+###########################################################################
+
+###########################################################################
 # n - Nav#
 var make_master = func(n) {
   ctl32[n] = master_ctl32.new(n);
@@ -116,6 +120,92 @@ swap = func(n) {
 adjust_frequency = func(n, d) {
   ctl32[n].adjust_frequency(d);
 }
+
+###########################################################################
+# Create aliases to drive a radio 3d model in an AI/MP model. 
+# n - Nav#
+var animate_aimodel = func(n, airoot) {
+  var p = "systems/electrical/outputs/nav["~ n ~"]";
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = "instrumentation/nav["~ n ~"]/serviceable";
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = nav_base[n] ~ "/" ~ freq_selected;
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = nav_base[n] ~ "/" ~ freq_standby;
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+}
+
+###########################################################################
+# Create a TDMEncoder node array for sending the current radio state to
+# slaves.  
+# n - Nav#
+var master_send_state = func(n) {
+  return
+    [
+     props.globals.getNode(nav_base[n] ~ freq_selected),
+     props.globals.getNode(nav_base[n] ~ freq_standby)
+    ];
+}
+
+###########################################################################
+# Create a SwitchDecoder action array for processing button presses
+# from a slave.  
+# n - Nav#
+var master_receive_slave_buttons = func(n) {
+  return
+    [
+     func (b) {
+         if (b) { swap(n); }
+     },
+     func (b) {
+         if (b) { adjust_frequency(n, -0.05); }
+     },
+     func (b) {
+         if (b) { adjust_frequency(n, 0.05); }
+     },
+     func (b) {
+         if (b) { adjust_frequency(n, -1.0); }
+     },
+     func (b) {
+         if (b) { adjust_frequency(n, 1.0); }
+     }
+    ];
+}
+
+###########################################################################
+# Create a TDMDecoder action array for processing the radio state
+# from the master.
+# n - Nav#
+var slave_receive_master_state = func(n) {
+  return
+    [
+     func (v) {
+         props.globals.getNode
+             (nav_base[n] ~ freq_selected).setValue(v);
+     },
+     func (v) {
+         props.globals.getNode
+             (nav_base[n] ~ freq_standby).setValue(v);
+     }
+    ];
+}
+
+###########################################################################
+# Create a SwitchEncoder node array for sending button presses
+# to the master
+# n - Nav#
+var slave_send_buttons = func(n) {
+  return
+    [
+     props.globals.getNode(nav_base[n] ~ swap_btn, 1),
+     props.globals.getNode(nav_base[n] ~ freq_decS, 1),
+     props.globals.getNode(nav_base[n] ~ freq_incS, 1),
+     props.globals.getNode(nav_base[n] ~ freq_decL, 1),
+     props.globals.getNode(nav_base[n] ~ freq_incL, 1),
+    ];
+}
+
+
 
 ###########################################################################
 # Generic frequency stepper.

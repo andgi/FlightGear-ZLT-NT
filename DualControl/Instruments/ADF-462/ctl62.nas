@@ -1,7 +1,7 @@
 ###############################################################################
 ## $Id$
 ##
-## Nasal for dual control of a VHF 22 Comm radio over the multiplayer
+## Nasal for dual control of a ADF 462 radio over the multiplayer
 ## network.
 ##
 ##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
@@ -10,7 +10,7 @@
 ###############################################################################
 
 # Note:
-#  This module MUST be loaded as VHF22.
+#  This module MUST be loaded as ADF462.
 #
 
 # Slave button presses.
@@ -21,47 +21,47 @@ var freq_decL   = "freq-decL-clicked";
 var freq_incL   = "freq-incL-clicked";
 
 # Settings
-var freq_selected = "frequencies/selected-mhz";
-var freq_standby  = "frequencies/standby-mhz";
+var freq_selected = "frequencies/selected-khz";
+var freq_standby  = "frequencies/standby-khz";
 
-var comm_base = ["instrumentation/comm[0]",
-                 "instrumentation/comm[1]"];
+var adf_base = ["instrumentation/adf[0]",
+                "instrumentation/adf[1]"];
 
 ###########################################################################
-var master_ctl22 = {
+var master_ctl62 = {
   new : func(n) {
     obj = {};
-    obj.parents = [master_ctl22];
-    obj.comm_base = props.globals.getNode(comm_base[n]);
+    obj.parents = [master_ctl62];
+    obj.adf_base = props.globals.getNode(adf_base[n]);
     return obj;
   },
   swap : func() {
-    var tmp = me.comm_base.getNode(freq_selected).getValue();
-    me.comm_base.getNode(freq_selected).setValue
-      (me.comm_base.getNode(freq_standby).getValue());
-    me.comm_base.getNode(freq_standby).setValue(tmp);
+    var tmp = me.adf_base.getNode(freq_selected).getValue();
+    me.adf_base.getNode(freq_selected).setValue
+      (me.adf_base.getNode(freq_standby).getValue());
+    me.adf_base.getNode(freq_standby).setValue(tmp);
   },
   adjust_frequency : func(d) {
     adjust_radio_frequency(
-      me.comm_base.getNode(freq_standby),
+      me.adf_base.getNode(freq_standby),
       d,
-      118,
-      135.975);
+      190.0,
+      1800.0);
   }
 };
 
 ###########################################################################
-var slave_ctl22 = {
+var slave_ctl62 = {
   new : func(n, airoot) {
     obj = {};
-    obj.parents = [slave_ctl22];
+    obj.parents = [slave_ctl62];
     obj.root = airoot;
-    obj.comm_base = props.globals.getNode(comm_base[n]);
+    obj.adf_base = props.globals.getNode(adf_base[n]);
     return obj;
   },
   swap : func() {
-    var p = me.comm_base.getNode(swap_btn);
-    print("VHF22[?].SWAP");
+    var p = me.adf_base.getNode(swap_btn);
+    print("ADF62[?].SWAP");
     if (!p.getValue()) {
       p.setValue(1);
       settimer(func { p.setValue(0); },
@@ -70,12 +70,12 @@ var slave_ctl22 = {
   },
   adjust_frequency : func(d) {
     var p = 0;
-    if (abs(d) < 0.99) {
-      p = (d < 0) ? me.comm_base.getNode(freq_decS)
-                  : me.comm_base.getNode(freq_incS);
+    if (abs(d) < 5.0) {
+      p = (d < 0) ? me.adf_base.getNode(freq_decS)
+                  : me.adf_base.getNode(freq_incS);
     } else {
-      p = (d < 0) ? me.comm_base.getNode(freq_decL)
-                  : me.comm_base.getNode(freq_incL);
+      p = (d < 0) ? me.adf_base.getNode(freq_decL)
+                  : me.adf_base.getNode(freq_incL);
     }
     if (!p.getValue()) {
       p.setValue(1);
@@ -86,10 +86,10 @@ var slave_ctl22 = {
 };
 
 ###########################################################################
-#  The VHF-22 pick animations default to master.
+#  The ADF 462 pick animations default to master.
 #  NOTE: Use make_master() and make_slave_to().
-#        Do NOT change ctl22 directly.
-var ctl22 = [master_ctl22.new(0), master_ctl22.new(1)];
+#        Do NOT change ctl62 directly.
+var ctl62 = [master_ctl62.new(0), master_ctl62.new(1)];
 
 
 ###########################################################################
@@ -97,60 +97,60 @@ var ctl22 = [master_ctl22.new(0), master_ctl22.new(1)];
 ###########################################################################
 
 ###########################################################################
-# n - Comm#
+# n - Adf#
 var make_master = func(n) {
-  ctl22[n] = master_ctl22.new(n);
+  ctl62[n] = master_ctl62.new(n);
 }
 
 ###########################################################################
-# n - Comm#
+# n - Adf#
 var make_slave_to = func(n, airoot) {
-  ctl22[n] = slave_ctl22.new(n, airoot);
+  ctl62[n] = slave_ctl62.new(n, airoot);
 }
 
 ###########################################################################
-# n - Comm#
+# n - Adf#
 swap = func(n) {
-  ctl22[n].swap();
+  ctl62[n].swap();
 }
 
 ###########################################################################
-# n - Comm#
+# n - Adf#
 # d - adjustment
 adjust_frequency = func(n, d) {
-  ctl22[n].adjust_frequency(d);
+  ctl62[n].adjust_frequency(d);
 }
 
 ###########################################################################
 # Create aliases to drive a radio 3d model in an AI/MP model. 
-# n - Comm#
+# n - Adf#
 var animate_aimodel = func(n, airoot) {
-  var p = "systems/electrical/outputs/comm["~ n ~"]";
+  var p = "systems/electrical/outputs/adf["~ n ~"]";
   airoot.getNode(p, 1).alias(props.globals.getNode(p));
-  p = "instrumentation/comm["~ n ~"]/serviceable";
+  p = "instrumentation/adf["~ n ~"]/serviceable";
   airoot.getNode(p, 1).alias(props.globals.getNode(p));
-  p = comm_base[n] ~ "/" ~ freq_selected;
+  p = adf_base[n] ~ "/" ~ freq_selected;
   airoot.getNode(p, 1).alias(props.globals.getNode(p));
-  p = comm_base[n] ~ "/" ~ freq_standby;
+  p = adf_base[n] ~ "/" ~ freq_standby;
   airoot.getNode(p, 1).alias(props.globals.getNode(p));
 }
 
 ###########################################################################
 # Create a TDMEncoder node array for sending the current radio state to
 # slaves.  
-# n - Comm#
+# n - Adf#
 var master_send_state = func(n) {
   return
     [
-     props.globals.getNode(comm_base[n] ~ freq_selected),
-     props.globals.getNode(comm_base[n] ~ freq_standby)
+     props.globals.getNode(adf_base[n] ~ freq_selected),
+     props.globals.getNode(adf_base[n] ~ freq_standby)
     ];
 }
 
 ###########################################################################
 # Create a SwitchDecoder action array for processing button presses
 # from a slave.  
-# n - Comm#
+# n - Adf#
 var master_receive_slave_buttons = func(n) {
   return
     [
@@ -158,16 +158,16 @@ var master_receive_slave_buttons = func(n) {
          if (b) { swap(n); }
      },
      func (b) {
-         if (b) { adjust_frequency(n, -0.025); }
-     },
-     func (b) {
-         if (b) { adjust_frequency(n, 0.025); }
-     },
-     func (b) {
          if (b) { adjust_frequency(n, -1.0); }
      },
      func (b) {
          if (b) { adjust_frequency(n, 1.0); }
+     },
+     func (b) {
+         if (b) { adjust_frequency(n, -10.0); }
+     },
+     func (b) {
+         if (b) { adjust_frequency(n, 10.0); }
      }
     ];
 }
@@ -175,17 +175,17 @@ var master_receive_slave_buttons = func(n) {
 ###########################################################################
 # Create a TDMDecoder action array for processing the radio state
 # from the master.
-# n - Comm#
+# n - Adf#
 var slave_receive_master_state = func(n) {
   return
     [
      func (v) {
          props.globals.getNode
-             (comm_base[n] ~ freq_selected).setValue(v);
+             (adf_base[n] ~ freq_selected).setValue(v);
      },
      func (v) {
          props.globals.getNode
-             (comm_base[n] ~ freq_standby).setValue(v);
+             (adf_base[n] ~ freq_standby).setValue(v);
      }
     ];
 }
@@ -193,22 +193,22 @@ var slave_receive_master_state = func(n) {
 ###########################################################################
 # Create a SwitchEncoder node array for sending button presses
 # to the master
-# n - Comm#
+# n - Adf#
 var slave_send_buttons = func(n) {
   return
     [
-     props.globals.getNode(comm_base[n] ~ swap_btn, 1),
-     props.globals.getNode(comm_base[n] ~ freq_decS, 1),
-     props.globals.getNode(comm_base[n] ~ freq_incS, 1),
-     props.globals.getNode(comm_base[n] ~ freq_decL, 1),
-     props.globals.getNode(comm_base[n] ~ freq_incL, 1),
+     props.globals.getNode(adf_base[n] ~ swap_btn, 1),
+     props.globals.getNode(adf_base[n] ~ freq_decS, 1),
+     props.globals.getNode(adf_base[n] ~ freq_incS, 1),
+     props.globals.getNode(adf_base[n] ~ freq_decL, 1),
+     props.globals.getNode(adf_base[n] ~ freq_incL, 1),
     ];
 }
 
 
 
 ###########################################################################
-# Generic frequency stepper.
+# (Not so) Generic frequency stepper.
 #  f   - frequency property
 #  d   - change
 #  min - min frequency
@@ -216,10 +216,13 @@ var slave_send_buttons = func(n) {
 var adjust_radio_frequency = func(f, d, min, max) {
   var old = f.getValue();
   var new = old + d;
-  if (new < min - 0.005) { new = int(max) + (new - int(new)); }
-  if (new > max + 0.005) {
-      new = int(min) + (new - int(new));
-      if (int(new + 0.005) > min) new -= 1;
+  if (new < min - 0.05) {
+    new = max + (new - min);
+    if ((max - new) >= -d) new += -d;
+  }
+  if (new > max + 0.05) {
+    new = min + (new - max);
+    if ((new - min) >= d) new -= d;
   }
 #  print("Old: " ~ old ~ "  Intermediate: " ~ (old + d) ~ "  New: " ~ new);
   f.setValue(new);

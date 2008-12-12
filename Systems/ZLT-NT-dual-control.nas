@@ -256,41 +256,15 @@ var pilot_connect_copilot = func (copilot) {
            },
            func (b) {
                if (b) controls.gearDown(1);
-           },
-           ########################################
-           # 4 - 8: VHF22 Comm 1
-           func (b) {
-               if (b) { VHF22.swap(0); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(0, -0.025); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(0, 0.025); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(0, -1.0); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(0, 1.0); }
-           },
-           ########################################
-           # 9 - 13: VIR32 Nav 1
-           func (b) {
-               if (b) { VIR32.swap(0); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(0, -0.05); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(0, 0.05); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(0, -1.0); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(0, 1.0); }
-           },
+           }
+          ] ~
+          ########################################
+          #  4 - 8: VHF22 Comm 1
+          VHF22.master_receive_slave_buttons(0) ~
+          ########################################
+          #  9 - 13: VIR32 Nav 1
+          VIR32.master_receive_slave_buttons(0) ~
+          [
            ########################################
            # 14 - 17: Ballonet cmd inc/dec
            func (b) {
@@ -305,31 +279,20 @@ var pilot_connect_copilot = func (copilot) {
            func (b) {
                if (b) { ZLTNT.step_ballonet_cmd(1, -0.05); }
            },
-          ]),
+          ] ~
+          ########################################
+          #  18 - 22: ADF 462
+          ADF462.master_receive_slave_buttons(0)
+          ),
          ##################################################
          # Set up TDM reception of slow state properties.
          DCT.TDMDecoder.new
          (copilot.getNode(copilot_TDM1_mpp),
-          [
-           # 0 - 1 Comm 2 frequencies
-           func (v) {
-               props.globals.getNode
-                   (VHF22.comm_base[1] ~ VHF22.freq_selected).setValue(v);
-           },
-           func (v) {
-               props.globals.getNode
-                   (VHF22.comm_base[1] ~ VHF22.freq_standby).setValue(v);
-           },
-           # 2 - 3 Nav 2 frequencies
-           func (v) {
-               props.globals.getNode
-                   (VIR32.nav_base[1] ~ VIR32.freq_selected).setValue(v);
-           },
-           func (v) {
-               props.globals.getNode
-                   (VIR32.nav_base[1] ~ VIR32.freq_standby).setValue(v);
-           },
-          ]),
+          #  0 - 1 Comm 2 frequencies
+          VHF22.slave_receive_master_state(1) ~
+          #  2 - 3 Nav 2 frequencies
+          VIR32.slave_receive_master_state(1)
+         ),
 
          ######################################################################
          # Process properties to send.
@@ -337,21 +300,13 @@ var pilot_connect_copilot = func (copilot) {
          ##################################################
          # Encoding of on/off switches.
          DCT.SwitchEncoder.new
-         ([
-           # 0 - 4: VHF22 Comm 2
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.swap_btn, 1),
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.freq_decS, 1),
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.freq_incS, 1),
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.freq_decL, 1),
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.freq_incL, 1),
-           # 0 - 4: VIR32 Nav 2
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.swap_btn, 1),
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.freq_decS, 1),
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.freq_incS, 1),
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.freq_decL, 1),
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.freq_incL, 1),
-          ],
-          props.globals.getNode(pilot_switches1_mpp)),
+         (
+          #  0 - 4: VHF22 Comm 2
+          VHF22.slave_send_buttons(1) ~
+          #  5 - 9: VIR32 Nav 2
+          VIR32.slave_send_buttons(1),
+          props.globals.getNode(pilot_switches1_mpp)
+         ),
          ##################################################
          # Set up TDM transmission of slow state properties.
          DCT.TDMEncoder.new
@@ -393,13 +348,13 @@ var pilot_connect_copilot = func (copilot) {
            props.globals.getNode(l_net_lift),
            # 5 CG position
            props.globals.getNode(l_cg_position),
-           # 6 - 7 Comm 1 frequencies
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_selected),
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_standby),
-           # 8 - 9 Nav 1 frequencies
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_selected),
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_standby),
-          ],
+          ] ~
+          #  6 - 7 Comm 1 frequencies
+          VHF22.master_send_state(0) ~
+          #  8 - 9 Nav 1 frequencies
+          VIR32.master_send_state(0) ~
+          #  10 -11 ADF frequencies
+          ADF462.master_send_state(0),
           props.globals.getNode(pilot_TDM2_mpp),
          ),
          ##################################################
@@ -475,9 +430,16 @@ var copilot_connect_pilot = func (pilot) {
     # VHF 22 Comm. Comm 1 is owned by pilot, 2 by copilot.
     VHF22.make_slave_to(0, pilot);
     VHF22.make_master(1);
+    VHF22.animate_aimodel(0, pilot);
+    VHF22.animate_aimodel(1, pilot);
     # VIR 32 Nav. Nav 1 is owned by pilot, 2 by copilot.
     VIR32.make_slave_to(0, pilot);
     VIR32.make_master(1);
+    VIR32.animate_aimodel(0, pilot);
+    VIR32.animate_aimodel(1, pilot);
+    # ADF 462. Owned by the pilot.
+    ADF462.make_slave_to(0, pilot);
+    ADF462.animate_aimodel(0, pilot);
 
     return
         [
@@ -565,40 +527,11 @@ var copilot_connect_pilot = func (pilot) {
          #   NOTE: Actions are only triggered on change.
          DCT.SwitchDecoder.new
          (pilot.getNode(pilot_switches1_mpp),
-          [
-           # 0 - 4: VHF22 Comm 2
-           func (b) {
-               if (b) { VHF22.swap(1); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(1, -0.025); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(1, 0.025); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(1, -1.0); }
-           },
-           func (b) {
-               if (b) { VHF22.adjust_frequency(1, 1.0); }
-           },
-           # 5 - 9: VIR32 Nav 2
-           func (b) {
-               if (b) { VIR32.swap(1); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(1, -0.05); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(1, 0.05); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(1, -1.0); }
-           },
-           func (b) {
-               if (b) { VIR32.adjust_frequency(1, 1.0); }
-           },
-          ]),
+          #  0 - 4: VHF22 Comm 2
+          VHF22.master_receive_slave_buttons(1) ~
+          #  5 - 9: VIR32 Nav 2
+          VIR32.master_receive_slave_buttons(1)
+         ),
          ##################################################
          # Set up TDM reception of slow state properties.
          DCT.TDMDecoder.new
@@ -711,33 +644,14 @@ var copilot_connect_pilot = func (pilot) {
            func (v) {
                props.globals.getNode(l_cg_position).setValue(v);
            },
-           # 6 - 7 Comm 1 frequencies
-           func (v) {
-               props.globals.getNode
-                   (VHF22.comm_base[0] ~ VHF22.freq_selected).setValue(v);
-               pilot.getNode
-                   (VHF22.comm_base[0] ~ VHF22.freq_selected, 1).setValue(v);
-           },
-           func (v) {
-               props.globals.getNode
-                   (VHF22.comm_base[0] ~ VHF22.freq_standby).setValue(v);
-               pilot.getNode
-                   (VHF22.comm_base[0] ~ VHF22.freq_standby, 1).setValue(v);
-           },
-           # 8 - 9 Nav 1 frequencies
-           func (v) {
-               props.globals.getNode
-                   (VIR32.nav_base[0] ~ VIR32.freq_selected).setValue(v);
-               pilot.getNode
-                   (VIR32.nav_base[0] ~ VIR32.freq_selected, 1).setValue(v);
-           },
-           func (v) {
-               props.globals.getNode
-                   (VIR32.nav_base[0] ~ VIR32.freq_standby).setValue(v);
-               pilot.getNode
-                   (VIR32.nav_base[0] ~ VIR32.freq_standby, 1).setValue(v);
-           },
-          ]),
+          ] ~
+          #  6 - 7 Comm 1 frequencies
+          VHF22.slave_receive_master_state(0) ~
+          #  8 - 9 Nav 1 frequencies
+          VIR32.slave_receive_master_state(0) ~
+          #  10 - 11 ADF frequencies
+          ADF462.slave_receive_master_state(0)
+         ),
          ##################################################
          # Set up TDM reception of slow state properties.
          DCT.TDMDecoder.new
@@ -839,36 +753,29 @@ var copilot_connect_pilot = func (pilot) {
            # 2 - 3: "gear"/rear engine up / down.
            props.globals.initNode(l_gear_up_cmd, 0, "BOOL"),
            props.globals.initNode(l_gear_down_cmd, 0, "BOOL"),
-           # 4 - 8: VHF22 Comm 1
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.swap_btn, 1),
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_decS, 1),
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_incS, 1),
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_decL, 1),
-           props.globals.getNode(VHF22.comm_base[0] ~ VHF22.freq_incL, 1),
-           # 9 - 13: VIR32 Nav 1
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.swap_btn, 1),
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_decS, 1),
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_incS, 1),
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_decL, 1),
-           props.globals.getNode(VIR32.nav_base[0] ~ VIR32.freq_incL, 1),
+          ] ~
+          #  4 - 8: VHF22 Comm 1
+          VHF22.slave_send_buttons(0) ~
+          #  9 - 13: VIR32 Nav 1
+          VIR32.slave_send_buttons(0) ~
+          [
            # 14 - 17: Ballonet cmd inc/dec
            props.globals.getNode(l_ballonet_cmd_inc[0], 1),
            props.globals.getNode(l_ballonet_cmd_dec[0], 1),
            props.globals.getNode(l_ballonet_cmd_inc[1], 1),
-           props.globals.getNode(l_ballonet_cmd_dec[1], 1),
-          ],
+           props.globals.getNode(l_ballonet_cmd_dec[1], 1)
+          ] ~
+          #  18 - 22: ADF 462
+          ADF462.slave_send_buttons(0),
           props.globals.getNode(copilot_switches1_mpp)),
          ##################################################
          # Set up TDM transmission of slow state properties.
          DCT.TDMEncoder.new
-         ([
-           # 0 - 1 Comm 2 frequencies
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.freq_selected),
-           props.globals.getNode(VHF22.comm_base[1] ~ VHF22.freq_standby),
-           # 2 - 3 Nav 2 frequencies
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.freq_selected),
-           props.globals.getNode(VIR32.nav_base[1] ~ VIR32.freq_standby),
-          ],
+         (
+          #  0 - 1 Comm 2 frequencies
+          VHF22.master_send_state(1) ~
+          #  2 - 3 Nav 2 frequencies
+          VIR32.master_send_state(1),
           props.globals.getNode(copilot_TDM1_mpp),
          )
         ];

@@ -165,7 +165,7 @@
  </model>
  <model>
   <name>ADF radio</name>
-  <path>Aircraft/Instruments-3d/ADF-462/ctl62-adf.xml</path>
+  <path>Aircraft/ZLT-NT/DualControl/Instruments/ADF-462/ctl62-adf1.xml</path>
   <offsets>
    <x-m> 0.040</x-m>
    <y-m> 0.197</y-m>
