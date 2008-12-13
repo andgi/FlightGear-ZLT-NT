@@ -14,6 +14,13 @@
 #  This module MUST be loaded as KDI572.
 #
 
+var base = ["instrumentation/dme[0]",
+            "instrumentation/dme[1]"];
+
+###########################################################################
+# API for pick animations.
+###########################################################################
+
 var dme_step = func(stp) {
     var switch= getprop("instrumentation/dme/switch-position");
     switch += stp;
@@ -34,4 +41,26 @@ var dme_step = func(stp) {
         setprop("instrumentation/dme/frequencies/source",
                 "instrumentation/nav[1]/frequencies/selected-mhz");
     }
+}
+
+###########################################################################
+# API for dual control setup.
+###########################################################################
+
+###########################################################################
+# Create aliases to drive a KDI-572 3d model in an AI/MP model. 
+# n - unit#
+var animate_aimodel = func(n, airoot) {
+    var p = "systems/electrical/outputs/dme";
+    airoot.getNode(p, 1).alias(props.globals.getNode(p));
+    p = base[n] ~ "/switch-position";
+    airoot.getNode(p, 1).alias(props.globals.getNode(p));
+    p = base[n] ~ "/in-range";
+    airoot.getNode(p, 1).alias(props.globals.getNode(p));
+    p = base[n] ~ "/indicated-distance-nm";
+    airoot.getNode(p, 1).alias(props.globals.getNode(p));
+    p = base[n] ~ "/indicated-ground-speed-kt";
+    airoot.getNode(p, 1).alias(props.globals.getNode(p));
+    p = base[n] ~ "/indicated-time-min";
+    airoot.getNode(p, 1).alias(props.globals.getNode(p));
 }

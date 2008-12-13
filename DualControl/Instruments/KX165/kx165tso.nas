@@ -4,8 +4,8 @@
 ## Nasal for dual control of a KX165 NavComm radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2007  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
@@ -23,6 +23,11 @@ var freq_incL   = "freq-incL-clicked";
 # Settings
 var freq_selected = "frequencies/selected-mhz";
 var freq_standby  = "frequencies/standby-mhz";
+
+var comm_base = ["instrumentation/comm[0]",
+                 "instrumentation/comm[1]"];
+var nav_base = ["instrumentation/nav[0]",
+                "instrumentation/nav[1]"];
 
 ###########################################################################
 var master_kx165tso = {
@@ -67,40 +72,26 @@ var slave_kx165tso = {
     obj = {};
     obj.parents = [slave_kx165tso];
     obj.root = airoot;
-    obj.nav_base  = props.globals.getNode("instrumentation/nav[" ~ n ~ "]/");
-    obj.comm_base = props.globals.getNode("instrumentation/comm[" ~ n ~ "]/");
+    obj.nav_base  = props.globals.getNode("instrumentation/nav[" ~ n ~ "]");
+    obj.comm_base = props.globals.getNode("instrumentation/comm[" ~ n ~ "]");
     return obj;
   },
   swap_nav : func() {
     var p = me.nav_base.getNode(swap_btn);
-    print("KX165tso[?].NAVSWAP");
+#    print("KX165tso[?].NAVSWAP");
     if (!p.getValue()) {
       p.setValue(1);
       settimer(func { p.setValue(0); },
                1.0);
-      # Swap locally to improve user experience.
-#      master_kx165tso.swap_nav(n);
-      # Swap below the pilot node in case the animations look there.
-#      me.root.getNode(b ~ freq_selected, 1).
-#        setValue(props.globals.getNode(b ~ freq_selected).getValue());
-#      me.root.getNode(b ~ freq_standby, 1).
-#        setValue(props.globals.getNode(b ~ freq_standby).getValue());
     }
   },
   swap_comm : func() {
     var p = me.comm_base.getNode(swap_btn);
-    print("KX165tso[?].COMMSWAP");
+#    print("KX165tso[?].COMMSWAP");
     if (!p.getValue()) {
       p.setValue(1);
       settimer(func { p.setValue(0); },
                1.0);
-      # Swap locally to improve user experience.
-#      master_kx165tso.swap_comm(n);
-      # Swap below the pilot node in case the animations look there.
-#      me.root.getNode(b ~ freq_selected, 1).
-#        setValue(props.globals.getNode(b ~ freq_selected).getValue());
-#      me.root.getNode(b ~ freq_standby, 1).
-#        setValue(props.globals.getNode(b ~ freq_standby).getValue());
     }
   },
   adjust_nav_frequency : func(d) {
@@ -143,6 +134,10 @@ var kx165tso = [master_kx165tso.new(0), master_kx165tso.new(1)];
 
 
 ###########################################################################
+# API for pick animations and dual control setup.
+###########################################################################
+
+###########################################################################
 # n - NavComm#
 var make_master = func(n) {
   kx165tso[n] = master_kx165tso.new(n);
@@ -163,7 +158,7 @@ swap_nav = func(n) {
 ###########################################################################
 # n - NavComm#
 swap_comm = func(n, b) {
-  kx165tso[n].comm_base.getNode(swap_btn).setValue(b);
+  kx165tso[n].comm_base.getNode(swap_btn, 1).setValue(b);
   if (b) kx165tso[n].swap_comm();
 }
 
@@ -180,6 +175,145 @@ adjust_nav_frequency = func(n, d) {
 adjust_comm_frequency = func(n, d) {
   kx165tso[n].adjust_comm_frequency(d);
 }
+
+###########################################################################
+# Create aliases to drive a radio 3d model in an AI/MP model. 
+# n - NavComm#
+var animate_aimodel = func(n, airoot) {
+  # Comm
+  var base = comm_base[n];
+  var p = "systems/electrical/outputs/comm["~ n ~"]";
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = "instrumentation/comm["~ n ~"]/serviceable";
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = base ~ "/" ~ freq_selected;
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = base ~ "/" ~ freq_standby;
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = base ~ "/" ~ swap_btn;
+  props.globals.getNode(p, 1).alias(airoot.getNode(p));
+  # Nav
+  base = nav_base[n];
+  p = "systems/electrical/outputs/nav["~ n ~"]";
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = "instrumentation/nav["~ n ~"]/serviceable";
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = base ~ "/" ~ freq_selected;
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = base ~ "/" ~ freq_standby;
+  airoot.getNode(p, 1).alias(props.globals.getNode(p));
+  p = base ~ "/" ~ swap_btn;
+  props.globals.getNode(p, 1).alias(airoot.getNode(p));
+}
+
+###########################################################################
+# Create a TDMEncoder node array for sending the current radio state to
+# slaves.  
+# n - NavComm#
+var master_send_state = func(n) {
+  return
+    [
+     props.globals.getNode(comm_base[n] ~ freq_selected),
+     props.globals.getNode(comm_base[n] ~ freq_standby),
+     props.globals.getNode(nav_base[n] ~ freq_selected),
+     props.globals.getNode(nav_base[n] ~ freq_standby)
+    ];
+}
+
+###########################################################################
+# Create a SwitchDecoder action array for processing button presses
+# from a slave.  
+# n - Comm#
+var master_receive_slave_buttons = func(n) {
+  return
+    [
+     # Comm
+     func (b) {
+         if (b) {
+             swap_comm(n, 1);
+             settimer(func { swap_comm(n, 0); }, 1.0)
+         }
+     },
+     func (b) {
+         if (b) { adjust_comm_frequency(n, -0.025); }
+     },
+     func (b) {
+         if (b) { adjust_comm_frequency(n, 0.025); }
+     },
+     func (b) {
+         if (b) { adjust_comm_frequency(n, -1.0); }
+     },
+     func (b) {
+         if (b) { adjust_comm_frequency(n, 1.0); }
+     },
+     # Nav
+     func (b) {
+         if (b) { swap_nav(n); }
+     },
+     func (b) {
+         if (b) { adjust_nav_frequency(n, -0.05); }
+     },
+     func (b) {
+         if (b) { adjust_nav_frequency(n, 0.05); }
+     },
+     func (b) {
+         if (b) { adjust_nav_frequency(n, -1.0); }
+     },
+     func (b) {
+         if (b) { adjust_nav_frequency(n, 1.0); }
+     }
+    ];
+}
+
+###########################################################################
+# Create a TDMDecoder action array for processing the radio state
+# from the master.
+# n - NavComm#
+var slave_receive_master_state = func(n) {
+  return
+    [
+     func (v) {
+         props.globals.getNode
+             (comm_base[n] ~ freq_selected).setValue(v);
+     },
+     func (v) {
+         props.globals.getNode
+             (comm_base[n] ~ freq_standby).setValue(v);
+     },
+     func (v) {
+         props.globals.getNode
+             (nav_base[n] ~ freq_selected).setValue(v);
+     },
+     func (v) {
+         props.globals.getNode
+             (nav_base[n] ~ freq_standby).setValue(v);
+     }
+    ];
+}
+
+###########################################################################
+# Create a SwitchEncoder node array for sending button presses
+# to the master
+# n - NavComm#
+var slave_send_buttons = func(n) {
+  return
+    [
+     # Comm
+     props.globals.getNode(comm_base[n] ~ swap_btn, 1),
+     props.globals.getNode(comm_base[n] ~ freq_decS, 1),
+     props.globals.getNode(comm_base[n] ~ freq_incS, 1),
+     props.globals.getNode(comm_base[n] ~ freq_decL, 1),
+     props.globals.getNode(comm_base[n] ~ freq_incL, 1),
+     # Nav
+     props.globals.getNode(nav_base[n] ~ swap_btn, 1),
+     props.globals.getNode(nav_base[n] ~ freq_decS, 1),
+     props.globals.getNode(nav_base[n] ~ freq_incS, 1),
+     props.globals.getNode(nav_base[n] ~ freq_decL, 1),
+     props.globals.getNode(nav_base[n] ~ freq_incL, 1)     
+    ];
+}
+
+
 
 ###########################################################################
 # Generic frequency stepper.

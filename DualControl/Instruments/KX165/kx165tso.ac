@@ -7,7 +7,7 @@ kids 15
 OBJECT poly
 name "Chassis"
 loc -0.0185441 0 0
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 8
 0.0325441 -0.0255 0.079
@@ -62,7 +62,7 @@ kids 6
 OBJECT poly
 name "CommUse100M"
 loc 0.00234275 0.00053078 0.0232637
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -82,7 +82,7 @@ kids 0
 OBJECT poly
 name "CommUse10M"
 loc 0.00234275 0.00053078 0.0162098
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -102,7 +102,7 @@ kids 0
 OBJECT poly
 name "CommUse1M"
 loc 0.00234275 0.00053078 0.0091559
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -122,7 +122,7 @@ kids 0
 OBJECT poly
 name "CommUse100K"
 loc 0.00234275 0.00053078 0.00210197
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -142,7 +142,7 @@ kids 0
 OBJECT poly
 name "CommUse10K"
 loc 0.00234275 0.00053078 -0.00495195
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -162,7 +162,7 @@ kids 0
 OBJECT poly
 name "CommUseDot"
 loc -0.0117138 -0.0026539 -0.0451466
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 4
 0.0141379 0.0113861 0.0553319
@@ -185,7 +185,7 @@ kids 6
 OBJECT poly
 name "CommStby100M"
 loc 0.00214136 0.00053078 0.0232527
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -205,7 +205,7 @@ kids 0
 OBJECT poly
 name "CommStby10M"
 loc 0.00214136 0.00053078 0.0161988
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -225,7 +225,7 @@ kids 0
 OBJECT poly
 name "CommStby1M"
 loc 0.00214136 0.00053078 0.00914484
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -245,7 +245,7 @@ kids 0
 OBJECT poly
 name "CommStby100K"
 loc 0.00214136 0.00053078 0.00209092
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -265,7 +265,7 @@ kids 0
 OBJECT poly
 name "CommStby10K"
 loc 0.00214136 0.00053078 -0.004963
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -285,7 +285,7 @@ kids 0
 OBJECT poly
 name "CommStbyDot"
 loc -0.0119151 -0.00265385 -0.0450913
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 4
 0.0141379 0.0102382 0.0553319
@@ -308,7 +308,7 @@ kids 6
 OBJECT poly
 name "NavUse100M"
 loc 0.00193996 0.0247506 0.031069
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -328,7 +328,7 @@ kids 0
 OBJECT poly
 name "NavUse10M"
 loc 0.00193996 0.0247506 0.0240151
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -348,7 +348,7 @@ kids 0
 OBJECT poly
 name "NavUse1M"
 loc 0.00193996 0.0247506 0.0169612
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -368,7 +368,7 @@ kids 0
 OBJECT poly
 name "NavUse100K"
 loc 0.00193996 0.0247506 0.00990724
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -388,7 +388,7 @@ kids 0
 OBJECT poly
 name "NavUse10K"
 loc 0.00193996 0.0247506 0.00285331
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -408,7 +408,7 @@ kids 0
 OBJECT poly
 name "NavUseDot"
 loc -0.0121165 -0.00265386 -0.0451102
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 4
 0.0141379 0.0113861 0.0553319
@@ -431,7 +431,7 @@ kids 6
 OBJECT poly
 name "NavStby100M"
 loc 0.00173857 0.0247506 0.031068
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -451,7 +451,7 @@ kids 0
 OBJECT poly
 name "NavStby10M"
 loc 0.00173857 0.0247506 0.0240141
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -471,7 +471,7 @@ kids 0
 OBJECT poly
 name "NavStby1M"
 loc 0.00173857 0.0247506 0.0169602
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -491,7 +491,7 @@ kids 0
 OBJECT poly
 name "NavStby100K"
 loc 0.00173857 0.0247506 0.00990625
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -511,7 +511,7 @@ kids 0
 OBJECT poly
 name "NavStby10K"
 loc 0.00173857 0.0247506 0.00285233
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 texrep 1 1
 crease 45.000000
 numvert 4
@@ -531,7 +531,7 @@ kids 0
 OBJECT poly
 name "NavStbyDot"
 loc -0.0123179 -0.00265386 -0.0451054
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 4
 0.0141379 0.0102382 0.0553319
@@ -554,7 +554,7 @@ kids 4
 OBJECT poly
 name "CommToggle"
 loc -0.00052402 -0.00645512 -0.0306302
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 8
 0.0321433 -0.00498789 0.0557888
@@ -605,7 +605,7 @@ kids 0
 OBJECT poly
 name "CommMHz"
 loc 0.000685325 -0.00540788 -0.0315262
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 24
 0.0308582 -0.00878513 0.0226896
@@ -736,7 +736,7 @@ kids 0
 OBJECT poly
 name "CommKHz"
 loc 0.000685325 -0.00540788 -0.0315262
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 24
 0.0540198 -0.0125351 0.0241848
@@ -867,7 +867,7 @@ kids 0
 OBJECT poly
 name "CommVolume"
 loc -0.000846632 0.0172709 0.0936826
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 24
 0.0423582 -0.034739 -0.053549
@@ -1002,7 +1002,7 @@ kids 4
 OBJECT poly
 name "NavToggle"
 loc -0.000826385 -0.00645512 -0.0306302
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 8
 0.0321433 1.21146e-05 0.0557888
@@ -1053,7 +1053,7 @@ kids 0
 OBJECT poly
 name "NavMHz"
 loc 0.000786129 -0.00540788 -0.0315262
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 24
 0.0438582 -0.0125351 0.0216848
@@ -1184,7 +1184,7 @@ kids 0
 OBJECT poly
 name "NavKHz"
 loc 0.0007861 -0.0054079 -0.0315262
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 24
 0.0440198 -0.0100351 0.0248547
@@ -1315,7 +1315,7 @@ kids 0
 OBJECT poly
 name "NavVolume"
 loc -0.000745887 0.0172709 0.0936824
-texture "kx165tso.rgb"
+texture "kx165tso.png"
 crease 45.000000
 numvert 24
 0.0323582 -0.036308 -0.0526431
