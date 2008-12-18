@@ -3,14 +3,19 @@
 ##
 ## Nasal for copilot for dual control over the multiplayer network.
 ##
-##  Copyright (C) 2007  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
 # Renaming (almost :)
 var DCT = dual_control_tools;
 var ADC = aircraft_dual_control;
+
+# Allow aircraft to override the copilot view name.
+if (!contains(ADC, "copilot_view")) {
+  ADC.copilot_view = "Copilot View";
+}
 
 # Properties for position and orientation of local aircraft.
 var l_lat     = "/position/latitude-deg";
@@ -31,7 +36,7 @@ var process_data = 0;
 
 var connect = func (pilot) {
   # Set view eye paths.
-  var view_cfg = "/sim/view[" ~ view.indexof("Copilot View")~ "]/config";
+  var view_cfg = "/sim/view[" ~ view.indexof(ADC.copilot_view)~ "]/config";
   setprop(view_cfg ~ "/eye-lat-deg-path",
           pilot.getNode(DCT.lat_mpp).getPath());
   setprop(view_cfg ~ "/eye-lon-deg-path",
@@ -173,20 +178,6 @@ var main = {
 var last_view = 0;
 
 setlistener("/sim/signals/fdm-initialized", func {
-#  setlistener("/sim/current-view/view-number", func {
-#    var vn = getprop("/sim/current-view/view-number");
-#    if (vn == 0) {
-#     print("View change to view 0");
-#     if (last_view != 1) {
-#        last_view = vn;
-#        setprop("/sim/current-view/view-number", view.indexof("Chase View"));
-#        print("View skip");
-#      } else {
-#        last_view = vn;
-#        setprop("/sim/current-view/view-number", view.indexof("Copilot View"));
-#      }
-#    }
-#  });
   main.init();
 });
 
