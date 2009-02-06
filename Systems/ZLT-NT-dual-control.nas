@@ -89,9 +89,9 @@ var l_oil_pressure =
      "engines/engine[1]/oil-pressure-psi",
      "engines/engine[2]/oil-pressure-psi"];
 var l_fuel_quantity =
-    ["consumables/fuel/tank[0]/level-lb",
-     "consumables/fuel/tank[1]/level-lb",
-     "consumables/fuel/tank[2]/level-lb"];
+    ["consumables/fuel/tank[0]/level-lbs",
+     "consumables/fuel/tank[1]/level-lbs",
+     "consumables/fuel/tank[2]/level-lbs"];
 var l_fuel_flow =
     ["engines/engine[0]/fuel-flow-gph",
      "engines/engine[1]/fuel-flow-gph",

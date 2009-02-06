@@ -654,7 +654,7 @@
  <animation>
   <type>translate</type>
   <object-name>FL_arrow.1</object-name>
-  <property>consumables/fuel/tank[0]/level-lb</property>
+  <property>consumables/fuel/tank[0]/level-lbs</property>
   <factor>0.00004860</factor>
   <offset>0</offset>
   <min>0.0</min>
@@ -668,7 +668,7 @@
  <animation>
   <type>scale</type>
   <object-name>FL_bar.1</object-name>
-  <property>consumables/fuel/tank[0]/level-lb</property>
+  <property>consumables/fuel/tank[0]/level-lbs</property>
   <x-factor>0.0</x-factor>
   <x-offset>1.0</x-offset>
   <y-factor>0.0</y-factor>
@@ -687,7 +687,7 @@
  <animation>
   <type>translate</type>
   <object-name>FL_arrow.2</object-name>
-  <property>consumables/fuel/tank[2]/level-lb</property>
+  <property>consumables/fuel/tank[2]/level-lbs</property>
   <factor>0.00004860</factor>
   <offset>0</offset>
   <min>0.0</min>
@@ -701,7 +701,7 @@
  <animation>
   <type>scale</type>
   <object-name>FL_bar.2</object-name>
-  <property>consumables/fuel/tank[2]/level-lb</property>
+  <property>consumables/fuel/tank[2]/level-lbs</property>
   <x-factor>0.0</x-factor>
   <x-offset>1.0</x-offset>
   <y-factor>0.0</y-factor>
@@ -720,7 +720,7 @@
  <animation>
   <type>translate</type>
   <object-name>FL_arrow.3</object-name>
-  <property>consumables/fuel/tank[1]/level-lb</property>
+  <property>consumables/fuel/tank[1]/level-lbs</property>
   <factor>0.00004860</factor>
   <offset>0</offset>
   <min>0.0</min>
@@ -734,7 +734,7 @@
  <animation>
   <type>scale</type>
   <object-name>FL_bar.3</object-name>
-  <property>consumables/fuel/tank[1]/level-lb</property>
+  <property>consumables/fuel/tank[1]/level-lbs</property>
   <x-factor>0.0</x-factor>
   <x-offset>1.0</x-offset>
   <y-factor>0.0</y-factor>
