@@ -13,16 +13,6 @@ var broadcast = nil;
 var message_id = nil;
 
 ###############################################################################
-# For backwards compatibility.
-var load_nasal = func (a, b) {
-    if (contains(io, "load_nasal")) {
-        io.load_nasal(a, b);
-    } else {
-        debug.load_nasal(a, b);
-    }
-}
-
-###############################################################################
 # Send message wrappers.
 var announce_fixed_mooring = func (pos, alt_offset) {
     if (typeof(broadcast) != "hash") return;
@@ -95,14 +85,6 @@ remote_mooring.init();
 ###############################################################################
 # Initialization.
 var mp_network_init = func (active_participant=0) {
-    # Load the broadcast module if it isn't loaded yet.
-
-    if (!contains(globals, "mp_broadcast")) {
-        load_nasal(getprop("/sim/fg-root") ~
-                   "/Aircraft/ZLT-NT/Systems/mp_broadcast.nas",
-                   "mp_broadcast");
-    }
-
     Binary = mp_broadcast.Binary;
     broadcast =
         mp_broadcast.BroadcastChannel.new

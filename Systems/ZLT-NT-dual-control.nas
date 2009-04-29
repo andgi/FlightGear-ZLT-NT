@@ -3,8 +3,8 @@
 ##
 ## Nasal for dual control of the ZLT-NT over the multiplayer network.
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
@@ -495,15 +495,15 @@ var copilot_connect_pilot = func (pilot) {
 #          props.globals.getNode(l_ai_hoffset)),
          ##################################################
          # Map M877 clock properties to pilot 3d model. Local replica.
-         DCT.Translator.new
-         (props.globals.getNode("instrumentation/clock/m877/mode"),
-          pilot.getNode("instrumentation/clock/m877/mode")),
-         DCT.Translator.new
-         (props.globals.getNode("instrumentation/clock/m877/indicated-hour"),
-          pilot.getNode("instrumentation/clock/m877/indicated-hour")),
-         DCT.Translator.new
-         (props.globals.getNode("instrumentation/clock/m877/indicated-min"),
-          pilot.getNode("instrumentation/clock/m877/indicated-min")),
+#         DCT.Translator.new
+#         (props.globals.getNode("instrumentation/clock/m877/mode"),
+#          pilot.getNode("instrumentation/clock/m877/mode")),
+#         DCT.Translator.new
+#         (props.globals.getNode("instrumentation/clock/m877/indicated-hour"),
+#          pilot.getNode("instrumentation/clock/m877/indicated-hour")),
+#         DCT.Translator.new
+#         (props.globals.getNode("instrumentation/clock/m877/indicated-min"),
+#          pilot.getNode("instrumentation/clock/m877/indicated-min")),
          ##################################################
          # Decode pilot cockpit switch states.
          #   NOTE: Actions are only triggered on change.

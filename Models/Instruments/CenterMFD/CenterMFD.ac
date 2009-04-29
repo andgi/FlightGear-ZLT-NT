@@ -1,9 +1,9 @@
 AC3Db
 MATERIAL "DefaultWhite" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.5 0.5 0.5  shi 64  trans 0
-MATERIAL "LCD_Green" rgb 0 1 0 amb 0.5 0.5 0.5 emis 0 1 0 spec 1 1 1 shi 32 trans 0
-MATERIAL "LCD_White" rgb 1 1 1 amb 0.5 0.5 0.5 emis 1 1 1 spec 1 1 1 shi 32 trans 0
-MATERIAL "LCD_Cyan" rgb 0 1 1 amb 0.5 0.5 0.5 emis 0 1 1 spec 1 1 1 shi 32 trans 0
-MATERIAL "plastic_black" rgb 0.2 0.2 0.2 amb 0.5 0.5 0.5 emis 0 0 0 spec 0.6 0.6 0.6 shi 32 trans 0
+MATERIAL "LCD_Green" rgb 0 1 0 amb 0 1 0 emis 0 1 0 spec 1 1 1 shi 32 trans 0
+MATERIAL "LCD_White" rgb 1 1 1 amb 1 1 1 emis 1 1 1 spec 1 1 1 shi 32 trans 0
+MATERIAL "LCD_Cyan" rgb 0 1 1 amb 0 1 1 emis 0 1 1 spec 1 1 1 shi 32 trans 0
+MATERIAL "plastic_black" rgb 0.2 0.2 0.2 amb 0.2 0.2 0.2 emis 0 0 0 spec 0.6 0.6 0.6 shi 32 trans 0
 OBJECT world
 kids 50
 OBJECT poly

@@ -1,15 +1,15 @@
 AC3Db
 MATERIAL "DefaultWhite" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.5 0.5 0.5  shi 64  trans 0
-MATERIAL "instrument_panel" rgb 0.21 0.32 0.52 amb 0.5 0.5 0.5 emis 0 0 0 spec 1 1 1 shi 32 trans 0
+MATERIAL "instrument_panel" rgb 0.21 0.32 0.52 amb 0.21 0.32 0.52 emis 0 0 0 spec 1 1 1 shi 32 trans 0
 MATERIAL "WhiteLightOff.001" rgb 1 1 1 amb 1 1 1 emis 0 0 0 spec 0 0 0 shi 72 trans 0
 MATERIAL "WhiteLightOff" rgb 1 1 1 amb 1 1 1 emis 0 0 0 spec 0 0 0 shi 72 trans 0
-MATERIAL "black_metal" rgb 0.1 0.1 0.1 amb 0.5 0.5 0.5 emis 0 0 0 spec 0.5 0.5 0.5 shi 32 trans 0
-MATERIAL "blue_plastic" rgb 0.39055 0.510142 0.990591 amb 0.5 0.5 0.5 emis 0 0 0 spec 1 1 1 shi 32 trans 0
-MATERIAL "glare_shield" rgb 0.38 0.58 0.79 amb 0.5 0.5 0.5 emis 0 0 0 spec 1 1 1 shi 32 trans 0
-MATERIAL "red_plastic" rgb 1 0.009495 0 amb 0.5 0.5 0.5 emis 0 0 0 spec 1 1 1 shi 32 trans 0
-MATERIAL "yellow_plastic" rgb 0.959888 0.990591 0.014998 amb 0.5 0.5 0.5 emis 0 0 0 spec 0.8 0.8 0.8 shi 32 trans 0
-MATERIAL "tyre" rgb 0.1 0.1 0.1 amb 0.5 0.5 0.5 emis 0 0 0 spec 0.4 0.4 0.4 shi 32 trans 0
-MATERIAL "window" rgb 0.8 0.8 0.95 amb 0.5 0.5 0.5 emis 0 0 0 spec 1 1 1 shi 32 trans 0.85
+MATERIAL "black_metal" rgb 0.1 0.1 0.1 amb 0.1 0.1 0.1 emis 0 0 0 spec 0.5 0.5 0.5 shi 32 trans 0
+MATERIAL "blue_plastic" rgb 0.39055 0.510142 0.990591 amb 0.39055 0.510142 0.990591 emis 0 0 0 spec 1 1 1 shi 32 trans 0
+MATERIAL "glare_shield" rgb 0.38 0.58 0.79 amb 0.38 0.58 0.79 emis 0 0 0 spec 1 1 1 shi 32 trans 0
+MATERIAL "red_plastic" rgb 1 0.009495 0 amb 1 0.009495 0 emis 0 0 0 spec 1 1 1 shi 32 trans 0
+MATERIAL "yellow_plastic" rgb 0.959888 0.990591 0.014998 amb 0.959888 0.990591 0.014998 emis 0 0 0 spec 0.8 0.8 0.8 shi 32 trans 0
+MATERIAL "tyre" rgb 0.1 0.1 0.1 amb 0.1 0.1 0.1 emis 0 0 0 spec 0.4 0.4 0.4 shi 32 trans 0
+MATERIAL "window" rgb 0.8 0.8 0.95 amb 0.8 0.8 0.95 emis 0 0 0 spec 1 1 1 shi 32 trans 0.85
 OBJECT world
 kids 84
 OBJECT poly

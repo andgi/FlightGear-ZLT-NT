@@ -1,8 +1,8 @@
 AC3Db
 MATERIAL "DefaultWhite" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.5 0.5 0.5  shi 64  trans 0
-MATERIAL "illum" rgb 1 1 1 amb 0 0 0 emis 0.7 0.7 0.7 spec 0 0 0 shi 0 trans 0
-MATERIAL "glosswhite" rgb 1 1 1 amb 0.2 0.2 0.2 emis 0 0 0 spec 0.255556 0.255556 0.255556 shi 32 trans 0
-MATERIAL "flatpaint" rgb 0.8 0.8 0.8 amb 0.046055 0.046055 0.046055 emis 0.051361 0.051361 0.051361 spec 0 0 0 shi 32 trans 0
+MATERIAL "illum" rgb 1 1 1 amb 1 1 1 emis 0.7 0.7 0.7 spec 0 0 0 shi 0 trans 0
+MATERIAL "glosswhite" rgb 1 1 1 amb 1 1 1 emis 0 0 0 spec 0.255556 0.255556 0.255556 shi 32 trans 0
+MATERIAL "flatpaint" rgb 0.8 0.8 0.8 amb 0.8 0.8 0.8 emis 0.051361 0.051361 0.051361 spec 0 0 0 shi 32 trans 0
 OBJECT world
 kids 13
 OBJECT poly

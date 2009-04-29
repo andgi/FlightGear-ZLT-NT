@@ -72,7 +72,7 @@ var init_all = func(reinit=0) {
                         var node = props.globals.getNode(path.getValue());
                         if (nil == node.getNode("sim/model/path")) return;
                         var model = node.getNode("sim/model/path").getValue();
-                        foreach (c; mp_mast_carriers) {
+                        foreach (var c; mp_mast_carriers) {
                             if (model == c) {
                                 mooring.add_ai_mooring(node, 11.8);
                                 print("Added: " ~ path.getValue());
@@ -213,6 +213,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 # fake part of the electrical system.
 var fake_electrical = func {
     setprop("systems/electrical/ac-volts", 24);
+    setprop("systems/electrical/volts", 24);
 
     setprop("/systems/electrical/outputs/comm[0]", 24.0);
     setprop("/systems/electrical/outputs/comm[1]", 24.0);
@@ -223,6 +224,7 @@ var fake_electrical = func {
     setprop("/systems/electrical/outputs/transponder", 24.0);
     setprop("/systems/electrical/outputs/instrument-lights", 24.0);
     setprop("/systems/electrical/outputs/gps", 24.0);
+    setprop("/systems/electrical/outputs/efis", 24.0);
 
     setprop("/instrumentation/clock/flight-meter-hour",0);
 }

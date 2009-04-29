@@ -100,7 +100,7 @@ var mooring = {
     ##################################################
     remove_ai_mooring : func(ai) {
         if (ai == nil) return;
-        foreach (name; keys(me.moorings)) {
+        foreach (var name; keys(me.moorings)) {
             if (contains(me.moorings[name], "base") and
                 me.moorings[name].base == ai) {
                 delete(me.moorings, name);
@@ -175,7 +175,7 @@ var mooring = {
             me.active_mooring.getNode("total-distance-ft").getValue();
         var ac_pos = geo.aircraft_position();
         var found = 0;
-        foreach (name; keys(me.moorings)) {
+        foreach (var name; keys(me.moorings)) {
             # Find the mooring position.
             if (contains(me.moorings[name], "position")) {
                 var pos = me.moorings[name].position;

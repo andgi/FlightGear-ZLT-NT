@@ -4,7 +4,7 @@
 
   Zeppelin NT-07 airship flight model for JSBSim.
 
-    Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -685,75 +685,6 @@
  </propulsion>
 
  <!--
- ==== External environment properties ======================================
- -->
- <system name="Externam environment properties">
-  <property> fcs/sun-angle-rad </property>
-  <property> fcs/sun-radiation-norm </property>
- </system>
-
- <!--
- === Ballonet control system ===============================================
- -->
- <system name="Ballonet control">
-
-  <property>fcs/ballonet-inflation-cmd-norm[0]</property>
-  <property>fcs/ballonet-inflation-cmd-norm[1]</property>
-
-  <documentation>
-   Range [-1, 1].
-   Positive values maps to blower inflow percentage and
-   negative values maps to valve open percentage.
-  </documentation>
-
-  <channel name="Ballonet control">
-
-   <fcs_function name="fcs/blower-cmd-norm[0]">
-    <function>
-     <max>
-      <value> 0.0 </value>
-      <property> fcs/ballonet-inflation-cmd-norm[0] </property>
-     </max>
-    </function>
-   </fcs_function>
-   <fcs_function name="fcs/valve-cmd-norm[0]">
-    <function>
-     <product>
-      <value> -1.0 </value>
-      <min>
-       <value> 0.0 </value>
-       <property> fcs/ballonet-inflation-cmd-norm[0] </property>
-      </min>
-     </product>
-    </function>
-    <output> buoyant_forces/gas-cell/ballonet[0]/valve_open </output>
-   </fcs_function>
-
-   <fcs_function name="fcs/blower-cmd-norm[1]">
-    <function>
-     <max>
-      <value> 0.0 </value>
-      <property> fcs/ballonet-inflation-cmd-norm[1] </property>
-     </max>
-    </function>
-   </fcs_function>
-   <fcs_function name="fcs/valve-cmd-norm[1]">
-    <function>
-     <product>
-      <value> -1.0 </value>
-      <min>
-       <value> 0.0 </value>
-       <property> fcs/ballonet-inflation-cmd-norm[1] </property>
-      </min>
-     </product>
-    </function>
-    <output> buoyant_forces/gas-cell/ballonet[1]/valve_open </output>
-   </fcs_function>
-
-  </channel>
- </system>
-
- <!--
  === Gas cell ==============================================================
  -->
 
@@ -788,6 +719,14 @@
   <limitations>
    NOTE: The ballonets are placed based on a guess.
   </limitations>
+
+  <!-- External environment properties -->
+  <property> environment/sun-angle-rad </property>
+  <property> environment/sun-radiation-norm </property>
+
+  <!-- Ballonet system interface properties -->
+  <property> buoyant_forces/gas-cell/ballonet[0]/blower-cmd-norm </property>
+  <property> buoyant_forces/gas-cell/ballonet[1]/blower-cmd-norm </property>
 
   <gas_cell type="HELIUM">
    <location unit="M">
@@ -844,12 +783,12 @@
       <value>   775.19 </value> <!-- Estimated projected surface area [m2] -->
       <value>  1300.00 </value> <!-- Solar energy flow [W/m2] -->
       <value>     0.01 </value> <!-- Guess -->
-      <property> fcs/sun-radiation-norm </property>
+      <property> environment/sun-radiation-norm </property>
       <max>
        <value> 0.0 </value>
        <difference>
         <value> 1.5708 </value>
-        <property> fcs/sun-angle-rad </property>
+        <property> environment/sun-angle-rad </property>
        </difference>
       </max>
      </product>
@@ -905,7 +844,7 @@
      <function name="buoyant_forces/gas-cell/ballonet[0]/in-flow-ft3ps">
       <product>
        <value> 100.0 </value>
-       <property>fcs/blower-cmd-norm[0]</property>
+       <property>buoyant_forces/gas-cell/ballonet[0]/blower-cmd-norm</property>
       </product>
      </function>
     </blower_input>
@@ -958,7 +897,7 @@
      <function name="buoyant_forces/gas-cell/ballonet[1]/in-flow-ft3ps">
       <product>
        <value> 100.0 </value>
-       <property>fcs/blower-cmd-norm[1]</property>
+       <property>buoyant_forces/gas-cell/ballonet[1]/blower-cmd-norm</property>
       </product>
      </function>
     </blower_input>
@@ -967,6 +906,70 @@
   </gas_cell>
 
  </buoyant_forces>
+
+ <!--
+ === Ballonet control system ===============================================
+ -->
+ <system name="Ballonet control">
+
+  <!-- Interface properties -->
+  <property>fcs/ballonet-inflation-cmd-norm[0]</property>
+  <property>fcs/ballonet-inflation-cmd-norm[1]</property>
+
+  <documentation>
+   Range [-1, 1].
+   Positive values maps to blower inflow percentage and
+   negative values maps to valve open percentage.
+  </documentation>
+
+  <channel name="Ballonet control">
+
+   <fcs_function name="fcs/blower-cmd-norm[0]">
+    <function>
+     <max>
+      <value> 0.0 </value>
+      <property> fcs/ballonet-inflation-cmd-norm[0] </property>
+     </max>
+    </function>
+    <output>buoyant_forces/gas-cell/ballonet[0]/blower-cmd-norm</output>
+   </fcs_function>
+   <fcs_function name="fcs/valve-cmd-norm[0]">
+    <function>
+     <product>
+      <value> -1.0 </value>
+      <min>
+       <value> 0.0 </value>
+       <property> fcs/ballonet-inflation-cmd-norm[0] </property>
+      </min>
+     </product>
+    </function>
+    <output> buoyant_forces/gas-cell/ballonet[0]/valve_open </output>
+   </fcs_function>
+
+   <fcs_function name="fcs/blower-cmd-norm[1]">
+    <function>
+     <max>
+      <value> 0.0 </value>
+      <property> fcs/ballonet-inflation-cmd-norm[1] </property>
+     </max>
+    </function>
+    <output>buoyant_forces/gas-cell/ballonet[1]/blower-cmd-norm</output>
+   </fcs_function>
+   <fcs_function name="fcs/valve-cmd-norm[1]">
+    <function>
+     <product>
+      <value> -1.0 </value>
+      <min>
+       <value> 0.0 </value>
+       <property> fcs/ballonet-inflation-cmd-norm[1] </property>
+      </min>
+     </product>
+    </function>
+    <output> buoyant_forces/gas-cell/ballonet[1]/valve_open </output>
+   </fcs_function>
+
+  </channel>
+ </system>
 
  <!--
  ==== Initial static condition weigh-off ====================================

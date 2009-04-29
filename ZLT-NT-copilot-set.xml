@@ -137,6 +137,7 @@
     </menu>
    </default>
   </menubar>
+
  </sim>
 
  <payload>
@@ -178,9 +179,9 @@
    </script>
   </ZLTNT>
   <!--  Instrument drivers. -->
-  <M877>
+  <m877>
    <file>Aircraft/Instruments-3d/clock/M877/M877.nas</file>
-  </M877>
+  </m877>
   <VHF22>
    <file>Aircraft/ZLT-NT/DualControl/Instruments/VHF-22/ctl22.nas</file>
   </VHF22>

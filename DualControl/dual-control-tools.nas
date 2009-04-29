@@ -3,7 +3,7 @@
 ##
 ## Nasal module for dual control over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -15,6 +15,10 @@ var alt_mpp     = "position/altitude-ft";
 var heading_mpp = "orientation/true-heading-deg";
 var pitch_mpp   = "orientation/pitch-deg";
 var roll_mpp    = "orientation/roll-deg";
+
+# Import components from the mp_broadcast module.
+var Binary         = mp_broadcast.Binary;
+var MessageChannel = mp_broadcast.MessageChannel;
 
 ###############################################################################
 # Utility classes
@@ -38,6 +42,7 @@ Translator.new = func (src = nil, dest = nil, factor = 1, offset = 0) {
     print("  ", debug.string(obj.src));
     print("  ", debug.string(obj.dest));
     print("]");
+    fail();
   }
 
   return obj;
@@ -70,6 +75,7 @@ EdgeTrigger.new = func (n, on_positive_flank, on_negative_flank) {
     print("EdgeTrigger[");
     print("  ", debug.string(obj.node));
     print("]");
+    fail();
   }
   return obj;
 }
@@ -121,6 +127,7 @@ StableTrigger.new = func (src, action) {
     print("  ", debug.string(obj.src));
     print("  ", debug.string(obj.action));
     print("]");
+    fail();
   }
 
   return obj;
@@ -205,6 +212,7 @@ Adder.new = func (src1, src2, dest) {
     print("  ", debug.string(obj.src2));
     print("  ", debug.string(obj.dest));
     print("]");
+    fail();
   }
 
   return obj;
@@ -229,6 +237,7 @@ DeltaAdder.new = func (src, dest) {
   if (obj.src == nil or obj.dest == nil) {
     print("DeltaAdder[", debug.string(obj.src), ", ",
           debug.string(obj.dest), "]");
+    fail();
   }
 
   return obj;
@@ -252,17 +261,18 @@ SwitchEncoder.new = func (inputs, dest) {
           dest    : dest };
   # Error checking.
   var bad = (obj.dest == nil);
-  foreach (i; inputs) {
+  foreach (var i; inputs) {
     if (i == nil) { bad = 1; }
   }
 
   if (bad) {
     print("SwitchEncoder[");
-    foreach (i; inputs) {
+    foreach (var i; inputs) {
       print("  ", debug.string(i));
     }
     print("  ", debug.string(obj.dest));
     print("]");
+    fail();
   }
 
   return obj;
@@ -299,17 +309,18 @@ SwitchDecoder.new = func (src, actions) {
           MIN_STABLE   : 0.1 };
   # Error checking.
   var bad = (obj.src == nil);
-  foreach (a; obj.actions) {
+  foreach (var a; obj.actions) {
     if (a == nil) { bad = 1; }
   }
   
   if (bad) {
     print("SwitchDecoder[");
     print("  ", debug.string(obj.src));
-    foreach (a; obj.actions) {
+    foreach (var a; obj.actions) {
       print("  ", debug.string(a));
     }
     print("]");
+    fail();
   }
 
   return obj;
@@ -365,13 +376,13 @@ TDMEncoder.new = func (inputs, dest) {
           old       : [] };
   # Error checking.
   var bad = (dest == nil) or (obj.channel == nil);
-  foreach (i; inputs) {
+  foreach (var i; inputs) {
     if (i == nil) { bad = 1; }
   }
 
   if (bad) {
     print("TDMEncoder[");
-    foreach (i; inputs) {
+    foreach (var i; inputs) {
       print("  ", debug.string(i));
     }
     print("  ", debug.string(dest));
@@ -429,17 +440,18 @@ TDMDecoder.new = func (src, actions) {
 
   # Error checking.
   var bad = (src == nil) or (obj.channel == nil);
-  foreach (a; actions) {
+  foreach (var a; actions) {
     if (a == nil) { bad = 1; }
   }
 
   if (bad) {
     print("TDMDecoder[");
     print("  ", debug.string(src));
-    foreach (a; actions) {
+    foreach (var a; actions) {
       print("  ", debug.string(a));
     }
     print("]");
+    fail();
   }
 
   return obj;
@@ -455,183 +467,16 @@ TDMDecoder.update = func {
 }
 
 ###############################################################################
+# Internal utility functions
 
 var is_num = func (v) {
     return num(v) != nil;
-} 
+}
+
+# fail causes a Nasal runtime error so we get a backtrace.
+var fail = func {
+    error_detected_in_calling_context();
+}
 
 ###############################################################################
 
-############################################################
-# Detects incoming messages encoded in a string property.
-#   n       - MP source : property node
-#   process - action    : func (v)
-# NOTE: The same object is seldom used for both sending and receiving.
-var MessageChannel = {};
-MessageChannel.new = func (n = nil, process = nil) {
-  obj = { parents     : [MessageChannel],
-          node        : n, 
-          process_msg : process,
-          old         : "" };
-  return obj;
-}
-MessageChannel.update = func {
-  if (me.node == nil) return;
-
-  var msg = me.node.getValue();
-  if (!streq(typeof(msg), "scalar")) return;
-
-  if ((me.process_msg != nil) and
-      !streq(msg, "") and
-      !streq(msg, me.old)) {
-    me.process_msg(msg);
-    me.old = msg;
-  }
-}
-MessageChannel.send = func (msg) {
-  me.node.setValue(msg);
-}
-
-############################################################
-# Broadcast primitive using a MP enabled string property.
-#   mpp_path - MP property path                : string
-#   process  - action when receiving a message : func (n, msg)
-#              n is the base node of the sender
-var BroadcastChannel = {};
-BroadcastChannel.new = func (mpp_path, process) {
-  obj = { parents     : [BroadcastChannel],
-          mpp_path    : mpp_path,
-          send_node   : props.globals.getNode(mpp_path, 1), 
-          process_msg : process,
-          send_buf    : [],
-          last_send   : 0,
-          peers       : {},
-          loopid      : 0,
-          PERIOD      : 1.3,
-          last_time   : 0.0,
-          SEND_TIME   : 0.2 };
-  if (obj.send_node == nil) {
-    print("BroadcastChannel[");
-    print("  ", debug.string(obj));
-    print("]");
-  }
-  settimer(func { obj._loop_(obj.loopid); }, 0, 1);
-  print("BroadcastChannel[" ~ obj.mpp_path ~ "] ...  started.");
-  return obj;
-}
-BroadcastChannel.send = func (msg) {
-  var t = getprop("/sim/time/elapsed-sec");
-  if (((t - me.last_send) > me.SEND_TIME) and (size(me.send_buf) == 0)) {
-    me.send_node.setValue(msg);
-    me.send_time = t;
-  } else {
-    append(me.send_buf, msg);
-  }  
-}
-BroadcastChannel.update = func {
-  var t = getprop("/sim/time/elapsed-sec");
-  var process_msg = me.process_msg;
-
-  # Handled join/leave. This is done more seldom.
-  if ((t - me.last_time) > me.PERIOD) {
-    var mpplayers =
-      props.globals.getNode("/ai/models").getChildren("multiplayer");
-    foreach (pilot; mpplayers) {
-      if ((pilot.getChild("valid") != nil) and
-          pilot.getChild("valid").getValue()) {
-        if (me.peers[pilot.getIndex()] == nil) {
-          me.peers[pilot.getIndex()] =
-            MessageChannel.new(pilot.getNode(me.mpp_path),
-                               func(msg) {
-#                                 print("BroadcastChannel: processing " ~ msg);
-                                 process_msg(pilot, msg);
-                               });
-        }
-      } else {
-        delete(me.peers, pilot.getIndex());
-      }
-    }
-    me.last_time = t;
-  }
-  # Process new messages.
-  foreach (w; keys(me.peers)) {
-    if (me.peers[w] != nil) me.peers[w].update();
-  }
-  # Check send buffer.
-  if (((t - me.last_send) > me.SEND_TIME) and (size(me.send_buf) > 0)) {
-    me.send_node.setValue(me.send_buf[0]);
-    me.send_buf = subvec(me.send_buf, 1);
-    me.last_send = t;
-  }
-}
-BroadcastChannel.die = func {
-  me.loopid += 1;
-  print("BroadcastChannel[" ~ me.mpp_path ~ "] ...  destroyed.");
-}
-BroadcastChannel._loop_ = func(id) {
-  id == me.loopid or return;
-  me.update();
-  settimer(func { me._loop_(id); }, 0, 1);
-}
-
-############################################################
-# NOTE: MP is picky about what it sends in a string propery.
-#       Encode 7 bits as a printable 8 bit character.
-var Binary = {};
-Binary.TWOTO31 = 2147483648;
-Binary.TWOTO32 = 4294967296;
-Binary.encodeInt = func (int) {
-  var bf = bits.buf(5);
-  if (int < 0) int += Binary.TWOTO32;
-  var r = int;
-  for (var i = 0; i < 5; i += 1) {
-    var c = math.mod(r, 128);
-    bf[4-i] = c + 65;
-    r = (r - c)/128;
-  }
-  return bf;
-}
-Binary.decodeInt = func (str) {
-  var v = 0;
-  var b = 1;
-  for (var i = 0; i < 5; i += 1) {
-    v += (str[4-i] - 65) * b;
-    b *= 128;
-  }
-  if (v / Binary.TWOTO31 >= 1) v -= Binary.TWOTO32;
-  return int(v);
-}
-# NOTE: This encodes a 7 bit byte.
-Binary.encodeByte = func (int) {
-  var bf = bits.buf(1);
-  if (int < 0) int += 128;
-  bf[0] = math.mod(int, 128) + 65;
-  return bf;
-}
-Binary.decodeByte = func (str) {
-  var v = str[0] - 65;
-  if (v / 64 >= 1) v -= 128;
-  return int(v);
-}
-# NOTE: This can neither handle huge values nor really tiny.
-Binary.encodeDouble = func (d) {
-  return Binary.encodeInt(int(d)) ~
-         Binary.encodeInt((d - int(d)) * Binary.TWOTO31);
-}
-Binary.decodeDouble = func (str) {
-  return Binary.decodeInt(substr(str, 0)) +
-         Binary.decodeInt(substr(str, 5)) / Binary.TWOTO31;
-}
-Binary.encodeCoord = func (coord) {
-  return Binary.encodeDouble(coord.lat()) ~
-         Binary.encodeDouble(coord.lon()) ~
-         Binary.encodeDouble(coord.alt());
-}
-Binary.decodeCoord = func (str) {
-  var coord = geo.aircraft_position();
-  coord.set_latlon(Binary.decodeDouble(substr(str, 0)),
-                   Binary.decodeDouble(substr(str, 10)),
-                   Binary.decodeDouble(substr(str, 20)));
-  return coord;
-}
-###############################################################################

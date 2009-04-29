@@ -126,7 +126,7 @@ var main = {
       props.globals.getNode("/ai/models").getChildren("multiplayer");
     var r_callsign = getprop("/sim/remote/pilot-callsign");
 
-    foreach (pilot; mpplayers) {
+    foreach (var pilot; mpplayers) {
       if ((pilot.getChild("valid").getValue()) and
           (pilot.getChild("callsign") != nil) and
           (pilot.getChild("callsign").getValue() == r_callsign)) {
@@ -151,7 +151,7 @@ var main = {
           #pilot.getNode("controls/lag-time-offset").setValue(0.99 * v);
         }
 
-        foreach (w; process_data) {
+        foreach (var w; process_data) {
           w.update();
         }
         return;

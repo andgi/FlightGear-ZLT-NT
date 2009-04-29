@@ -1,6 +1,6 @@
 AC3Db
-MATERIAL "Gaugelight" rgb 1 1 1 amb 0.2 0.2 0.2 emis 0.7 0.7 0.7 spec 0 0 0 shi 32 trans 0
-MATERIAL "Gaugemetal" rgb 0.901507 0.901507 0.901507 amb 0 0 0 emis 0 0 0 spec 0.779111 0.779111 0.779111 shi 45 trans 0
+MATERIAL "Gaugelight" rgb 1 1 1 amb 1 1 1 emis 0.7 0.7 0.7 spec 0 0 0 shi 32 trans 0
+MATERIAL "Gaugemetal" rgb 0.901507 0.901507 0.901507 amb 0.901507 0.901507 0.901507 emis 0 0 0 spec 0.779111 0.779111 0.779111 shi 45 trans 0
 OBJECT world
 kids 6
 OBJECT poly
