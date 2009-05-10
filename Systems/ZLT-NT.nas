@@ -39,6 +39,12 @@ var initial_weighoff = func {
     auto_weighoff();
     settimer(auto_weighoff, 0.25);
     settimer(auto_weighoff, 1.0);
+    # Fill up the envelope if not at pressure already. A bit of a hack.
+    settimer(func {
+        setprop("/fdm/jsbsim/buoyant_forces/gas-cell/contents-mol",
+                2.0 *
+                getprop("/fdm/jsbsim/buoyant_forces/gas-cell/contents-mol"));
+    }, 0.8);
 }
 
 var mp_mast_carriers =
