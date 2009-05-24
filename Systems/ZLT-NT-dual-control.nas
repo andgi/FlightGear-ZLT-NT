@@ -13,8 +13,8 @@ var DCT = dual_control_tools;
 
 ######################################################################
 # Pilot/copilot aircraft identifiers. Used by dual_control.
-var pilot_type   = "ZLT-NT";
-var copilot_type = "ZLT-NT-copilot";
+var pilot_type   = "Aircraft/ZLT-NT/Models/ZLT-NT.xml";
+var copilot_type = "Aircraft/ZLT-NT/Models/ZLT-NT-copilot.xml";
 
 props.globals.initNode("/sim/remote/pilot-callsign", "", "STRING");
 

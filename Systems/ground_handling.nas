@@ -3,7 +3,7 @@
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -38,6 +38,9 @@ var init = func(reinit=0) {
             }
         });
     }
+
+    # Set up ground crew models.
+    setprop("/sim/model/crew-chief/right-elbow-joint-deg", 90.0);
 }
 
 setlistener("/sim/signals/fdm-initialized", func {

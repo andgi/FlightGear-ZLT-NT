@@ -480,3 +480,158 @@ var fail = func {
 
 ###############################################################################
 
+###############################################################################
+# Copilot selection dialog.
+#
+# Usage: dual_control_tools.copilot_dialog.show(<copilot type string>);
+#
+var COPILOT_DLG = 0;
+var copilot_dialog = {};
+############################################################
+copilot_dialog.init = func (copilot_type, x = nil, y = nil) {
+    me.x = x;
+    me.y = y;
+    me.bg = [0, 0, 0, 0.3];    # background color
+    me.fg = [[1.0, 1.0, 1.0, 1.0]]; 
+    #
+    # "private"
+    me.title = "Copilot selection";
+    me.basenode = props.globals.getNode("/sim/remote", 1);
+    me.dialog = nil;
+    me.namenode = props.Node.new({"dialog-name" : me.title });
+    me.listeners = [];
+    me.copilot_type = copilot_type;
+}
+############################################################
+copilot_dialog.create = func {
+    if (me.dialog != nil)
+        me.close();
+
+    me.dialog = gui.Widget.new();
+    me.dialog.set("name", me.title);
+    if (me.x != nil)
+        me.dialog.set("x", me.x);
+    if (me.y != nil)
+        me.dialog.set("y", me.y);
+
+    me.dialog.set("layout", "vbox");
+    me.dialog.set("default-padding", 0);
+    var titlebar = me.dialog.addChild("group");
+    titlebar.set("layout", "hbox");
+    titlebar.addChild("empty").set("stretch", 1);
+    titlebar.addChild("text").set("label", "Copilots online");
+    var w = titlebar.addChild("button");
+    w.set("pref-width", 16);
+    w.set("pref-height", 16);
+    w.set("legend", "");
+    w.set("default", 0);
+    w.set("key", "esc");
+    w.setBinding("nasal", "dual_control_tools.copilot_dialog.destroy(); ");
+    w.setBinding("dialog-close");
+    me.dialog.addChild("hrule");
+
+    var content = me.dialog.addChild("group");
+    content.set("layout", "vbox");
+    content.set("halign", "center");
+    content.set("default-padding", 5);
+
+    # Generate the dialog contents.
+    me.players = me.find_copilot_players();
+    var i = 0;
+    var tmpbase  = me.basenode.getNode("dialog", 1);
+    var selected = me.basenode.getNode("pilot-callsign").getValue();
+    foreach (var p; me.players) {
+        var tmp = tmpbase.getNode("b[" ~ i ~ "]", 1);
+        tmp.setBoolValue(streq(selected, p));
+        var w = content.addChild("checkbox");
+        w.node.setValues({"label"    : p,
+                          "halign"   : "left",
+                          "property" : tmp.getPath()});
+        w.setBinding
+            ("nasal",
+             "dual_control_tools.copilot_dialog.select_action(" ~ i ~ ");");
+        i = i + 1;
+    }
+    me.dialog.addChild("hrule");
+
+    # Display the dialog.
+    fgcommand("dialog-new", me.dialog.prop());
+    fgcommand("dialog-show", me.namenode);
+}
+############################################################
+copilot_dialog.close = func {
+    fgcommand("dialog-close", me.namenode);
+}
+############################################################
+copilot_dialog.destroy = func {
+    COPILOT_DLG = 0;
+    me.close();
+    foreach(var l; me.listeners)
+        removelistener(l);
+    delete(gui.dialog, "\"" ~ me.title ~ "\"");
+}
+############################################################
+copilot_dialog.show = func (copilot_type) {
+#    print("Showing MPCopilots dialog!");
+    if (!COPILOT_DLG) {
+        COPILOT_DLG = int(getprop("/sim/time/elapsed-sec"));
+        me.init(copilot_type);
+        me.create();
+        me._update_(COPILOT_DLG);
+    }
+}
+############################################################
+copilot_dialog._redraw_ = func {
+    if (me.dialog != nil) {
+        me.close();
+        me.create();
+    }
+}
+############################################################
+copilot_dialog._update_ = func (id) {
+    if (COPILOT_DLG != id) return;
+    me._redraw_();
+    settimer(func { me._update_(id); }, 4.1);
+}
+############################################################
+copilot_dialog.select_action = func (n) {
+    var selected = me.basenode.getNode("pilot-callsign").getValue();
+    var bs = me.basenode.getNode("dialog").getChildren();
+    # Assumption: There are two true b:s or none. The one not matching selected
+    #             is the new selection.
+    var i = 0;
+    me.basenode.getNode("pilot-callsign").setValue("");
+    foreach (var b; bs) {
+        if (!b.getValue() and (i == n)) {
+            b.setValue(1);
+            me.basenode.getNode("pilot-callsign").setValue(me.players[i]);
+        } else {
+            b.setValue(0);
+        }
+        i = i + 1;
+    }
+    dual_control.main.reset();
+    me._redraw_();
+}
+############################################################
+# Return a list containing all nearby copilot players of the right type.
+copilot_dialog.find_copilot_players = func {
+    var mpplayers =
+        props.globals.getNode("/ai/models").getChildren("multiplayer");
+
+    var res = [];
+    foreach (var pilot; mpplayers) {
+        if ((pilot.getNode("valid") != nil) and
+            (pilot.getNode("valid").getValue()) and
+            (pilot.getNode("sim/model/path") != nil)) {
+            var type = pilot.getNode("sim/model/path").getValue();
+
+            if (type == me.copilot_type) {
+                append(res, pilot.getNode("callsign").getValue());
+            }
+        }
+    }
+#    debug.dump(res);
+    return res; 
+}
+###############################################################################

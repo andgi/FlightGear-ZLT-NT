@@ -3,7 +3,7 @@
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -44,9 +44,9 @@ var handle_message = func (sender, msg) {
 ###############################################################################
 # MP Accept and disconnect handlers.
 var listen_to = func (pilot) {
-    if (pilot.getNode("sim/model/ac-type") != nil and
-        streq("ZLT-NT",
-              pilot.getNode("sim/model/ac-type").getValue())) {
+    if (pilot.getNode("sim/model/path") != nil and
+        streq("Aircraft/ZLT-NT/Models/ZLT-NT.xml",
+              pilot.getNode("sim/model/path").getValue())) {
 #        print("Accepted " ~ pilot.getPath());
         return 1;
     } else {
@@ -71,6 +71,8 @@ var remote_mooring = {
         if (me.model[key] != nil) me.model[key].remove();
         me.model[key] =
             geo.put_model("Aircraft/ZLT-NT/Models/mooring_mast.xml", pos);
+        # Set up ground crew models.
+        setprop("/sim/model/crew-chief/right-elbow-joint-deg", 90.0);
     },
     ##################################################
     remove_fixed_mooring : func(key) {

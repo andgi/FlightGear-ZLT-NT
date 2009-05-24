@@ -3,7 +3,7 @@
 <!--
   Zeppelin NT-07 airship.
 
-  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -132,6 +132,16 @@
     <menu n="100">
      <label>Zeppelin NT</label>
      <item>
+      <label>Select MP-copilot</label>
+      <binding>
+       <command>nasal</command>
+       <script>
+        dual_control_tools.
+          copilot_dialog.show(aircraft_dual_control.copilot_type);
+       </script>
+      </binding>
+     </item>
+     <item>
       <label>About</label>
       <binding>
        <command>nasal</command>
@@ -218,9 +228,9 @@
   <aircraft_dual_control>
    <file>Aircraft/ZLT-NT/Systems/ZLT-NT-dual-control.nas</file>
   </aircraft_dual_control>
-  <dual_control_pilot>
+  <dual_control>
    <file>Aircraft/ZLT-NT/DualControl/pilot-dual-control.nas</file>
-  </dual_control_pilot>
+  </dual_control>
  </nasal>
 
  <input>

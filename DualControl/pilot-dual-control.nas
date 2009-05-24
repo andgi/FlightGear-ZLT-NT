@@ -3,16 +3,20 @@
 ##
 ## Nasal for main pilot for dual control over the multiplayer network.
 ##
-##  Copyright (C) 2007  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
 # Renaming (almost :)
 var DCT = dual_control_tools;
-# NOTE: By loading the aircraft specific dual control module
-#       as <aircraft_dual_control> this file is generic. 
 var ADC = aircraft_dual_control;
+# NOTE: By loading the aircraft specific dual control module
+#       as <aircraft_dual_control> this file is generic.
+#       The aircraft specific modul must set the variables
+#       pilot_type and copilot_type to the name (with full path) of
+#       main 3d model XML for the pilot and copilot aircraft.
+#       This module should be loades under the name dual_control.
 
 ######################################################################
 # Connect new copilot
@@ -42,6 +46,7 @@ var main = {
     print("Pilot dual control ... initialized");
   },
   reset : func {
+    me.active = 0;
     me.loopid += 1;
     me._loop_(me.loopid);
   },
@@ -61,9 +66,9 @@ var main = {
           (copilot.getChild("callsign").getValue() == r_callsign)) {
 
         if (me.active == 0) {
-          # Note: sim/model/ac-type is set by the model XML file. 
-          if ((copilot.getNode("sim/model/ac-type") != nil) and
-              (copilot.getNode("sim/model/ac-type").getValue() ==
+          # Note: sim/model/path tells which XML file of the model. 
+          if ((copilot.getNode("sim/model/path") != nil) and
+              (copilot.getNode("sim/model/path").getValue() ==
                ADC.copilot_type)) {
             connect(copilot);
             me.active = 1;

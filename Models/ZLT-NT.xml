@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT07 airship.
 
-  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -1594,9 +1594,6 @@
 var rplayer = cmdarg();
 print("LOAD ZLT-NT", rplayer.getPath());
 
-# Set aircraft type property.
-rplayer.getNode("sim/model/ac-type", 1).setValue("ZLT-NT");
-
 # Set up property aliases for animations.
 rplayer.getNode("fdm/jsbsim/propulsion/engine[0]/pitch-angle-rad", 1).
   alias(rplayer.getNode("sim/multiplay/generic/float[0]"));
@@ -1622,9 +1619,6 @@ if (!contains(globals, "ZLTNT")) {
 ##############################################################################
 var rplayer = cmdarg();
 print("UNLOAD ZLT-NT ", rplayer.getPath());
-# Unset aircraft type property.
-rplayer.getNode("sim/model/ac-type", 1).setValue("");
-rplayer.getNode("sim/model/ac-type", 1).remove();
 
 # This is done automatically. However, the the module should be shut down
 # if this was its last user.
