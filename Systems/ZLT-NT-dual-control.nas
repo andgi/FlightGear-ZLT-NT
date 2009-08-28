@@ -427,6 +427,9 @@ var copilot_connect_pilot = func (pilot) {
     # Initialize Nasal wrappers for copilot pick anaimations.
     set_copilot_wrappers(pilot);
 
+    # Map (some) properties needed to (e.g.) animate the MP/AI model.
+    copilot_alias_aimodel(pilot);
+
     # VHF 22 Comm. Comm 1 is owned by pilot, 2 by copilot.
     VHF22.make_slave_to(0, pilot);
     VHF22.make_master(1);
@@ -449,22 +452,7 @@ var copilot_connect_pilot = func (pilot) {
          # Process received properties.
          ######################################################################
          ##################################################
-         # Map airspeed for airspeed indicator. This is cheating!
-         DCT.Translator.new
-         (pilot.getNode("velocities/true-airspeed-kt"),
-          props.globals.getNode("/instrumentation/" ~
-                                "airspeed-indicator/indicated-speed-kt", 1)),
-         ##################################################
-         # Map engine RPMs to the appropriate properties.
-         DCT.Translator.new
-         (pilot.getNode("engines/engine[0]/rpm"),
-          props.globals.getNode("engines/engine[0]/rpm", 1)),
-         DCT.Translator.new
-         (pilot.getNode("engines/engine[1]/rpm"),
-          props.globals.getNode("engines/engine[1]/rpm", 1)),
-         DCT.Translator.new
-         (pilot.getNode("engines/engine[2]/rpm"),
-          props.globals.getNode("engines/engine[2]/rpm", 1)),
+         # Map engine RPMs to the appropriate properties for the thrusters.
          DCT.Translator.new
          (pilot.getNode("engines/engine[0]/rpm"),
           props.globals.getNode("engines/engine[0]/thruster/rpm", 1),
@@ -477,33 +465,6 @@ var copilot_connect_pilot = func (pilot) {
          (pilot.getNode("engines/engine[2]/rpm"),
           props.globals.getNode("engines/engine[2]/thruster/rpm", 1),
           0.46),
-         ##################################################
-         # Map HSI indicated heading for animation.
-         DCT.Translator.new
-         (pilot.getNode(pilot_hsi_head_mpp),
-          pilot.getNode(l_hsi_heading)),
-         ##################################################
-         # Map Attitude Indicator for animation. NOTE: global properties.
-         DCT.Translator.new
-         (pilot.getNode(pilot_ai_pitch_mpp),
-          props.globals.getNode(l_ai_pitch)),
-         DCT.Translator.new
-         (pilot.getNode(pilot_ai_roll_mpp),
-          props.globals.getNode(l_ai_roll)),
-#         DCT.Translator.new
-#         (pilot.getNode(pilot_ai_hoffset_mpp),
-#          props.globals.getNode(l_ai_hoffset)),
-         ##################################################
-         # Map M877 clock properties to pilot 3d model. Local replica.
-#         DCT.Translator.new
-#         (props.globals.getNode("instrumentation/clock/m877/mode"),
-#          pilot.getNode("instrumentation/clock/m877/mode")),
-#         DCT.Translator.new
-#         (props.globals.getNode("instrumentation/clock/m877/indicated-hour"),
-#          pilot.getNode("instrumentation/clock/m877/indicated-hour")),
-#         DCT.Translator.new
-#         (props.globals.getNode("instrumentation/clock/m877/indicated-min"),
-#          pilot.getNode("instrumentation/clock/m877/indicated-min")),
          ##################################################
          # Decode pilot cockpit switch states.
          #   NOTE: Actions are only triggered on change.
@@ -832,3 +793,74 @@ var set_copilot_wrappers = func (pilot) {
     ZLTNT.step_gas_valve_cmd = func(n, d) {
     }
 }
+
+######################################################################
+# More property aliases to animate the MP/AI model for the copilot.
+#  Contains all 1:1 mappings that are not provided by other modules
+#  (e.g. instruments).
+var copilot_alias_aimodel = func(pilot) {
+    # Map the pilot's engine RPMs to local properties for the OSD.
+    var p = "engines/engine[0]/rpm";
+    props.globals.getNode(p, 1).alias(pilot.getNode(p));
+    p = "engines/engine[1]/rpm";
+    props.globals.getNode(p, 1).alias(pilot.getNode(p));
+    p = "engines/engine[2]/rpm";
+    props.globals.getNode(p, 1).alias(pilot.getNode(p));
+
+    # Map airspeed for airspeed indicator. This is cheating!
+    props.globals.
+        getNode("/instrumentation/airspeed-indicator/indicated-speed-kt", 1).
+            alias(pilot.getNode("velocities/true-airspeed-kt"));
+
+    # Map HSI indicated heading for animation and other uses.
+    pilot.getNode(l_hsi_heading, 1).alias(pilot.getNode(pilot_hsi_head_mpp));
+    props.globals.getNode(l_hsi_heading, 1).
+        alias(pilot.getNode(pilot_hsi_head_mpp));
+
+    # Map Attitude Indicator for animation. NOTE: global properties.
+    props.globals.getNode(l_ai_pitch, 1).
+        alias(pilot.getNode(pilot_ai_pitch_mpp));
+    props.globals.getNode(l_ai_roll, 1).
+        alias(pilot.getNode(pilot_ai_roll_mpp));
+#    props.globals.getNode(l_ai_hoffset, 1).
+#        alias(pilot.getNode(pilot_ai_hoffset_mpp));
+
+    # Map M877 clock properties to pilot 3d model. Local replica.
+    var m877_props =
+        [
+         "instrumentation/clock/m877/ET-hr",
+         "instrumentation/clock/m877/ET-min",
+#         "instrumentation/clock/m877/ET-string",
+         "instrumentation/clock/m877/FT-hr",
+         "instrumentation/clock/m877/FT-min",
+         "instrumentation/clock/m877/digit[0]",
+         "instrumentation/clock/m877/digit[1]",
+         "instrumentation/clock/m877/digit[2]",
+         "instrumentation/clock/m877/digit[3]",
+         "instrumentation/clock/m877/et-alarm",
+         "instrumentation/clock/m877/flight-meter-sec",
+         "instrumentation/clock/m877/ft-alarm-time",
+         "instrumentation/clock/m877/ft-alert",
+         "instrumentation/clock/m877/indicated-hour",
+         "instrumentation/clock/m877/indicated-min",
+#         "instrumentation/clock/m877/mode",
+         "instrumentation/clock/m877/mode-string",
+         "instrumentation/clock/m877/power",
+         "instrumentation/clock/m877/tenths"
+        ];
+    foreach (var p; m877_props) {
+        pilot.getNode(p, 1).alias(props.globals.getNode(p));
+    }
+
+    # Map some more instrument related properties.
+    var panel_props =
+        [
+         "systems/electrical/outputs/instrument-lights",
+         "instrumentation/nav[0]/heading-deg",
+         "instrumentation/adf[0]/indicated-bearing-deg"
+        ];
+    foreach (var p; panel_props) {
+        pilot.getNode(p, 1).alias(props.globals.getNode(p));
+    }
+}
+

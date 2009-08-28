@@ -78,17 +78,13 @@ functions:
 
 
   pilot_type : string
-    The identifying string the pilot aircraft adds as the property
-    sim/model/ac-type below its multiplayer node.
-    This is usually done by the aircraft 3d model file with something close to
-    the following XML fragment:
-    <nasal>
-     <load>
-       cmdarg().getNode("sim/model/ac-type", 1).setValue("ZLT-NT");
-     </load>
-    </nasal>
+    The identifying string of the pilot aircraft is the path of the
+    3d model XML file of the pilot aircraft (as found in sim/model/path
+    under the multiplayer entry).
 
   copilot_type : string
-    The identifying string the copilot aircraft adds as the property
-    sim/model/ac-type below its multiplayer node.
+    The identifying string of the copilot aircraft is the path of the
+    3d model XML file of the copilot aircraft (as found in sim/model/path
+    under the multiplayer entry).
+
 
