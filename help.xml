@@ -87,10 +87,12 @@
        Maximum Forward         1315.0 in
        Maximum Aft             1374.0 in
 
- Maximum equilibrium weight                   : 16,865 lbs. (7650 kg)
- Maximum static heavyness:   In Flight        :  1,102 lbs.  (500 kg)
-                             Take off/Landing :    882 lbs.  (400 kg)
- Maximum static lightness                     :   -441 lbs. (-200 kg)
+ Maximum equilibrium weight                   : 16,865 lbs (7650 kg)
+ Maximum static heavyness:   In Flight        :  1,102 lbs  (500 kg)
+                             Take off/Landing :    882 lbs  (400 kg)
+ Maximum static lightness                     :   -441 lbs (-200 kg)
+
+ Maximum operating altitude                   : 10,000 ft
 
  ________________FlightGear Pilot's Notes_______________
 

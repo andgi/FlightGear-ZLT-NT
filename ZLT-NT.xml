@@ -22,7 +22,7 @@
   
 -->
 <?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
-<fdm_config name="NT07" version="2.0" release="ALPHA"
+<fdm_config name="NT07" version="2.0" release="BETA"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
 
@@ -70,6 +70,12 @@
    author="FAA"
    title="http://edocket.access.gpo.gov/2008/pdf/E8-6600.pdf"
    date="28 March 2008"/>
+
+  <reference
+   refID="FAA:2008:P30BO"
+   author="FAA"
+   title="http://www.hoffmann-prop.com/documents/HOV373TCDS_1.pdf"
+   date="24 April 2008"/>
 
  </fileheader>
 
@@ -1046,44 +1052,9 @@
  </system>
 
  <!--
- ==== Instrumentation =======================================================
- -->
- <system name="Instrumentation">
-  <channel name="">
-
-  <fcs_function name="instrumentation/gas-pressure-psf">
-   <function>
-    <difference>
-     <property> buoyant_forces/gas-cell/pressure-psf </property>
-     <property> atmosphere/P-psf </property>
-    </difference>
-   </function>   
-  </fcs_function>
-
-  <fcs_function name="instrumentation/ballonet-pressure-psf[0]">
-   <function>
-    <difference>
-     <property> buoyant_forces/gas-cell/ballonet[0]/pressure-psf[0] </property>
-     <property> atmosphere/P-psf </property>
-    </difference>
-   </function>   
-  </fcs_function>
-
-  <fcs_function name="instrumentation/ballonet-pressure-psf[1]">
-   <function>
-    <difference>
-     <property> buoyant_forces/gas-cell/ballonet[1]/pressure-psf </property>
-     <property> atmosphere/P-psf </property>
-    </difference>
-   </function>   
-  </fcs_function>
-
-  </channel>
- </system>
-
- <!--
  ==== Flight control system =================================================
  -->
+ <system file="instrumentation-jsbsim"/> <!-- Instruments and sensors. -->
  <flight_control name="NT FCS">
 
   <documentation>
@@ -1405,7 +1376,7 @@
    <pid name="fcs/etc/throttle-controller-pid[0]">
     <input>fcs/etc/propeller-speed-error-switch[0]</input>
     <kp> 0.0 </kp>
-    <ki> 0.0004 </ki>
+    <ki> 0.0002 </ki>
     <trigger>fcs/etc/windup-trigger[0]</trigger>
    </pid>
 
@@ -1474,7 +1445,7 @@
    <pid name="fcs/etc/throttle-controller-pid[1]">
     <input>fcs/etc/propeller-speed-error-switch[1]</input>
     <kp> 0.0 </kp>
-    <ki> 0.0004 </ki>
+    <ki> 0.0002 </ki>
     <trigger>fcs/etc/windup-trigger[1]</trigger>
    </pid>
 
@@ -1543,7 +1514,7 @@
    <pid name="fcs/etc/throttle-controller-pid[2]">
     <input>fcs/etc/propeller-speed-error-switch[2]</input>
     <kp> 0.0 </kp>
-    <ki> 0.0004 </ki>
+    <ki> 0.0002 </ki>
     <trigger>fcs/etc/windup-trigger[2]</trigger>
    </pid>
 

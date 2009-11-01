@@ -15,7 +15,7 @@
 
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
-  <status>experimental</status>
+  <status>development</status>
   <aircraft-version>$Id$</aircraft-version>
   
   <flight-model>null</flight-model>
@@ -204,10 +204,12 @@
   <ADF462>
    <file>Aircraft/ZLT-NT/DualControl/Instruments/ADF-462/ctl62.nas</file>
   </ADF462>
+  <CenterMFD>
+   <file>Aircraft/ZLT-NT/Models/Instruments/CenterMFD/CenterMFD.nas</file>
+  </CenterMFD>
   <!-- citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
    <file>Aircraft/CitationX/Nasal/Primus1000.nas</file>
-   <file>Aircraft/CitationX/Nasal/rmu.nas</file>
   </citation -->
   <dual_control_tools>
    <file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
