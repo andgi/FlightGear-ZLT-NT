@@ -68,7 +68,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 ###############################################################################
 # fake part of the electrical system.
 var fake_electrical = func {
-    setprop("systems/electrical/ac-volts", 15);
+    setprop("/systems/electrical/ac-volts", 15);
 
     setprop("/systems/electrical/outputs/comm[0]", 24.0);
     setprop("/systems/electrical/outputs/comm[1]", 24.0);

@@ -73,17 +73,17 @@ var l_manifold_pressure =
      "engines/engine[1]/mp-inhg",
      "engines/engine[2]/mp-inhg"];
 var l_EGT =
-    ["engines/engine[0]/egt-degf",
-     "engines/engine[1]/egt-degf",
-     "engines/engine[2]/egt-degf"];
+    ["engines/engine[0]/egt-degc",
+     "engines/engine[1]/egt-degc",
+     "engines/engine[2]/egt-degc"];
 var l_CHT =
-    ["engines/engine[0]/cht-degf",
-     "engines/engine[1]/cht-degf",
-     "engines/engine[2]/cht-degf"];
+    ["engines/engine[0]/cht-degc",
+     "engines/engine[1]/cht-degc",
+     "engines/engine[2]/cht-degc"];
 var l_oil_temperature =
-    ["engines/engine[0]/oil-temperature-degf",
-     "engines/engine[1]/oil-temperature-degf",
-     "engines/engine[2]/oil-temperature-degf"];
+    ["engines/engine[0]/oil-temperature-degc",
+     "engines/engine[1]/oil-temperature-degc",
+     "engines/engine[2]/oil-temperature-degc"];
 var l_oil_pressure =
     ["engines/engine[0]/oil-pressure-psi",
      "engines/engine[1]/oil-pressure-psi",
@@ -360,36 +360,7 @@ var pilot_connect_copilot = func (copilot) {
          ##################################################
          # Set up TDM transmission of slow state properties.
          DCT.TDMEncoder.new
-         ([
-           # 1 - 3 Manifold pressure
-           props.globals.getNode(l_manifold_pressure[0]),
-           props.globals.getNode(l_manifold_pressure[1]),
-           props.globals.getNode(l_manifold_pressure[2]),
-           # 4 - 6 EGT
-           props.globals.getNode(l_EGT[0]),
-           props.globals.getNode(l_EGT[1]),
-           props.globals.getNode(l_EGT[2]),
-           # 7 - 9 CHT
-           props.globals.getNode(l_CHT[0]),
-           props.globals.getNode(l_CHT[1]),
-           props.globals.getNode(l_CHT[2]),
-           # 10 - 12 Oil temperature
-           props.globals.getNode(l_oil_temperature[0]),
-           props.globals.getNode(l_oil_temperature[1]),
-           props.globals.getNode(l_oil_temperature[2]),
-           # 13 - 15 Oil pressure
-           props.globals.getNode(l_oil_pressure[0]),
-           props.globals.getNode(l_oil_pressure[1]),
-           props.globals.getNode(l_oil_pressure[2]),
-           # 16 - 18 Fuel quantity
-           props.globals.getNode(l_fuel_quantity[0]),
-           props.globals.getNode(l_fuel_quantity[1]),
-           props.globals.getNode(l_fuel_quantity[2]),
-           # 19 - 21 Fuel flow
-           props.globals.getNode(l_fuel_flow[0]),
-           props.globals.getNode(l_fuel_flow[1]),
-           props.globals.getNode(l_fuel_flow[2]),           
-          ],
+         (CenterMFD.master_send_state(),
           props.globals.getNode(pilot_TDM3_mpp),
          )
         ];
@@ -445,6 +416,8 @@ var copilot_connect_pilot = func (pilot) {
     # ADF 462. Owned by the pilot.
     ADF462.make_slave_to(0, pilot);
     ADF462.animate_aimodel(0, pilot);
+    # Center MFD. Owned by the pilot.
+    CenterMFD.animate_aimodel(pilot);
 
     return
         [
@@ -501,19 +474,19 @@ var copilot_connect_pilot = func (pilot) {
                pilot.getNode(l_final_thrust_cmd[0]).setValue(v);
                props.globals.getNode
                    ("/fdm/jsbsim/propulsion/engine[0]/blade-angle",
-                    1).setValue(35*v - 10);
+                    1).setValue(60*v - 25);
            },
            func (v) {
                pilot.getNode(l_final_thrust_cmd[1]).setValue(v);
                props.globals.getNode
                    ("/fdm/jsbsim/propulsion/engine[1]/blade-angle",
-                    1).setValue(35*v - 10);
+                    1).setValue(60*v - 25);
            },
            func (v) {
                pilot.getNode(l_final_thrust_cmd[2]).setValue(v);
                props.globals.getNode
                    ("/fdm/jsbsim/propulsion/engine[2]/blade-angle",
-                    1).setValue(35*v - 10);
+                    1).setValue(60*v - 25);
            },
            # 7 - 9 mixture cmd
            func (v) {
@@ -599,78 +572,8 @@ var copilot_connect_pilot = func (pilot) {
          # Set up TDM reception of slow state properties.
          DCT.TDMDecoder.new
          (pilot.getNode(pilot_TDM3_mpp),
-          [
-           # 1 - 3 Manifold pressure
-           func (v) {
-               pilot.getNode(l_manifold_pressure[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_manifold_pressure[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_manifold_pressure[2]).setValue(v);
-           },
-           # 4 - 6 EGT
-           func (v) {
-               pilot.getNode(l_EGT[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_EGT[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_EGT[2]).setValue(v);
-           },
-           # 7 - 9 CHT
-           func (v) {
-               pilot.getNode(l_CHT[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_CHT[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_CHT[2]).setValue(v);
-           },
-           # 10 - 12 Oil temperature
-           func (v) {
-               pilot.getNode(l_oil_temperature[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_oil_temperature[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_oil_temperature[2]).setValue(v);
-           },
-           # 13 - 15 Oil pressure
-           func (v) {
-               pilot.getNode(l_oil_pressure[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_oil_pressure[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_oil_pressure[2]).setValue(v);
-           },
-           # 16 - 18 Fuel quantity
-           func (v) {
-               pilot.getNode(l_fuel_quantity[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_fuel_quantity[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_fuel_quantity[2]).setValue(v);
-           },
-           # 19 - 21 Fuel flow
-           func (v) {
-               pilot.getNode(l_fuel_flow[0]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_fuel_flow[1]).setValue(v);
-           },
-           func (v) {
-               pilot.getNode(l_fuel_flow[2]).setValue(v);
-           },
-          ]),
+          CenterMFD.slave_receive_master_state()
+         ),
 
          ######################################################################
          # Process properties to send.

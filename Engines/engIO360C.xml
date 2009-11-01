@@ -1,25 +1,28 @@
 <?xml version="1.0"?>
 <!--
-  minmp:         minimum manifold pressure in inches Hg
-  maxmp:         maximum manifold pressure in inches Hg
-  displacement:  total cylinder space (??) in cubic inches
-  maxhp:         maximum horsepower produced (=BRAKEHORSEPOWER in the old
-                 config)
-  cycles:        cycles/power stroke
-  idlerpm:       minimum RPM when the engine is running
-  maxthrottle:   maximum throttle setting (as before)
-  minthrottle:   minimum throttle setting (as before)
+  Textron-Lycoming IO-360-C1G6 for JSBSim
+
+    Copyright (C) 2004 - 2009  JSBSim
+    Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+    This file is licensed under the GPL license version 2 or later.
 -->
-<piston_engine name="IO360C">
-  <minmp unit="INHG">         6.5  </minmp>	<!-- Deprecated -->
-  <maxmp unit="INHG">        28.5 </maxmp>	
-  <displacement unit="IN3"> 360.0  </displacement>
+<piston_engine name="IO-360-C1G6">
+  <displacement unit="IN3"> 361.00 </displacement>
+  <bore unit="IN">           5.125 </bore>
+  <stroke unit="IN">         4.375 </stroke>
+  <compression-ratio>         8.70 </compression-ratio>
+  <cylinders>                 4.00 </cylinders>
+  <cycles>                    4.00 </cycles>
+
   <maxhp>                   180.0  </maxhp>	
   <!--bsfc>                      0.37 </bsfc-->
-  <cycles>                    4.0  </cycles>
   <idlerpm>                 550.0  </idlerpm>
   <maxrpm>                 2700.0  </maxrpm>
+
+  <sparkfaildrop>             0.1 </sparkfaildrop>
+
+  <minmp unit="INHG">         6.5 </minmp>	<!-- Deprecated -->
+  <maxmp unit="INHG">        28.5 </maxmp>	
   <maxthrottle>               1.0  </maxthrottle>
   <minthrottle>               0.1  </minthrottle>
-  <sparkfaildrop>             0.1 </sparkfaildrop>
 </piston_engine>
