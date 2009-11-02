@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<!--
+
+  Zeppelin NT-07 airship flight model for JSBSim.
+
+    Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+  
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+  
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  
+-->
+<system name="Instrumentation">
+
+ <channel name="">
+
+  <fcs_function name="instrumentation/gas-pressure-psf">
+   <function>
+    <difference>
+     <property> buoyant_forces/gas-cell/pressure-psf </property>
+     <property> atmosphere/P-psf </property>
+    </difference>
+   </function>   
+  </fcs_function>
+
+  <fcs_function name="instrumentation/ballonet-pressure-psf[0]">
+   <function>
+    <difference>
+     <property> buoyant_forces/gas-cell/ballonet[0]/pressure-psf[0] </property>
+     <property> atmosphere/P-psf </property>
+    </difference>
+   </function>   
+  </fcs_function>
+
+  <fcs_function name="instrumentation/ballonet-pressure-psf[1]">
+   <function>
+    <difference>
+     <property> buoyant_forces/gas-cell/ballonet[1]/pressure-psf </property>
+     <property> atmosphere/P-psf </property>
+    </difference>
+   </function>   
+  </fcs_function>
+
+ </channel>
+
+ <documentation>
+  Provide exhaust gas temperature in degC.
+  The scale of the EGT instrument does not agree well with the EGT computed
+  by JSBSim.
+  I use a bogus mapping to map the range 200-500 degC to 600-900 degC.
+ </documentation>
+ <!-- Updated by FlightGear. -->
+ <property value="0.0">/engines/engine[0]/egt-degf</property>
+ <property value="0.0">/engines/engine[1]/egt-degf</property>
+ <property value="0.0">/engines/engine[2]/egt-degf</property>
+
+ <channel name="Engine EGT">
+
+  <fcs_function name="instrumentation/engines/egt-degc[0]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[0]/egt-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+       212.0   100.0
+       392.0   600.0
+       932.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[0]/egt-degc</output>
+  </fcs_function>
+  <fcs_function name="instrumentation/engines/egt-degc[1]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[1]/egt-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+       212.0   100.0
+       392.0   600.0
+       932.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[1]/egt-degc</output>
+  </fcs_function>
+  <fcs_function name="instrumentation/engines/egt-degc[2]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[2]/egt-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+       212.0   100.0
+       392.0   600.0
+       932.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[2]/egt-degc</output>
+  </fcs_function>
+
+ </channel>
+
+ <documentation>
+  Provide cylinder head temperature in degC.
+  The maximum allowable value is 260 degC according to the type certificate
+  FAA AS1CE.
+  The temperature computed by JSBSim seems a bit high compared
+  to the data in the type certificate. Remap?
+ </documentation>
+ <!-- Updated by FlightGear. -->
+ <property value="0.0">/engines/engine[0]/cht-degf</property>
+ <property value="0.0">/engines/engine[1]/cht-degf</property>
+ <property value="0.0">/engines/engine[2]/cht-degf</property>
+
+ <channel name="Engine CHT">
+
+  <fcs_function name="instrumentation/engines/cht-degc[0]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[0]/cht-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+      1652.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[0]/cht-degc</output>
+  </fcs_function>
+  <fcs_function name="instrumentation/engines/cht-degc[1]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[1]/cht-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+      1652.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[1]/cht-degc</output>
+  </fcs_function>
+  <fcs_function name="instrumentation/engines/cht-degc[2]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[2]/cht-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+      1652.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[2]/cht-degc</output>
+  </fcs_function>
+
+ </channel>
+
+ <documentation>
+  Provide oil temperature in degC.
+  The maximum allowable value is 118 degC (100F) and take-off
+  minimum is 37.8 degC (240F) according to the type certificates
+  FAA AS1CE and E1CE.
+  The temperature computed by JSBSim seems ok.
+ </documentation>
+ <!-- Updated by FlightGear. -->
+ <property value="0.0">/engines/engine[0]/oil-temperature-degf</property>
+ <property value="0.0">/engines/engine[1]/oil-temperature-degf</property>
+ <property value="0.0">/engines/engine[2]/oil-temperature-degf</property>
+
+ <channel name="Engine oil temperature">
+
+  <fcs_function name="instrumentation/engines/oil-temperature-degc[0]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[0]/oil-temperature-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+      1652.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[0]/oil-temperature-degc</output>
+  </fcs_function>
+  <fcs_function name="instrumentation/engines/oil-temperature-degc[1]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[1]/oil-temperature-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+      1652.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[1]/oil-temperature-degc</output>
+  </fcs_function>
+  <fcs_function name="instrumentation/engines/oil-temperature-degc[2]">
+   <function>
+    <table>
+     <independentVar>/engines/engine[2]/oil-temperature-degf</independentVar>
+     <tableData>
+      -148.0  -100.0
+      1652.0   900.0
+     </tableData>
+    </table>
+   </function>   
+   <output>/engines/engine[2]/oil-temperature-degc</output>
+  </fcs_function>
+
+ </channel>
+
+</system>

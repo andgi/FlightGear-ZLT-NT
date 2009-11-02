@@ -30,12 +30,12 @@
   <offset alias="../../params/offset"/>
   <format alias="../../params/format"/>
   <truncate type="bool">false</truncate>
-  <font type="string">led.txf</font>
+  <font type="string">lcd.txf</font>
   <draw-text type="bool">true</draw-text>
   <draw-alignment type="bool">false</draw-alignment>
   <draw-boundingbox type="bool">false</draw-boundingbox>
   <alignment>center-center</alignment>
-  <character-size type="double">0.004</character-size>
+  <character-size type="double">0.008</character-size>
  </text>
 
  <animation>

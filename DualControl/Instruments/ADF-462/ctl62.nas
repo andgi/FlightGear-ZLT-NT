@@ -4,8 +4,8 @@
 ## Nasal for dual control of a ADF 462 radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
