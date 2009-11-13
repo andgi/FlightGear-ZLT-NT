@@ -56,10 +56,10 @@ var l_engine_swivel =
      "fdm/jsbsim/propulsion/engine[1]/pitch-angle-rad",
      "fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad"];
 var l_surfaces =
-    [l_base ~"controls/abs-rudder-pos-norm",
-     l_base ~"controls/rudder-pos-norm",
-     l_base ~"controls/abs-elevator-pos-norm",
-     l_base ~"controls/elevator-pos-norm"];
+    [l_base ~ "controls/abs-rudder-pos-norm",
+     l_base ~ "controls/rudder-pos-norm",
+     l_base ~ "controls/abs-elevator-pos-norm",
+     l_base ~ "controls/elevator-pos-norm"];
 var l_rudder   = "surface-positions/rudder-pos-norm";
 var l_elevator = "surface-positions/elevator-pos-norm";
 

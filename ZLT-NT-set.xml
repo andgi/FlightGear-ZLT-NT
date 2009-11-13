@@ -26,6 +26,9 @@
   <!-- 3d model -->
   <model>
    <path>Aircraft/ZLT-NT/Models/ZLT-NT.xml</path>
+   <livery>
+    <file type="string">Classic</file>
+   </livery>
   </model>
 
   <!-- Views -->
@@ -146,6 +149,13 @@
       <binding>
        <command>nasal</command>
        <script>ZLTNT.about()</script>
+      </binding>
+     </item>
+     <item>
+      <label>Select Livery</label>
+      <binding>
+       <command>nasal</command>
+       <script>aircraft.livery.dialog.toggle()</script>
       </binding>
      </item>
     </menu>

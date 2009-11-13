@@ -72,6 +72,12 @@
    date="28 March 2008"/>
 
   <reference
+   refID="FAA:2009:TCDS-1E10"
+   author="FAA"
+   title="http://rgl.faa.gov/Regulatory_and_Guidance_library/rgMakeModel.nsf/0/450619753f0fec87862575e6004f3dac/$FILE/1E10.pdf"
+   date="28 January 2009"/>
+
+  <reference
    refID="FAA:2008:P30BO"
    author="FAA"
    title="http://www.hoffmann-prop.com/documents/HOV373TCDS_1.pdf"

@@ -211,12 +211,14 @@ var animate_aimodel = func(n, airoot) {
 # slaves.  
 # n - NavComm#
 var master_send_state = func(n) {
+  var cb = props.globals.getNode(comm_base[n]);
+  var nb = props.globals.getNode(nav_base[n]);
   return
     [
-     props.globals.getNode(comm_base[n] ~ freq_selected),
-     props.globals.getNode(comm_base[n] ~ freq_standby),
-     props.globals.getNode(nav_base[n] ~ freq_selected),
-     props.globals.getNode(nav_base[n] ~ freq_standby)
+     cb.getNode(freq_selected),
+     cb.getNode(freq_standby),
+     nb.getNode(freq_selected),
+     nb.getNode(freq_standby)
     ];
 }
 
@@ -270,23 +272,21 @@ var master_receive_slave_buttons = func(n) {
 # from the master.
 # n - NavComm#
 var slave_receive_master_state = func(n) {
+  var cb = props.globals.getNode(comm_base[n]);
+  var nb = props.globals.getNode(nav_base[n]);
   return
     [
      func (v) {
-         props.globals.getNode
-             (comm_base[n] ~ freq_selected).setValue(v);
+         cb.getNode(freq_selected).setValue(v);
      },
      func (v) {
-         props.globals.getNode
-             (comm_base[n] ~ freq_standby).setValue(v);
+         cb.getNode(freq_standby).setValue(v);
      },
      func (v) {
-         props.globals.getNode
-             (nav_base[n] ~ freq_selected).setValue(v);
+         nb.getNode(freq_selected).setValue(v);
      },
      func (v) {
-         props.globals.getNode
-             (nav_base[n] ~ freq_standby).setValue(v);
+         nb.getNode(freq_standby).setValue(v);
      }
     ];
 }
@@ -296,20 +296,22 @@ var slave_receive_master_state = func(n) {
 # to the master
 # n - NavComm#
 var slave_send_buttons = func(n) {
+  var cb = props.globals.getNode(comm_base[n]);
+  var nb = props.globals.getNode(nav_base[n]);
   return
     [
      # Comm
-     props.globals.getNode(comm_base[n] ~ swap_btn, 1),
-     props.globals.getNode(comm_base[n] ~ freq_decS, 1),
-     props.globals.getNode(comm_base[n] ~ freq_incS, 1),
-     props.globals.getNode(comm_base[n] ~ freq_decL, 1),
-     props.globals.getNode(comm_base[n] ~ freq_incL, 1),
+     cb.getNode(swap_btn, 1),
+     cb.getNode(freq_decS, 1),
+     cb.getNode(freq_incS, 1),
+     cb.getNode(freq_decL, 1),
+     cb.getNode(freq_incL, 1),
      # Nav
-     props.globals.getNode(nav_base[n] ~ swap_btn, 1),
-     props.globals.getNode(nav_base[n] ~ freq_decS, 1),
-     props.globals.getNode(nav_base[n] ~ freq_incS, 1),
-     props.globals.getNode(nav_base[n] ~ freq_decL, 1),
-     props.globals.getNode(nav_base[n] ~ freq_incL, 1)     
+     nb.getNode(swap_btn, 1),
+     nb.getNode(freq_decS, 1),
+     nb.getNode(freq_incS, 1),
+     nb.getNode(freq_decL, 1),
+     nb.getNode(freq_incL, 1)     
     ];
 }
 

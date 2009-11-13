@@ -4,8 +4,8 @@
 ## Nasal for dual control of a VIR 32 Nav radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
@@ -122,7 +122,7 @@ adjust_frequency = func(n, d) {
 }
 
 ###########################################################################
-# Create aliases to drive a radio 3d model in an AI/MP model. 
+# Create aliases to drive a radio 3d model in an AI/MP model.
 # n - Nav#
 var animate_aimodel = func(n, airoot) {
   var p = "systems/electrical/outputs/nav["~ n ~"]";
@@ -140,10 +140,11 @@ var animate_aimodel = func(n, airoot) {
 # slaves.  
 # n - Nav#
 var master_send_state = func(n) {
+  var b = props.globals.getNode(nav_base[n]);
   return
     [
-     props.globals.getNode(nav_base[n] ~ freq_selected),
-     props.globals.getNode(nav_base[n] ~ freq_standby)
+     b.getNode(freq_selected),
+     b.getNode(freq_standby)
     ];
 }
 
@@ -177,15 +178,14 @@ var master_receive_slave_buttons = func(n) {
 # from the master.
 # n - Nav#
 var slave_receive_master_state = func(n) {
+  var b = props.globals.getNode(nav_base[n]);
   return
     [
      func (v) {
-         props.globals.getNode
-             (nav_base[n] ~ freq_selected).setValue(v);
+         b.getNode(freq_selected).setValue(v);
      },
      func (v) {
-         props.globals.getNode
-             (nav_base[n] ~ freq_standby).setValue(v);
+         b.getNode(freq_standby).setValue(v);
      }
     ];
 }
@@ -195,13 +195,14 @@ var slave_receive_master_state = func(n) {
 # to the master
 # n - Nav#
 var slave_send_buttons = func(n) {
+  var b = props.globals.getNode(nav_base[n]);
   return
     [
-     props.globals.getNode(nav_base[n] ~ swap_btn, 1),
-     props.globals.getNode(nav_base[n] ~ freq_decS, 1),
-     props.globals.getNode(nav_base[n] ~ freq_incS, 1),
-     props.globals.getNode(nav_base[n] ~ freq_decL, 1),
-     props.globals.getNode(nav_base[n] ~ freq_incL, 1),
+     b.getNode(swap_btn, 1),
+     b.getNode(freq_decS, 1),
+     b.getNode(freq_incS, 1),
+     b.getNode(freq_decL, 1),
+     b.getNode(freq_incL, 1),
     ];
 }
 

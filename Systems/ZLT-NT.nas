@@ -59,9 +59,11 @@ var init_all = func(reinit=0) {
 
     fake_electrical();
 
-    # Hobbs counters.
     if (!reinit) {
+        # Hobbs counters.
         aircraft.timer.new("/sim/time/hobbs/envelope", 73).start();
+        # Livery support.
+        aircraft.livery.init("Aircraft/ZLT-NT/Models/Liveries")
     }
 
     # Timed initialization.
