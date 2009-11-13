@@ -16,6 +16,16 @@
   <z-m> 0.0 </z-m>
  </offsets>
 
+ <!-- Livery selection =====================================================-->
+ <animation>
+  <type>material</type>
+  <object-name>hull</object-name>
+  <property-base>sim/model/livery</property-base>
+  <texture-prop>texture</texture-prop>
+  <texture>Liveries/Classic-envelope.png</texture>
+ </animation>
+
+
  <!-- Instrument panel =====================================================-->
  <model>
   <name>Panel instruments</name>
@@ -1602,6 +1612,10 @@ rplayer.getNode("fdm/jsbsim/propulsion/engine[1]/pitch-angle-rad", 1).
 rplayer.getNode("fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad", 1).
   alias(rplayer.getNode("sim/multiplay/generic/float[2]"));
 
+# Set up livery support.
+var livery_update =
+  aircraft.livery_update.new("Aircraft/ZLT-NT/Models/Liveries", 10);
+
 ############################################################
 # Load the needed modules if it hasn't been done yet.
 if (!contains(globals, "ZLTNT")) {
@@ -1619,6 +1633,9 @@ if (!contains(globals, "ZLTNT")) {
 ##############################################################################
 var rplayer = cmdarg();
 print("UNLOAD ZLT-NT ", rplayer.getPath());
+
+# Stop the livery support.
+livery_update.stop();
 
 # This is done automatically. However, the the module should be shut down
 # if this was its last user.
