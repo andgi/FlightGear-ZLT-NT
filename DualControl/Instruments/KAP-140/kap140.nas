@@ -4,15 +4,21 @@
 ## Nasal for dual control of a KAP 140 autopilot over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
-##  This file is licensed under the GPL license.
+##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
 
 # Note:
-#  This module MUST be loaded as kap140 and the real kap140.nas
-#  MUST be loaded as kap140_implementation.
+#  This module MUST be loaded as kap140.
 #
+
+# Load the real KAP 140 module as kap140_implementation.
+if (!contains(globals, "kap140_implementation")) {
+    io.load_nasal(getprop("/sim/fg-root") ~
+                  "/Aircraft/Generic/kap140.nas",
+                  "kap140_implementation");
+}
 
 # Slave button presses.
 var ap_btn    = "ap-btn";
