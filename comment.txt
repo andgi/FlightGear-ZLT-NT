@@ -1,6 +1,0 @@
-Center MFD:
-- Improved engine displays.
-- Added the controls screen.
-FDM
-- Improved engine and propellers.
-
