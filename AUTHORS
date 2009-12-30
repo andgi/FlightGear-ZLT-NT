@@ -21,7 +21,9 @@ Jon S. Berndt et. al.
 David Megginson
   - Propeller 3d models. (From c172p)
 
+Gijs de Rooy
+  - Models/Lights/ navigation, beacon and strobe lights. (From 747-400)
 
 Dependencies:
 
-Aircraft/CitationX       (Nasal/flightdirector.nas,Nasal/rmu.nas,Models/Instruments/fmc.xml)
+Aircraft/CitationX       (Nasal/flightdirector.nas,Models/Instruments/fmc.xml)

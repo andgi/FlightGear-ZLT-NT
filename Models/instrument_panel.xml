@@ -225,4 +225,11 @@
   </action>
  </animation>
 
+ <!-- LOD for the model as a whole =========================================-->
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>15</max-m>
+ </animation>
+
 </PropertyList>

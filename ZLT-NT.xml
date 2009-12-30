@@ -1162,8 +1162,9 @@
   -->
   <channel name="Yaw">
    <summer name="Yaw Trim Sum">
-    <input>fcs/rudder-cmd-norm</input>
-    <input>-fcs/aileron-cmd-norm</input> <!-- Save my fragile rudder axis. --> 
+    <!-- input>fcs/rudder-cmd-norm</input -->
+    <!-- On the NT the rudder is controlled by the side stick. -->
+    <input>-fcs/aileron-cmd-norm</input>
     <input>fcs/yaw-trim-cmd-norm</input>
     <input>fcs/copilot-rudder-cmd-norm</input>
     <clipto>

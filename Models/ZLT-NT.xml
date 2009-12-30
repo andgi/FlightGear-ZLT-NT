@@ -25,912 +25,80 @@
   <texture>Liveries/Classic-envelope.png</texture>
  </animation>
 
-
- <!-- Instrument panel =====================================================-->
  <model>
-  <name>Panel instruments</name>
-  <path>Aircraft/ZLT-NT/Models/instrument_panel.xml</path>
+  <name>Car interior</name>
+  <path>Aircraft/ZLT-NT/Models/interior.xml</path>
   <offsets>
    <!-- x/y/z == back/right/up -->
-   <x-m> 18.20 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.80 </z-m>
-   <pitch-deg>-10.0</pitch-deg>
+   <x-m> 0.00 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> 0.00 </z-m>
   </offsets>
  </model>
 
- <!-- Ceiling control panel ================================================-->
+ <!-- Navigation lights ====================================================-->
  <model>
-  <name>Ceiling console</name>
-  <path>Aircraft/ZLT-NT/Models/ceiling_console.xml</path>
+  <name>Bow navigation light</name>
+  <path>Aircraft/ZLT-NT/Models/Lights/WhiteLight.xml</path>
   <offsets>
    <!-- x/y/z == back/right/up -->
-   <x-m> 18.20 </x-m>
+   <x-m> 0.40 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> 0.40 </z-m>
+  </offsets>
+ </model>
+ <model>
+  <name>Left navigation light</name>
+  <path>Aircraft/ZLT-NT/Models/Lights/RedLight.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 26.40 </x-m>
+   <y-m> -8.74 </y-m>
+   <z-m> -3.50 </z-m>
+  </offsets>
+ </model>
+ <model>
+  <name>Right navigation light</name>
+  <path>Aircraft/ZLT-NT/Models/Lights/GreenLight.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 26.40 </x-m>
+   <y-m>  8.74 </y-m>
+   <z-m> -3.50 </z-m>
+  </offsets>
+ </model>
+ <model>
+  <name>Tail navigation light</name>
+  <path>Aircraft/ZLT-NT/Models/Lights/WhiteLight.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 74.70 </x-m>
    <y-m>  0.00 </y-m>
-   <z-m> -8.80 </z-m>
-   <pitch-deg>0.0</pitch-deg>
+   <z-m>  0.30 </z-m>
   </offsets>
  </model>
 
- <!-- Cockpit animations ===================================================-->
-
- <!-- Animations for the engine swivel controls -->
- <animation>
-  <type>pick</type>
-  <object-name>left_swivel_handle</object-name>
-  <object-name>left_swivel_arm</object-name>
-  <object-name>right_swivel_handle</object-name>
-  <object-name>right_swivel_arm</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>controls.flapsDown(1);</script>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>controls.flapsDown(-1);</script>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>controls.flapsDown(1);</script>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>controls.flapsDown(-1);</script>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>rear_swivel_handle</object-name>
-  <object-name>rear_swivel_arm</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>controls.gearDown(-1);</script>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>controls.gearDown(1);</script>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>controls.gearDown(-1);</script>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>controls.gearDown(1);</script>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>left_swivel_arm</object-name>
-  <object-name>left_swivel_handle</object-name>
-  <property>fdm/jsbsim/fcs/side-engine-swivel-cmd-rad[0]</property>
-  <factor>57.296</factor>
-  <offset-deg>10.0</offset-deg>
-  <center>
-   <x-m> 18.48 </x-m>
+ <!-- Beacon and strobe ====================================================-->
+ <model>
+  <name>Beacon</name>
+  <path>Aircraft/ZLT-NT/Models/Lights/Beacon.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 24.00 </x-m>
+   <y-m>  0.40 </y-m>
+   <z-m> -9.20 </z-m>
+  </offsets>
+ </model>
+ <model>
+  <name>Strobe</name>
+  <path>Aircraft/ZLT-NT/Models/Lights/Strobe.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 63.50 </x-m>
    <y-m>  0.00 </y-m>
-   <z-m> -8.60 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>right_swivel_arm</object-name>
-  <object-name>right_swivel_handle</object-name>
-  <property>fdm/jsbsim/fcs/side-engine-swivel-cmd-rad[1]</property>
-  <factor>57.296</factor>
-  <offset-deg>10.0</offset-deg>
-  <center>
-   <x-m> 18.48 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.60 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>rear_swivel_arm</object-name>
-  <object-name>rear_swivel_handle</object-name>
-  <property>fdm/jsbsim/fcs/rear-engine-swivel-cmd-rad</property>
-  <factor>28.648</factor>
-  <offset-deg>-22.5</offset-deg>
-  <center>
-   <x-m> 18.65 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.54 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
-
- <!-- Animations for the RPM select levers. -->
- <animation>
-  <type>pick</type>
-  <object-name>throttle_arm.1</object-name>
-  <object-name>throttle_handle.1</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/throttle</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/throttle</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/throttle</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/throttle</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>throttle_arm.3</object-name>
-  <object-name>throttle_handle.3</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/throttle</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/throttle</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/throttle</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/throttle</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>throttle_arm.2</object-name>
-  <object-name>throttle_handle.2</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/throttle</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/throttle</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/throttle</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/throttle</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>throttle_arm.1</object-name>
-  <object-name>throttle_handle.1</object-name>
-  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[0]</property>
-  <factor>-45.0</factor>
-  <offset-deg>22.5</offset-deg>
-  <center>
-   <x-m> 18.25 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.56 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>throttle_arm.3</object-name>
-  <object-name>throttle_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[1]</property>
-  <factor>-45.0</factor>
-  <offset-deg>22.5</offset-deg>
-  <center>
-   <x-m> 18.25 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.56 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>throttle_arm.2</object-name>
-  <object-name>throttle_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/propeller-speed-cmd-norm[2]</property>
-  <factor>-45.0</factor>
-  <offset-deg>22.5</offset-deg>
-  <center>
-   <x-m> 18.25 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.56 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
-
- <!-- Animations for the mixture levers. -->
- <animation>
-  <type>pick</type>
-  <object-name>mixture_arm.1</object-name>
-  <object-name>mixture_handle.1</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/mixture</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/mixture</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/mixture</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/mixture</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>mixture_arm.3</object-name>
-  <object-name>mixture_handle.3</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/mixture</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/mixture</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/mixture</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/mixture</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>mixture_arm.2</object-name>
-  <object-name>mixture_handle.2</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/mixture</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/mixture</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/mixture</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/mixture</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>mixture_arm.1</object-name>
-  <object-name>mixture_handle.1</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[0]</property>
-  <factor>-45.0</factor>
-  <offset-deg>22.5</offset-deg>
-  <center>
-   <x-m> 18.25 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.56 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>mixture_arm.2</object-name>
-  <object-name>mixture_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[2]</property>
-  <factor>-45.0</factor>
-  <offset-deg>22.5</offset-deg>
-  <center>
-   <x-m> 18.25 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.56 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>mixture_arm.3</object-name>
-  <object-name>mixture_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[1]</property>
-  <factor>-45.0</factor>
-  <offset-deg>22.5</offset-deg>
-  <center>
-   <x-m> 18.25 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.56 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
-
- <!-- Animations for the thrust levers. -->
- <animation>
-  <type>pick</type>
-  <object-name>thrust_arm.1</object-name>
-  <object-name>thrust_handle.1</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/propeller-pitch</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/propeller-pitch</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/propeller-pitch</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[0]/propeller-pitch</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>thrust_arm.2</object-name>
-  <object-name>thrust_handle.2</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/propeller-pitch</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/propeller-pitch</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/propeller-pitch</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[1]/propeller-pitch</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>thrust_arm.3</object-name>
-  <object-name>thrust_handle.3</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/propeller-pitch</property>
-    <step type="double">0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/propeller-pitch</property>
-    <step type="double">-0.1</step>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/propeller-pitch</property>
-    <step type="double">0.01</step>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>property-adjust</command>
-    <property>/controls/engines/engine[2]/propeller-pitch</property>
-    <step type="double">-0.01</step>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>thrust_arm.1</object-name>
-  <object-name>thrust_handle.1</object-name>
-  <property>fdm/jsbsim/fcs/advance-pos-norm[0]</property>
-  <factor>-90.0</factor>
-  <offset-deg>45.0</offset-deg>
-  <center>
-   <x-m> 18.42 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.53 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>thrust_arm.2</object-name>
-  <object-name>thrust_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/advance-pos-norm[1]</property>
-  <factor>-90.0</factor>
-  <offset-deg>45.0</offset-deg>
-  <center>
-   <x-m> 18.42 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.53 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
- <animation>
-  <type>rotate</type>
-  <object-name>thrust_arm.3</object-name>
-  <object-name>thrust_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/advance-pos-norm[2]</property>
-  <factor>-90.0</factor>
-  <offset-deg>45.0</offset-deg>
-  <center>
-   <x-m> 18.65 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -8.53 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
-
- <!-- Animations for the gas valve controls. --> 
- <animation>
-  <type>pick</type>
-  <object-name>gas_handle.1</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_gas_valve_cmd(0, 0.10);</script>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_gas_valve_cmd(0, -0.10);</script>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_gas_valve_cmd(0, 0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_gas_valve_cmd(0, -0.05);</script>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>gas_arm.1</object-name>
-  <object-name>gas_handle.1</object-name>
-  <property>fdm/jsbsim/buoyant_forces/gas-cell/valve_open</property>
-  <factor>60.0</factor>
-  <offset-deg>-30.0</offset-deg>
-  <center>
-   <x-m> 18.40 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -7.30 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
-
- <!-- Animations for the ballonet valve controls. --> 
- <animation>
-  <type>pick</type>
-  <object-name>ballonet_handle.2</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(0, 0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(0, -0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(0, 0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(0, -0.05);</script>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>pick</type>
-  <object-name>ballonet_handle.3</object-name>
-  <action>
-   <button>0</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(1, 0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>1</button>
-   <repeatable>true</repeatable>
-   <interval-sec>0.2</interval-sec>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(1, -0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>3</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(1, 0.05);</script>
-   </binding>
-  </action>
-  <action>
-   <button>4</button>
-   <repeatable>false</repeatable>
-   <binding>
-    <command>nasal</command>
-    <script>ZLTNT.step_ballonet_cmd(1, -0.05);</script>
-   </binding>
-  </action>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>ballonet_arm.2</object-name>
-  <object-name>ballonet_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/ballonet-inflation-cmd-norm[0]</property>
-  <factor>30.0</factor>
-  <offset-deg>0.0</offset-deg>
-  <center>
-   <x-m> 18.40 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -7.30 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>ballonet_arm.3</object-name>
-  <object-name>ballonet_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/ballonet-inflation-cmd-norm[1]</property>
-  <factor>30.0</factor>
-  <offset-deg>0.0</offset-deg>
-  <center>
-   <x-m> 18.40 </x-m>
-   <y-m>  0.00 </y-m>
-   <z-m> -7.30 </z-m>
-  </center>
-  <axis>
-   <x> 0.0 </x>
-   <y> 1.0 </y>
-   <z> 0.0 </z>
-  </axis>
- </animation>
+   <z-m>  9.15 </z-m>
+  </offsets>
+ </model>
 
  <!-- Control surface animations ===========================================-->
  <animation>
@@ -1616,6 +784,16 @@ rplayer.getNode("fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad", 1).
 var livery_update =
   aircraft.livery_update.new("Aircraft/ZLT-NT/Models/Liveries", 10);
 
+# Beacon, strobe and nav lights.
+var beacon =
+  aircraft.light.new(rplayer.initNode("sim/model/lights/beacon", 0, "BOOL"),
+                     [0.05, 1.2],
+                     rplayer.initNode("controls/lighting/beacon", 1, "BOOL"));
+var strobe =
+  aircraft.light.new(rplayer.initNode("sim/model/lights/strobe", 0, "BOOL"),
+                     [0.05, 3],
+                     rplayer.initNode("controls/lighting/strobe", 1, "BOOL"));
+
 ############################################################
 # Load the needed modules if it hasn't been done yet.
 if (!contains(globals, "ZLTNT")) {
@@ -1636,6 +814,8 @@ print("UNLOAD ZLT-NT ", rplayer.getPath());
 
 # Stop the livery support.
 livery_update.stop();
+beacon.del();
+strobe.del();
 
 # This is done automatically. However, the the module should be shut down
 # if this was its last user.

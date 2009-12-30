@@ -70,4 +70,9 @@
     <number>0</number>
   </dme>
 
+ <gps>
+  <name>gps</name>
+  <number>0</number>
+ </gps>
+
 </PropertyList>

@@ -58,6 +58,8 @@ var init_all = func(reinit=0) {
     initial_weighoff();
 
     fake_electrical();
+    # Disable the autopilot menu.
+    gui.menuEnable("autopilot", 0);
 
     if (!reinit) {
         # Hobbs counters.
@@ -235,6 +237,17 @@ var fake_electrical = func {
     setprop("/systems/electrical/outputs/efis", 24.0);
 
     setprop("/instrumentation/clock/flight-meter-hour",0);
+
+    var beacon_switch =
+        props.globals.initNode("controls/lighting/beacon", 1, "BOOL");
+    var beacon = aircraft.light.new("sim/model/lights/beacon",
+                                    [0.05, 1.2],
+                                    "/controls/lighting/beacon");
+    var strobe_switch =
+        props.globals.initNode("controls/lighting/strobe", 1, "BOOL");
+    var strobe = aircraft.light.new("sim/model/lights/strobe",
+                                    [0.05, 3],
+                                    "/controls/lighting/strobe");
 }
 ###############################################################################
 

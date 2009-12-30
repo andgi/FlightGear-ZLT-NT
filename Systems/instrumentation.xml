@@ -31,7 +31,8 @@
  <attitude-indicator>
   <name>attitude-indicator</name>
   <number>0</number>
-  <suction>/systems/vacuum/suction-inhg</suction>
+  <suction>/systems/vacuum[0]/suction-inhg</suction>
+  <suction>/systems/vacuum[1]/suction-inhg</suction>
  </attitude-indicator>
 
  <clock>
@@ -99,5 +100,10 @@
   <number>0</number>
   <static-pressure>/systems/static/pressure-inhg</static-pressure>
  </vertical-speed-indicator>
+
+ <gps>
+  <name>gps</name>
+  <number>0</number>
+ </gps>
 
 </PropertyList>

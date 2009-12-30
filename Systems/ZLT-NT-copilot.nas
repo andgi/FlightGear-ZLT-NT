@@ -85,6 +85,9 @@ var fake_electrical = func {
 
 setlistener("/sim/signals/fdm-initialized", func {
     fake_electrical();
+    # Disable the autopilot menu.
+    gui.menuEnable("autopilot", 0);
+
     setprop("/fdm/jsbsim/instrumentation/gas-pressure-psf", -1);
 });
 

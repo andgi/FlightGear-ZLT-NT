@@ -15,9 +15,9 @@
    <path>Sounds/coughing.wav</path>
    <mode>looped</mode>
    <condition>
-    <property>/engines/engine/cranking</property>
+    <property>engines/engine/cranking</property>
     <not>
-     <property>/engines/engine/running</property>
+     <property>engines/engine/running</property>
     </not>
    </condition>
    <position>
@@ -26,7 +26,7 @@
     <y>  6.6 </y>
     <z> -3.4 </z>
    </position>
-   <reference-dist>15.0</reference-dist>
+   <reference-dist>10.0</reference-dist>
    <volume>
     <offset>0.4</offset>
    </volume>
@@ -36,9 +36,9 @@
    <path>Sounds/coughing.wav</path>
    <mode>looped</mode>
    <condition>
-    <property>/engines/engine[1]/cranking</property>
+    <property>engines/engine[1]/cranking</property>
     <not>
-     <property>/engines/engine[1]/running</property>
+     <property>engines/engine[1]/running</property>
     </not>
    </condition>
    <position>
@@ -47,7 +47,7 @@
     <y> -6.6 </y>
     <z> -3.4 </z>
    </position>
-   <reference-dist>15.0</reference-dist>
+   <reference-dist>10.0</reference-dist>
    <volume>
     <offset>0.4</offset>
    </volume>
@@ -57,9 +57,9 @@
    <path>Sounds/coughing.wav</path>
    <mode>looped</mode>
    <condition>
-    <property>/engines/engine[2]/cranking</property>
+    <property>engines/engine[2]/cranking</property>
     <not>
-     <property>/engines/engine[2]/running</property>
+     <property>engines/engine[2]/running</property>
     </not>
    </condition>
    <position>
@@ -68,7 +68,7 @@
     <y>  0.0 </y>
     <z>  0.0 </z>
    </position>
-   <reference-dist>15.0</reference-dist>
+   <reference-dist>10.0</reference-dist>
    <volume>
     <offset>0.4</offset>
    </volume>
@@ -80,7 +80,7 @@
    <mode>looped</mode>
    <condition>
      <greater-than>
-       <property>/engines/engine/rpm</property>
+       <property>engines/engine/rpm</property>
        <value>100</value>
      </greater-than>
    </condition>
@@ -90,12 +90,12 @@
     <y>  6.6 </y>
     <z> -3.4 </z>
    </position>
-   <reference-dist>15.0</reference-dist>
+   <reference-dist>10.0</reference-dist>
    <volume>
-    <offset>0.5</offset>
+    <offset>0.25</offset>
    </volume>
    <pitch>
-    <property>/engines/engine/rpm</property>
+    <property>engines/engine/rpm</property>
     <factor>0.0008</factor>
     <min>.3</min>
     <max>5.0</max>
@@ -109,7 +109,7 @@
    <mode>looped</mode>
    <condition>
      <greater-than>
-       <property>/engines/engine/rpm</property>
+       <property>engines/engine/rpm</property>
        <value>100</value>
      </greater-than>
    </condition>
@@ -119,12 +119,12 @@
     <y> -6.6 </y>
     <z> -3.4 </z>
    </position>
-   <reference-dist>15.0</reference-dist>
+   <reference-dist>10.0</reference-dist>
    <volume>
-    <offset>0.5</offset>
+    <offset>0.25</offset>
    </volume>
    <pitch>
-    <property>/engines/engine[1]/rpm</property>
+    <property>engines/engine[1]/rpm</property>
     <factor>0.0008</factor>
     <min>.3</min>
     <max>5.0</max>
@@ -138,7 +138,7 @@
    <mode>looped</mode>
    <condition>
      <greater-than>
-       <property>/engines/engine/rpm</property>
+       <property>engines/engine/rpm</property>
        <value>100</value>
      </greater-than>
    </condition>
@@ -148,12 +148,12 @@
     <y>  0.0 </y>
     <z>  0.0 </z>
    </position>
-   <reference-dist>15.0</reference-dist>
+   <reference-dist>10.0</reference-dist>
    <volume>
-    <offset>0.5</offset>
+    <offset>0.25</offset>
    </volume>
    <pitch>
-    <property>/engines/engine[2]/rpm</property>
+    <property>engines/engine[2]/rpm</property>
     <factor>0.0008</factor>
     <min>.3</min>
     <max>5.0</max>
