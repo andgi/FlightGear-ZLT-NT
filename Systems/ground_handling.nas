@@ -12,6 +12,7 @@
 ## Initialization and reset.
 
 var LOCAL_MOORING_ALT_OFFSET = 11.8;
+var MAX_WIRE_LENGTH = 100.0 * FT2M;
 
 var init = func(reinit=0) {
     mooring.init(reinit);
@@ -69,6 +70,7 @@ var mooring = {
         me.active_mooring = props.globals.getNode("/fdm/jsbsim/mooring");
         me.model = {local : nil};
         me.selected = "";
+        me.mast_truck_base = props.globals.getNode("/sim/model/mast-truck", 1);
         me.reset();
         print("ZLT-NT Mooring ... Standing by.");
     },
@@ -82,7 +84,9 @@ var mooring = {
         # Put a mooring mast model here. Note the model specific offset.
         if (me.model[name] != nil) me.model[name].remove();
         me.model[name] =
-            geo.put_model("Aircraft/ZLT-NT/Models/mooring_mast.xml", pos);
+            geo.put_model("Aircraft/ZLT-NT/Models/mooring_truck.xml", pos);
+        me.mast_truck_base.getNode("mast-head-height-m", 1).
+            setValue(alt_offset);
         if (name == "local") {
             announce_fixed_mooring(pos, alt_offset);
         }
@@ -114,7 +118,7 @@ var mooring = {
     ##################################################
     attach_mooring_wire : func {
         var dist = me.active_mooring.getNode("total-distance-ft").getValue();
-        if ((dist < 100.0) and
+        if ((dist < MAX_WIRE_LENGTH/FT2M) and
             (getprop("/position/altitude-agl-ft") < 45.0)) {
             me.active_mooring.getNode("winch-speed-fps").setValue(0);
             me.active_mooring.getNode("initial-wire-length-ft").setValue(dist);
@@ -176,6 +180,13 @@ var mooring = {
 # The mooring might have moved..
         var distance = FT2M *
             me.active_mooring.getNode("total-distance-ft").getValue();
+        
+        # Break wire connection if too far way.
+        if (distance > MAX_WIRE_LENGTH and
+            me.active_mooring.getNode("wire-connected").getBoolValue()) {
+            me.release_mooring();
+        }
+
         var ac_pos = geo.aircraft_position();
         var found = 0;
         foreach (var name; keys(me.moorings)) {
@@ -204,6 +215,16 @@ var mooring = {
                 found = 1;
             }
         }
+
+        # Animate mooring mast head. Currently affects all mast trucks.
+        if (me.active_mooring.getNode("wire-connected").getBoolValue()) {
+            # Best effort approximation: Use aircraft heading and pitch.
+            me.mast_truck_base.getNode("mast-head-heading-deg", 1).
+                setValue(getprop("/orientation/heading-deg") + 180);
+            me.mast_truck_base.getNode("mast-head-pitch-deg", 1).
+                setValue(-getprop("/orientation/pitch-deg"));
+        }
+
         # Announce local mooring mast.
         var now = systime();
         if (now > me.last_mp_announce + me.MP_ANNOUNCE_INTERVAL) {

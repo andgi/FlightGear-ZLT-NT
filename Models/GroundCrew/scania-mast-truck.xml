@@ -1,0 +1,243 @@
+<!-- $Id$ -->
+<!--
+  Mast truck for Zeppelin NT07 airship.
+
+  Copyright (C) 2009  Alexis Bory, author of the 3d model
+  Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license v2 or later.
+-->
+<PropertyList>
+
+ <params>
+  <mast-head-height-m type="string">sim/model/mast-truck/mast-head-height-m</mast-head-height-m>
+  <mast-head-heading-deg type="string">sim/model/mast-truck/mast-head-heading-deg</mast-head-heading-deg>
+  <mast-head-pitch-deg type="string">sim/model/mast-truck/mast-head-pitch-deg</mast-head-pitch-deg>
+
+  <!-- Other things to animate -->
+  <mast-fold-norm type="string">sim/model/mast-truck/mast-fold-norm</mast-fold-norm>
+  <legs-fold-norm type="string">sim/model/mast-truck/legs-fold-norm</legs-fold-norm>
+
+  <!-- Currently assumed to be the reverse to the truck heading. -->
+  <truck-heading-deg type="string">sim/model/mast-truck/truck-heading-deg</truck-heading-deg>
+ </params>
+
+ <path>scania-mast-truck.ac</path>
+ <offsets>
+  <!-- x/y/z == back/right/up -->
+  <x-m>-0.748 </x-m>
+  <y-m> 0.00  </y-m>
+  <z-m> 0.00  </z-m>
+ </offsets>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>mast-bottom</object-name>
+  <object-name>mast-upper</object-name>
+  <object-name>mast-head</object-name>
+  <property alias="../../params/mast-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind> <dep>0.0</dep></entry>
+   <entry><ind>1.0</ind> <dep>-90.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>0.752</x-m>
+   <y-m>0.000</y-m>
+   <z-m>3.401</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>top-head-receptacle</object-name>
+  <property alias="../../params/mast-head-pitch-deg"/>
+  <offset-deg>0.0</offset-deg>
+  <factor>1.0</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>0.824</x-m>
+   <y-m>0.000</y-m>
+   <z-m>8.418</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>mast-head</object-name>
+  <property alias="../../params/mast-head-heading-deg"/>
+  <offset-deg>0.0</offset-deg>
+  <factor>-1.0</factor>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m>0.748</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.0</z-m>
+  </center>
+ </animation>
+ 
+ <animation>
+  <type>rotate</type>
+  <object-name>mast-head</object-name>
+  <property alias="../../params/truck-heading-deg"/>
+  <offset-deg>180.0</offset-deg> <!-- temporary hack: reversed -->
+  <factor>1.0</factor>           <!-- temporary hack: reversed -->
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m>0.748</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.0</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>mast-upper</object-name>
+  <object-name>mast-head</object-name>
+  <property alias="../../params/mast-head-height-m"/>
+  <interpolation>
+   <entry><ind>8.42</ind>  <dep>0.0</dep></entry>
+   <entry><ind>11.92</ind> <dep>3.5</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>mast-jack-up</object-name>
+  <property alias="../../params/mast-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind>  <dep>0.0</dep></entry>
+   <entry><ind>1.0</ind>  <dep>-1.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>leg-fwd-L</object-name>
+  <object-name>jack-fwd-L</object-name>
+  <property alias="../../params/legs-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind> <dep>0.0</dep></entry>
+   <entry><ind>0.1</ind> <dep>0.0</dep></entry>
+   <entry><ind>1.0</ind> <dep>90.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m>-2.372</x-m>
+   <y-m>-1.067</y-m>
+   <z-m> 0.000</z-m>
+  </center>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>leg-fwd-R</object-name>
+  <object-name>jack-fwd-R</object-name>
+  <property alias="../../params/legs-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind> <dep>0.0</dep></entry>
+   <entry><ind>0.1</ind> <dep>0.0</dep></entry>
+   <entry><ind>1.0</ind> <dep>-90.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m>-2.372</x-m>
+   <y-m> 1.067</y-m>
+   <z-m> 0.000</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>leg-aft-L</object-name>
+  <object-name>jack-aft-L</object-name>
+  <property alias="../../params/legs-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind> <dep>0.0</dep></entry>
+   <entry><ind>0.1</ind> <dep>0.0</dep></entry>
+   <entry><ind>1.0</ind> <dep>-110.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m> 2.372</x-m>
+   <y-m>-1.067</y-m>
+   <z-m> 0.000</z-m>
+  </center>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>leg-aft-R</object-name>
+  <object-name>jack-aft-R</object-name>
+  <property alias="../../params/legs-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind> <dep>0.0</dep></entry>
+   <entry><ind>0.1</ind> <dep>0.0</dep></entry>
+   <entry><ind>1.0</ind> <dep>110.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m> 2.372</x-m>
+   <y-m> 1.067</y-m>
+   <z-m> 0.000</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>jack-fwd-L</object-name>
+  <object-name>jack-fwd-R</object-name>
+  <object-name>jack-aft-L</object-name>
+  <object-name>jack-aft-R</object-name>
+  <property alias="../../params/legs-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind>  <dep>0.00</dep></entry>
+   <entry><ind>0.1</ind>  <dep>0.40</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+</PropertyList>

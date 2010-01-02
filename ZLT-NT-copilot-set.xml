@@ -102,26 +102,31 @@
   <!-- Move the center of the external views. -->
   <view n="1">
    <config>
+    <at-model type="bool">false</at-model>
     <target-z-offset-m archive="y"> 20.0 </target-z-offset-m>
    </config>
   </view>
   <view n="2">
    <config>
+    <at-model type="bool">false</at-model>
     <target-z-offset-m archive="y"> 20.0 </target-z-offset-m>
    </config>
   </view>
   <view n="3">
    <config>
+    <at-model type="bool">false</at-model>
     <target-z-offset-m archive="y"> 20.0 </target-z-offset-m>
    </config>
   </view>
   <view n="5">
    <config>
+    <at-model type="bool">false</at-model>
     <target-z-offset-m archive="y"> 20.0 </target-z-offset-m>
    </config>
   </view>
   <view n="6">
    <config>
+    <at-model type="bool">false</at-model>
     <target-z-offset-m archive="y"> 20.0 </target-z-offset-m>
    </config>
   </view>

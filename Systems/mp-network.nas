@@ -69,10 +69,13 @@ var remote_mooring = {
     ##################################################
     add_fixed_mooring : func(pos, alt_offset, key) {
         if (me.model[key] != nil) me.model[key].remove();
+        me.mast_truck_base = props.globals.getNode("/sim/model/mast-truck", 1);
         me.model[key] =
-            geo.put_model("Aircraft/ZLT-NT/Models/mooring_mast.xml", pos);
+            geo.put_model("Aircraft/ZLT-NT/Models/mooring_truck.xml", pos);
         # Set up ground crew models.
         setprop("/sim/model/crew-chief/right-elbow-joint-deg", 90.0);
+        me.mast_truck_base.getNode("mast-head-height-m", 1).
+            setValue(11.80);
     },
     ##################################################
     remove_fixed_mooring : func(key) {
