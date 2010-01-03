@@ -22,6 +22,9 @@
    <onground type="bool">true</onground>
    <!-- altitude-agl-ft type="double">6.0</altitude-agl-ft -->
   </presets>
+  <startup>
+   <splash-texture>Aircraft/ZLT-NT/ZLT-NT-splash.jpg</splash-texture>
+  </startup>
 
   <!-- 3d model -->
   <model>

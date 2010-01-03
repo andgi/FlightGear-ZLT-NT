@@ -209,9 +209,18 @@ var mooring = {
                 distance = pos.distance_to(ac_pos);
                 me.active_mooring.getNode("latitude-deg").setValue(pos.lat());
                 me.active_mooring.getNode("longitude-deg").setValue(pos.lon());
+                # First check if the offset is fixed or a AI/MP property.
+                var offset = 0;
+                if (dual_control_tools.is_num(me.moorings[name].alt_offset)) {
+                    offset = me.moorings[name].alt_offset;
+                } else {
+                    offset =
+                        me.moorings[name].base.
+                            getNode(me.moorings[name].alt_offset).getValue();
+                }
                 me.active_mooring.getNode("altitude-ft").
-                    setValue(M2FT * (pos.alt() +
-                                     me.moorings[name].alt_offset));
+                    setValue(M2FT * (pos.alt() + offset));
+
                 found = 1;
             }
         }

@@ -48,8 +48,7 @@ var initial_weighoff = func {
 }
 
 var mp_mast_carriers =
-    ["Aircraft/Crash_tender/Models/crash_tender.xml",
-     "Aircraft/snowplow/Models/Snowplow.xml"];
+    ["Aircraft/ZLT-NT/Models/GroundCrew/scania-mast-truck.xml"];
 
 var init_all = func(reinit=0) {
     setprop(static_trim_p, 0.3);
@@ -84,8 +83,12 @@ var init_all = func(reinit=0) {
                         var model = node.getNode("sim/model/path").getValue();
                         foreach (var c; mp_mast_carriers) {
                             if (model == c) {
-                                mooring.add_ai_mooring(node, 11.8);
-                                print("Added: " ~ path.getValue());
+                                settimer(func {
+                                  mooring.add_ai_mooring
+                                    (node,
+                                     "sim/model/mast-truck/mast-head-height-m");
+                                  print("Added: " ~ path.getValue());
+                                }, 0.0);
                                 return;
                             }
                         }

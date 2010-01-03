@@ -2,8 +2,8 @@
 <!--
   Mast truck for Zeppelin NT07 airship.
 
-  Copyright (C) 2009  Alexis Bory, author of the 3d model
-  Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2009 - 2010  Alexis Bory, author of the 3d model
+  Copyright (C) 2009 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -54,6 +54,12 @@
  <animation>
   <type>rotate</type>
   <object-name>top-head-receptacle</object-name>
+  <condition>
+   <equals>
+    <value>0.0</value>
+    <property alias="../../../../params/mast-fold-norm"/>
+   </equals>
+  </condition>
   <property alias="../../params/mast-head-pitch-deg"/>
   <offset-deg>0.0</offset-deg>
   <factor>1.0</factor>
@@ -72,6 +78,12 @@
  <animation>
   <type>rotate</type>
   <object-name>mast-head</object-name>
+  <condition>
+   <equals>
+    <value>0.0</value>
+    <property alias="../../../../params/mast-fold-norm"/>
+   </equals>
+  </condition>
   <property alias="../../params/mast-head-heading-deg"/>
   <offset-deg>0.0</offset-deg>
   <factor>-1.0</factor>
@@ -90,6 +102,12 @@
  <animation>
   <type>rotate</type>
   <object-name>mast-head</object-name>
+  <condition>
+   <equals>
+    <value>0.0</value>
+    <property alias="../../../../params/mast-fold-norm"/>
+   </equals>
+  </condition>
   <property alias="../../params/truck-heading-deg"/>
   <offset-deg>180.0</offset-deg> <!-- temporary hack: reversed -->
   <factor>1.0</factor>           <!-- temporary hack: reversed -->
@@ -119,6 +137,30 @@
    <y>0.0</y>
    <z>1.0</z>
   </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>mast-jack-low</object-name>
+  <object-name>mast-jack-up</object-name>
+  <property alias="../../params/mast-fold-norm"/>
+  <interpolation>
+   <entry><ind>0.0</ind> <dep>0.0</dep></entry>
+   <entry><ind>0.2</ind> <dep>-4.0</dep></entry>
+   <entry><ind>0.5</ind> <dep>-6.0</dep></entry>
+   <entry><ind>0.8</ind> <dep>-4.0</dep></entry>
+   <entry><ind>1.0</ind> <dep>0.0</dep></entry>
+  </interpolation>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>-0.495</x-m>
+   <y-m> 0.000</y-m>
+   <z-m> 1.453</z-m>
+  </center>
  </animation>
 
  <animation>
@@ -239,5 +281,44 @@
    <z>1.0</z>
   </axis>
  </animation>
+
+ <!-- LOD for the model as a whole =========================================-->
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>10000</max-m>
+ </animation>
+
+ <nasal>
+  <load>
+##############################################################################
+# The on-load Nasal is not executed when this file is loaded as the user
+# aircraft.
+##############################################################################
+var rplayer = cmdarg();
+print("LOAD Scania-mast-truck", rplayer.getPath());
+
+rplayer.getNode("sim/model/mast-truck/legs-fold-norm").
+    alias(rplayer.getNode("sim/multiplay/generic/float[0]"));
+rplayer.getNode("sim/model/mast-truck/mast-fold-norm").
+    alias(rplayer.getNode("sim/multiplay/generic/float[1]"));
+rplayer.getNode("sim/model/mast-truck/mast-head-height-m").
+    alias(rplayer.getNode("sim/multiplay/generic/float[2]"));
+rplayer.getNode("sim/model/mast-truck/mast-head-heading-deg").
+    alias(rplayer.getNode("sim/multiplay/generic/float[3]"));
+rplayer.getNode("sim/model/mast-truck/mast-head-pitch-deg").
+    alias(rplayer.getNode("sim/multiplay/generic/float[4]"));
+
+rplayer.getNode("sim/model/mast-truck/truck-heading-deg").
+    alias(rplayer.getNode("orientation/true-heading-deg"));
+##############################################################################
+  </load>
+  <unload>
+##############################################################################
+var rplayer = cmdarg();
+print("UNLOAD Scania-mast-truck", rplayer.getPath());
+##############################################################################
+  </unload>
+ </nasal>
 
 </PropertyList>
