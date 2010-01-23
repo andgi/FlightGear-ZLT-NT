@@ -3,7 +3,7 @@
 <!--
   Zeppelin NT-07 airship.
 
-  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -32,6 +32,13 @@
    <livery>
     <file type="string">Classic</file>
    </livery>
+   <mast-truck>
+    <mast-head-height-m type="double">11.8</mast-head-height-m>
+    <mast-head-heading-deg type="double"/>
+    <mast-head-pitch-deg type="double"/>
+    <mast-fold-norm type="double">0.0</mast-fold-norm>
+    <legs-fold-norm type="double">0.0</legs-fold-norm>
+   </mast-truck>
   </model>
 
   <!-- Views -->
