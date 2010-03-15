@@ -3,7 +3,7 @@
 ##
 ## Nasal for copilot for dual control over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -178,6 +178,11 @@ var main = {
     settimer(func { me.activate(); }, 5);
   },
   reset : func {
+    if (me.active) {
+      print("Dual control ... disconnected from pilot.");
+      disconnect();
+      ADC.copilot_disconnect_pilot();
+    }
     me.active = 0;
     me.loopid += 1;
     me._loop_(me.loopid);

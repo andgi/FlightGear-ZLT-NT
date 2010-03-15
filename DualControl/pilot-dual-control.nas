@@ -3,7 +3,7 @@
 ##
 ## Nasal for main pilot for dual control over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -46,6 +46,10 @@ var main = {
     print("Pilot dual control ... initialized");
   },
   reset : func {
+    if (me.active) {
+      print("Dual control ... copilot disconnected.");
+      ADC.pilot_disconnect_copilot();
+    }
     me.active = 0;
     me.loopid += 1;
     me._loop_(me.loopid);
@@ -66,7 +70,7 @@ var main = {
           (copilot.getChild("callsign").getValue() == r_callsign)) {
 
         if (me.active == 0) {
-          # Note: sim/model/path tells which XML file of the model. 
+          # Note: sim/model/path tells the 3d XML file of the model. 
           if ((copilot.getNode("sim/model/path") != nil) and
               (copilot.getNode("sim/model/path").getValue() ==
                ADC.copilot_type)) {
