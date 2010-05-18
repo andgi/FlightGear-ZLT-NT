@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
 <!--
-  Zeppelin NT-07 airship.
+  Zeppelin NT-07 airship for FlightGear.
 
   Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
@@ -13,7 +12,7 @@
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id$</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.44 2010-05-17 21:34:10 anders Exp $</aircraft-version>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
@@ -71,7 +70,7 @@
    </config>
   </view>
   <view n="101">
-   <!-- Coach passenger. -->
+   <!-- Passenger Walk View. -->
    <name>Passenger View</name>
    <internal>true</internal>
    <config>
@@ -216,6 +215,30 @@
  </sim>
 
  <controls>
+  <flight>
+   <!-- On the NT elevator and rudder are controlled by a side stick.
+        NOTE: This means yaw-cmd-norm is inverted.  -->
+   <elevator n="0" alias="/fdm/jsbsim/fcs/pilot/pitch-cmd-norm"/>
+   <aileron  n="0" alias="/fdm/jsbsim/fcs/pilot/yaw-cmd-norm"/>
+  </flight>
+  <!-- NOTE: The control properties are redirected for dual control. -->
+  <engines>
+   <engine n="0">
+    <throttle n="0" alias="/fdm/jsbsim/fcs/pilot/propeller-speed-cmd-norm[0]"/>
+    <mixture  n="0" alias="/fdm/jsbsim/fcs/pilot/mixture-cmd-norm[0]"/>
+    <propeller-pitch n="0" alias="/fdm/jsbsim/fcs/pilot/thrust-cmd-norm[0]"/>
+   </engine>
+   <engine n="1">
+    <throttle n="0" alias="/fdm/jsbsim/fcs/pilot/propeller-speed-cmd-norm[1]"/>
+    <mixture  n="0" alias="/fdm/jsbsim/fcs/pilot/mixture-cmd-norm[1]"/>
+    <propeller-pitch n="0" alias="/fdm/jsbsim/fcs/pilot/thrust-cmd-norm[1]"/>
+   </engine>
+   <engine n="2">
+    <throttle n="0" alias="/fdm/jsbsim/fcs/pilot/propeller-speed-cmd-norm[2]"/>
+    <mixture  n="0" alias="/fdm/jsbsim/fcs/pilot/mixture-cmd-norm[2]"/>
+    <propeller-pitch n="0" alias="/fdm/jsbsim/fcs/pilot/thrust-cmd-norm[2]"/>
+   </engine>
+  </engines>
   <lighting>
    <nav-lights type="bool">true</nav-lights> <!-- Should be MP enabled. -->
   </lighting>
@@ -301,6 +324,26 @@
   <dual_control>
    <file>Aircraft/ZLT-NT/DualControl/pilot-dual-control.nas</file>
   </dual_control>
+  <!-- Walk View -->
+  <walkview>
+   <file>Aircraft/Generic/WalkView/walkview.nas</file>
+  </walkview>
+  <PassengerView>
+   <script><![CDATA[
+     var carConstraint =
+          walkview.makeUnionConstraint(
+          [
+           walkview.slopingYAlignedPlane.new([19.1, -0.3, -8.85],
+                                             [19.5,  0.3, -8.85]),
+           walkview.slopingYAlignedPlane.new([19.5, -0.7, -9.08], 
+                                             [26.4,  0.7, -9.08]),
+           walkview.slopingYAlignedPlane.new([26.4, -0.5, -9.35], 
+                                             [26.7,  0.5, -9.35]),
+          ]);
+     var walker = walkview.walker.new("Passenger View", carConstraint);
+    ]]>
+   </script>
+  </PassengerView>
  </nasal>
 
  <input>
@@ -314,10 +357,20 @@
     <binding>
      <command>nasal</command>
      <script>
-      gui.popupTip("Weigh-off in progress.");
-      ZLTNT.auto_weighoff();
+      if (!walkview.forward(4.0)) {
+          gui.popupTip("Weigh-off in progress.");
+          ZLTNT.auto_weighoff();
+      }
      </script>
     </binding>
+    <mod-up>
+     <binding>
+      <command>nasal</command>
+      <script>
+       walkview.forward(0);
+      </script>
+     </binding>
+    </mod-up>
    </key>
 
    <key n="119">
@@ -326,9 +379,19 @@
     <binding>
      <command>nasal</command>
      <script>
-      ZLTNT.print_wow();
+      if (!walkview.forward(1.0)) {
+          ZLTNT.print_wow();
+      }
      </script>
     </binding>
+    <mod-up>
+     <binding>
+      <command>nasal</command>
+      <script>
+       walkview.forward(0);
+      </script>
+     </binding>
+    </mod-up>
    </key>
 
    <key n="100">
@@ -478,6 +541,29 @@
        ZLTNT.mooring.set_winch_speed(sp + 0.5);
      </script>
     </binding>
+   </key>
+
+   <!-- Walkview commands ======================================== -->
+   <key n="115">
+    <name>s</name>
+    <desc>Walk backwards.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+      if (!walkview.forward(-1.0)) {
+          controls.startEngine(1);
+      }
+     </script>
+    </binding>
+    <mod-up>
+     <binding>
+      <command>nasal</command>
+      <script>
+       walkview.forward(0);
+       controls.startEngine(0);
+      </script>
+     </binding>
+    </mod-up>
    </key>
 
   </keyboard>

@@ -44,6 +44,82 @@
 
  <!-- Cockpit animations ===================================================-->
 
+ <!-- Animations for the side-sticks -->
+ <animation>
+  <type>rotate</type>
+  <object-name>sidestick_handle.L</object-name>
+  <object-name>sidestick_grip.L</object-name>
+  <property>fdm/jsbsim/fcs/pilot/pitch-cmd-norm</property>
+  <factor>-30.0</factor>
+  <offset-deg>0.0</offset-deg>
+  <center>
+   <x-m> 18.60 </x-m>
+   <y-m> -0.70 </y-m>
+   <z-m> -8.36 </z-m>
+  </center>
+  <axis>
+   <x> 0.0 </x>
+   <y> 1.0 </y>
+   <z> 0.0 </z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>sidestick_handle.L</object-name>
+  <object-name>sidestick_grip.L</object-name>
+  <property>fdm/jsbsim/fcs/pilot/yaw-cmd-norm</property>
+  <factor>-30.0</factor>
+  <offset-deg>0.0</offset-deg>
+  <center>
+   <x-m> 18.60 </x-m>
+   <y-m> -0.70 </y-m>
+   <z-m> -8.36 </z-m>
+  </center>
+  <axis>
+   <x> 1.0 </x>
+   <y> 0.0 </y>
+   <z> 0.0 </z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>sidestick_handle.R</object-name>
+  <object-name>sidestick_grip.R</object-name>
+  <property>fdm/jsbsim/fcs/copilot/pitch-cmd-norm</property>
+  <factor>-30.0</factor>
+  <offset-deg>0.0</offset-deg>
+  <center>
+   <x-m> 18.60 </x-m>
+   <y-m>  0.70 </y-m>
+   <z-m> -8.36 </z-m>
+  </center>
+  <axis>
+   <x> 0.0 </x>
+   <y> 1.0 </y>
+   <z> 0.0 </z>
+  </axis>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>sidestick_handle.R</object-name>
+  <object-name>sidestick_grip.R</object-name>
+  <property>fdm/jsbsim/fcs/copilot/yaw-cmd-norm</property>
+  <factor>-30.0</factor>
+  <offset-deg>0.0</offset-deg>
+  <center>
+   <x-m> 18.60 </x-m>
+   <y-m>  0.70 </y-m>
+   <z-m> -8.36 </z-m>
+  </center>
+  <axis>
+   <x> 1.0 </x>
+   <y> 0.0 </y>
+   <z> 0.0 </z>
+  </axis>
+ </animation>
+
+
  <!-- Animations for the engine swivel controls -->
  <animation>
   <type>pick</type>
@@ -131,7 +207,7 @@
   <type>rotate</type>
   <object-name>left_swivel_arm</object-name>
   <object-name>left_swivel_handle</object-name>
-  <property>fdm/jsbsim/fcs/side-engine-swivel-cmd-rad[0]</property>
+  <property>fdm/jsbsim/fcs/etc/side-engine-swivel-cmd-rad[0]</property>
   <factor>57.296</factor>
   <offset-deg>10.0</offset-deg>
   <center>
@@ -149,7 +225,7 @@
   <type>rotate</type>
   <object-name>right_swivel_arm</object-name>
   <object-name>right_swivel_handle</object-name>
-  <property>fdm/jsbsim/fcs/side-engine-swivel-cmd-rad[1]</property>
+  <property>fdm/jsbsim/fcs/etc/side-engine-swivel-cmd-rad[1]</property>
   <factor>57.296</factor>
   <offset-deg>10.0</offset-deg>
   <center>
@@ -167,7 +243,7 @@
   <type>rotate</type>
   <object-name>rear_swivel_arm</object-name>
   <object-name>rear_swivel_handle</object-name>
-  <property>fdm/jsbsim/fcs/rear-engine-swivel-cmd-rad</property>
+  <property>fdm/jsbsim/fcs/etc/rear-engine-swivel-cmd-rad</property>
   <factor>28.648</factor>
   <offset-deg>-22.5</offset-deg>
   <center>
@@ -507,7 +583,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.1</object-name>
   <object-name>mixture_handle.1</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[0]</property>
+  <property>fdm/jsbsim/fcs/mixture-cmd-norm[0]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -525,7 +601,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.2</object-name>
   <object-name>mixture_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[2]</property>
+  <property>fdm/jsbsim/fcs/mixture-cmd-norm[2]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -543,7 +619,7 @@
   <type>rotate</type>
   <object-name>mixture_arm.3</object-name>
   <object-name>mixture_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/mixture-pos-norm[1]</property>
+  <property>fdm/jsbsim/fcs/mixture-cmd-norm[1]</property>
   <factor>-45.0</factor>
   <offset-deg>22.5</offset-deg>
   <center>
@@ -695,7 +771,7 @@
   <type>rotate</type>
   <object-name>thrust_arm.1</object-name>
   <object-name>thrust_handle.1</object-name>
-  <property>fdm/jsbsim/fcs/advance-pos-norm[0]</property>
+  <property>fdm/jsbsim/fcs/thrust-cmd-norm[0]</property>
   <factor>-90.0</factor>
   <offset-deg>45.0</offset-deg>
   <center>
@@ -713,7 +789,7 @@
   <type>rotate</type>
   <object-name>thrust_arm.2</object-name>
   <object-name>thrust_handle.2</object-name>
-  <property>fdm/jsbsim/fcs/advance-pos-norm[1]</property>
+  <property>fdm/jsbsim/fcs/thrust-cmd-norm[1]</property>
   <factor>-90.0</factor>
   <offset-deg>45.0</offset-deg>
   <center>
@@ -731,7 +807,7 @@
   <type>rotate</type>
   <object-name>thrust_arm.3</object-name>
   <object-name>thrust_handle.3</object-name>
-  <property>fdm/jsbsim/fcs/advance-pos-norm[2]</property>
+  <property>fdm/jsbsim/fcs/thrust-cmd-norm[2]</property>
   <factor>-90.0</factor>
   <offset-deg>45.0</offset-deg>
   <center>

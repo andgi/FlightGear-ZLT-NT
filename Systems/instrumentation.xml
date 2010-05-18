@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!-- $Id$ -->
 <!--
-  Zeppelin NT-07 airship.
+  Zeppelin NT-07 airship for FlightGear.
 
-  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -18,6 +18,9 @@
   <number>0</number>
   <total-pressure>/systems/pitot/total-pressure-inhg</total-pressure>
   <static-pressure>/systems/static/pressure-inhg</static-pressure>
+  <has-overspeed-indicator>1</has-overspeed-indicator>
+  <ias-limit type="double">70.0</ias-limit>
+  <alt-threshold>100000.0</alt-threshold>
  </airspeed-indicator>
 
  <altimeter>

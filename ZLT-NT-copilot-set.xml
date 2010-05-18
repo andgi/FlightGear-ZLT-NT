@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
 <!--
-  Zeppelin NT-07 airship multiplayer copilot view and control.
+  Zeppelin NT-07 airship multiplayer copilot for FlightGear.
 
-  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2010 Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <!--
@@ -16,7 +15,7 @@
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id$</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.22 2010-05-17 21:34:10 anders Exp $</aircraft-version>
   
   <flight-model>null</flight-model>
 
@@ -253,6 +252,26 @@
   <dual_control>
    <file>Aircraft/ZLT-NT/DualControl/copilot-dual-control.nas</file>
   </dual_control>
+  <!-- Walk View -->
+  <walkview>
+   <file>Aircraft/Generic/WalkView/walkview.nas</file>
+  </walkview>
+  <PassengerView>
+   <script><![CDATA[
+     var carConstraint =
+          walkview.makeUnionConstraint(
+          [
+           walkview.slopingYAlignedPlane.new([19.1, -0.3, -8.85],
+                                             [19.5,  0.3, -8.85]),
+           walkview.slopingYAlignedPlane.new([19.5, -0.7, -9.08], 
+                                             [26.4,  0.7, -9.08]),
+           walkview.slopingYAlignedPlane.new([26.4, -0.5, -9.35], 
+                                             [26.7,  0.5, -9.35]),
+          ]);
+     var walker = walkview.walker.new("Passenger View", carConstraint);
+    ]]>
+   </script>
+  </PassengerView>
  </nasal>
 
  <!--
@@ -335,10 +354,20 @@
     <binding> 
      <command>nasal</command>
      <script>
-      gui.popupTip("Weigh-off in progress.");
-      ZLTNT.auto_weighoff();
+      if (!walkview.forward(4.0)) {
+          gui.popupTip("Weigh-off in progress.");
+          ZLTNT.auto_weighoff();
+      }
      </script>     
     </binding>
+    <mod-up>
+     <binding>
+      <command>nasal</command>
+      <script>
+       walkview.forward(0);
+      </script>
+     </binding>
+    </mod-up>
    </key>
 
    <key n="119">
@@ -347,9 +376,19 @@
     <binding>
      <command>nasal</command>
      <script>
-      ZLTNT.print_wow();
+      if (!walkview.forward(1.0)) {
+          ZLTNT.print_wow();
+      }
      </script>
     </binding>
+    <mod-up>
+     <binding>
+      <command>nasal</command>
+      <script>
+       walkview.forward(0);
+      </script>
+     </binding>
+    </mod-up>
    </key>
 
    <key n="100">
@@ -499,6 +538,27 @@
        ZLTNT.mooring.set_winch_speed(sp + 0.5);
      </script>
     </binding>
+   </key>
+
+   <!-- Walkview commands ======================================== -->
+   <key n="115">
+    <name>s</name>
+    <desc>Walk backwards.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+      if (!walkview.forward(-1.0)) {
+      }
+     </script>
+    </binding>
+    <mod-up>
+     <binding>
+      <command>nasal</command>
+      <script>
+       walkview.forward(0);
+      </script>
+     </binding>
+    </mod-up>
    </key>
 
   </keyboard>

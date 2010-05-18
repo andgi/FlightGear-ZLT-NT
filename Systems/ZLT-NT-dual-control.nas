@@ -52,6 +52,7 @@ var copilot_TDM1_mpp      =    "sim/multiplay/generic/string[0]";
 
 # Flight controls
 var l_rudder_cmd   = "controls/flight/rudder";
+var l_aileron_cmd  = "controls/flight/aileron";
 var l_elevator_cmd = "controls/flight/elevator";
 var l_elevator_trim_cmd = "controls/flight/elevator-trim";
 
@@ -139,18 +140,18 @@ var l_shared_thrust_cmd =
      "fdm/jsbsim/fcs/dual-control/thrust-cmd-norm[1]",
      "fdm/jsbsim/fcs/dual-control/thrust-cmd-norm[2]"];
 var l_final_thrust_cmd =
-    ["fdm/jsbsim/fcs/advance-pos-norm[0]",
-     "fdm/jsbsim/fcs/advance-pos-norm[1]",
-     "fdm/jsbsim/fcs/advance-pos-norm[2]"];
+    ["fdm/jsbsim/fcs/thrust-cmd-norm[0]",
+     "fdm/jsbsim/fcs/thrust-cmd-norm[1]",
+     "fdm/jsbsim/fcs/thrust-cmd-norm[2]"];
 
 var l_shared_mixture_cmd =
     ["fdm/jsbsim/fcs/dual-control/mixture-cmd-norm[0]",
      "fdm/jsbsim/fcs/dual-control/mixture-cmd-norm[1]",
      "fdm/jsbsim/fcs/dual-control/mixture-cmd-norm[2]"];
 var l_final_mixture_cmd =
-    ["fdm/jsbsim/fcs/mixture-pos-norm[0]",
-     "fdm/jsbsim/fcs/mixture-pos-norm[1]",
-     "fdm/jsbsim/fcs/mixture-pos-norm[2]"];
+    ["fdm/jsbsim/fcs/mixture-cmd-norm[0]",
+     "fdm/jsbsim/fcs/mixture-cmd-norm[1]",
+     "fdm/jsbsim/fcs/mixture-cmd-norm[2]"];
 
 var l_ballonet_inflation_cmd =
     ["fdm/jsbsim/fcs/ballonet-inflation-cmd-norm[0]",
@@ -177,11 +178,11 @@ var pilot_connect_copilot = func (copilot) {
          ##################################################
          # Copilot main flight control
          DCT.Translator.new
-         (copilot.getNode("surface-positions/elevator-pos-norm"),
-          props.globals.getNode("/fdm/jsbsim/fcs/copilot-elevator-cmd-norm")),
+         (copilot.getNode(copilot_elevator_mpp),
+          props.globals.getNode("/fdm/jsbsim/fcs/copilot/pitch-cmd-norm")),
          DCT.Translator.new
-         (copilot.getNode("surface-positions/rudder-pos-norm"),
-          props.globals.getNode("/fdm/jsbsim/fcs/copilot-rudder-cmd-norm")),
+         (copilot.getNode(copilot_rudder_mpp),
+          props.globals.getNode("/fdm/jsbsim/fcs/copilot/yaw-cmd-norm")),
          ##################################################
          # Copilot elevator trim control
          DCT.DeltaAdder.new
@@ -324,9 +325,9 @@ var pilot_connect_copilot = func (copilot) {
            props.globals.getNode(l_final_mixture_cmd[1]),
            props.globals.getNode(l_final_mixture_cmd[2]),
            # 10 - 12 Engine swivel cmd
-           props.globals.getNode(fcs ~ "/side-engine-swivel-cmd-rad[0]"),
-           props.globals.getNode(fcs ~ "/side-engine-swivel-cmd-rad[1]"),
-           props.globals.getNode(fcs ~ "/rear-engine-swivel-cmd-rad"),
+           props.globals.getNode(fcs ~ "/etc/side-engine-swivel-cmd-rad[0]"),
+           props.globals.getNode(fcs ~ "/etc/side-engine-swivel-cmd-rad[1]"),
+           props.globals.getNode(fcs ~ "/etc/rear-engine-swivel-cmd-rad"),
            # 13 - 14 ballonet inflation cmd
            props.globals.getNode(l_ballonet_inflation_cmd[0]),
            props.globals.getNode(l_ballonet_inflation_cmd[1]),
@@ -369,8 +370,8 @@ var pilot_connect_copilot = func (copilot) {
 ######################################################################
 var pilot_disconnect_copilot = func {
     # Reset copilot controls. Slightly dangerous.
-    setprop("/fdm/jsbsim/fcs/copilot-elevator-cmd-norm", 0.0);
-    setprop("/fdm/jsbsim/fcs/copilot-rudder-cmd-norm", 0.0);
+    setprop("/fdm/jsbsim/fcs/copilot/pitch-cmd-norm", 0.0);
+    setprop("/fdm/jsbsim/fcs/copilot/yaw-cmd-norm", 0.0);
     setprop(l_dual_control, 0);
 
     # VHF 22 Comm. Regain control of Comm 2.
@@ -457,17 +458,17 @@ var copilot_connect_pilot = func (pilot) {
            func (v) {
                pilot.getNode(l_final_rpm_cmd[0]).setValue(v);
                props.globals.getNode
-                   (l_final_rpm_cmd_rpm[0], 1).setValue(1250 * v);
+                   (l_final_rpm_cmd_rpm[0], 1).setValue(950 * v + 300);
            },
            func (v) {
                pilot.getNode(l_final_rpm_cmd[1]).setValue(v);
                props.globals.getNode
-                   (l_final_rpm_cmd_rpm[1], 1).setValue(1250 * v);
+                   (l_final_rpm_cmd_rpm[1], 1).setValue(950 * v + 300);
            },
            func (v) {
                pilot.getNode(l_final_rpm_cmd[2]).setValue(v);
                props.globals.getNode
-                   (l_final_rpm_cmd_rpm[2], 1).setValue(1250 * v);
+                   (l_final_rpm_cmd_rpm[2], 1).setValue(950 * v + 300);
            },
            # 4 - 6 thrust cmd
            func (v) {
@@ -501,21 +502,21 @@ var copilot_connect_pilot = func (pilot) {
            # 10 - 12 Engine swivel cmd
            func (v) {
                pilot.getNode
-                   (fcs ~ "/side-engine-swivel-cmd-rad[0]").setValue(v);
+                   (fcs ~ "/etc/side-engine-swivel-cmd-rad[0]").setValue(v);
                props.globals.getNode
-                   (fcs ~ "/side-engine-swivel-cmd-rad[0]", 1).setValue(v);
+                   (fcs ~ "/etc/side-engine-swivel-cmd-rad[0]", 1).setValue(v);
            },
            func (v) {
                pilot.getNode
-                   (fcs ~ "/side-engine-swivel-cmd-rad[1]").setValue(v);
+                   (fcs ~ "/etc/side-engine-swivel-cmd-rad[1]").setValue(v);
                props.globals.getNode
-                   (fcs ~ "/side-engine-swivel-cmd-rad[1]", 1).setValue(v);
+                   (fcs ~ "/etc/side-engine-swivel-cmd-rad[1]", 1).setValue(v);
            },
            func (v) {
                pilot.getNode
-                   (fcs ~ "/rear-engine-swivel-cmd-rad").setValue(v);
+                   (fcs ~ "/etc/rear-engine-swivel-cmd-rad").setValue(v);
                props.globals.getNode
-                   (fcs ~ "/rear-engine-swivel-cmd-rad", 1).setValue(v);
+                   (fcs ~ "/etc/rear-engine-swivel-cmd-rad", 1).setValue(v);
            },
            # 13 - 14 ballonet inflation cmd
            func (v) {
@@ -581,8 +582,8 @@ var copilot_connect_pilot = func (pilot) {
          ##################################################
          # Map copilot flight controls to MP properties.
          DCT.Translator.new
-         (props.globals.getNode(l_rudder_cmd),
-          props.globals.getNode(copilot_rudder_mpp), factor = -1),
+         (props.globals.getNode(l_aileron_cmd),
+          props.globals.getNode(copilot_rudder_mpp), factor = 1),
          DCT.Translator.new
          (props.globals.getNode(l_elevator_cmd),
           props.globals.getNode(copilot_elevator_mpp)),
@@ -657,7 +658,7 @@ var set_copilot_wrappers = func (pilot) {
                      1.0);
         } else
             return;
-        var n = -12*v + 57.29578*getprop(fcs ~ "/side-engine-swivel-cmd-rad");
+        var n = -12*v + 57.29578*getprop(fcs ~ "/etc/side-engine-swivel-cmd-rad");
         gui.popupTip("Side engine swivel " ~
                      int((n < 0 ? 0 : (n > 120 ? 120 : n))) ~ " deg.");
     }
@@ -709,6 +710,12 @@ var copilot_alias_aimodel = func(pilot) {
     props.globals.getNode(p, 1).alias(pilot.getNode(p));
     p = "engines/engine[2]/rpm";
     props.globals.getNode(p, 1).alias(pilot.getNode(p));
+
+    # Map the the local stick input to the copilot's side-stick.
+    pilot.getNode("fdm/jsbsim/fcs/copilot/pitch-cmd-norm").
+        alias(props.globals.getNode("controls/flight/elevator"));
+    pilot.getNode("fdm/jsbsim/fcs/copilot/yaw-cmd-norm").
+        alias(props.globals.getNode("controls/flight/aileron"));
 
     # Map airspeed for airspeed indicator. This is cheating!
     props.globals.
