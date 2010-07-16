@@ -42,17 +42,15 @@
  <property value="0.0">fcs/dual-control/enabled</property>
 
  <!-- Pilot command properties. Created and set from FlightGear. -->
- <!--
- <property>fcs/pilot/propeller-speed-cmd-norm[0]</property>
- <property>fcs/pilot/propeller-speed-cmd-norm[1]</property>
- <property>fcs/pilot/propeller-speed-cmd-norm[2]</property>
- <property>fcs/pilot/thrust-cmd-norm[0]</property>
- <property>fcs/pilot/thrust-cmd-norm[1]</property>
- <property>fcs/pilot/thrust-cmd-norm[2]</property>
- <property>fcs/pilot/mixture-cmd-norm[0]</property>
- <property>fcs/pilot/mixture-cmd-norm[1]</property>
- <property>fcs/pilot/mixture-cmd-norm[2]</property>
- -->
+ <property value="0.0">fcs/pilot/propeller-speed-cmd-norm[0]</property>
+ <property value="0.0">fcs/pilot/propeller-speed-cmd-norm[1]</property>
+ <property value="0.0">fcs/pilot/propeller-speed-cmd-norm[2]</property>
+ <property value="0.0">fcs/pilot/thrust-cmd-norm[0]</property>
+ <property value="0.0">fcs/pilot/thrust-cmd-norm[1]</property>
+ <property value="0.0">fcs/pilot/thrust-cmd-norm[2]</property>
+ <property value="0.0">fcs/pilot/mixture-cmd-norm[0]</property>
+ <property value="0.0">fcs/pilot/mixture-cmd-norm[1]</property>
+ <property value="0.0">fcs/pilot/mixture-cmd-norm[2]</property>
 
  <!-- Merged command properties set by dual-control. Set from FlightGear. -->
  <property value="0.0">fcs/dual-control/propeller-speed-cmd-norm[0]</property>
@@ -90,7 +88,7 @@
    <output>fcs/propeller-speed-cmd-norm[1]</output>
   </switch>
   <switch name="fcs/dual-control/propeller-speed-pos-norm[2]">
-  <default value="fcs/pilot/propeller-speed-cmd-norm[2]"/>
+   <default value="fcs/pilot/propeller-speed-cmd-norm[2]"/>
    <test logic="AND" value="fcs/dual-control/propeller-speed-cmd-norm[2]">
      fcs/dual-control/enabled GE 0.5
    </test>

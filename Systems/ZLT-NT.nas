@@ -64,7 +64,20 @@ var init_all = func(reinit=0) {
         # Hobbs counters.
         aircraft.timer.new("/sim/time/hobbs/envelope", 73).start();
         # Livery support.
-        aircraft.livery.init("Aircraft/ZLT-NT/Models/Liveries")
+        aircraft.livery.init("Aircraft/ZLT-NT/Models/Liveries");
+
+        # Make sure the control properties are not nil.
+        setprop("controls/flight/elevator", 0);
+        setprop("controls/flight/aileron", 0);
+        setprop("controls/engines/engine[0]/throttle", 0);
+        setprop("controls/engines/engine[0]/mixture", 0);
+        setprop("controls/engines/engine[0]/propeller-pitch", 0);
+        setprop("controls/engines/engine[1]/throttle", 0);
+        setprop("controls/engines/engine[1]/mixture", 0);
+        setprop("controls/engines/engine[1]/propeller-pitch", 0);
+        setprop("controls/engines/engine[2]/throttle", 0);
+        setprop("controls/engines/engine[2]/mixture", 0);
+        setprop("controls/engines/engine[2]/propeller-pitch", 0);
     }
 
     # Timed initialization.
@@ -314,9 +327,9 @@ var dialog = {
         content.set("default-padding", 5);
         props.globals.initNode("sim/about/text",
              "Zeppelin NT07 airship for FlightGear\n" ~
-             "Copyright (C) 2008 - 2009  Anders Gidenstam\n\n" ~
+             "Copyright (C) 2008 - 2010  Anders Gidenstam\n\n" ~
              "FlightGear flight simulator\n" ~
-             "Copyright (C) 1997 - 2009  http://www.flightgear.org\n\n" ~
+             "Copyright (C) 1997 - 2010  http://www.flightgear.org\n\n" ~
              "This is free software, and you are welcome to\n" ~
              "redistribute it under certain conditions.\n" ~
              "See the GNU GENERAL PUBLIC LICENSE Version 2 for the details.",

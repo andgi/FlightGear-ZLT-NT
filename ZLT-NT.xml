@@ -31,7 +31,7 @@
   <email>anders at gidenstam dot org</email>
 
   <filecreationdate>2008-06-10</filecreationdate>
-  <version>$Id: ZLT-NT.xml,v 1.43 2010-05-19 20:01:19 anders Exp $</version>
+  <version>$Id: ZLT-NT.xml,v 1.44 2010-07-16 20:20:09 anders Exp $</version>
 
   <description>JSBSim model of a Zeppelin NT-07 airship.</description>
 
@@ -1001,6 +1001,8 @@
  ==== Flight control system =================================================
  -->
 
+ <system file="dual-control-jsbsim"/><!-- Dual-control setup for FlightGear. -->
+
  <system file="instrumentation-jsbsim"/> <!-- Instruments and sensors. -->
  <system file="engine-control-jsbsim"/>  <!-- Engine and thrust vectoring. -->
 
@@ -1314,8 +1316,6 @@
   </force>
 
  </external_reactions>
-
- <system file="dual-control-jsbsim"/><!-- Dual-control setup for FlightGear. -->
 
  <!-- system file="fgfs4jsbsim"/ -->
  <system file="mooring-jsbsim">     <!-- Mooring setup for FlightGear. -->

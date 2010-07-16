@@ -54,11 +54,9 @@
  <property value="0.0">fcs/propeller-speed-cmd-norm[1]</property>
  <property value="0.0">fcs/propeller-speed-cmd-norm[2]</property>
 
- <!-- Automatically created by JSBSim.
  <property value="0.0">fcs/mixture-cmd-norm[0]</property>
  <property value="0.0">fcs/mixture-cmd-norm[1]</property>
  <property value="0.0">fcs/mixture-cmd-norm[2]</property>
- -->
 
  <property value="0.0">fcs/thrust-cmd-norm[0]</property>
  <property value="0.0">fcs/thrust-cmd-norm[1]</property>
