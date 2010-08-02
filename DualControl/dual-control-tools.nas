@@ -495,7 +495,11 @@ copilot_dialog.init = func (copilot_type, x = nil, y = nil) {
     me.fg = [[1.0, 1.0, 1.0, 1.0]]; 
     #
     # "private"
-    me.title = "Copilot selection";
+    if (contains(aircraft_dual_control, "copilot_view")) {
+        me.title = "Pilot selection";
+    } else {
+        me.title = "Copilot selection";
+    }
     me.basenode = props.globals.getNode("/sim/remote", 1);
     me.dialog = nil;
     me.namenode = props.Node.new({"dialog-name" : me.title });
@@ -519,7 +523,11 @@ copilot_dialog.create = func {
     var titlebar = me.dialog.addChild("group");
     titlebar.set("layout", "hbox");
     titlebar.addChild("empty").set("stretch", 1);
-    titlebar.addChild("text").set("label", "Copilots online");
+    if (contains(aircraft_dual_control, "copilot_view")) {
+        titlebar.addChild("text").set("label", "Pilots online");
+    } else {
+        titlebar.addChild("text").set("label", "Copilots online");
+    }
     var w = titlebar.addChild("button");
     w.set("pref-width", 16);
     w.set("pref-height", 16);
