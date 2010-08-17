@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
+<!--
+  Zeppelin NT07 airship.
 
+  Copyright (C) 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license v2 or later.
+-->
 <PropertyList>
 
- <path>../../../Models/Geometry/null.ac</path>
- 
  <model>
   <name>Mast truck</name>
   <path>Aircraft/ZLT-NT/Models/GroundCrew/scania-mast-truck.xml</path>

@@ -7,11 +7,10 @@ Adapted for dual control by Anders Gidenstam
 
 NOTE: kr87.nas MUST be loaded as Nasal module KR87.
  -->
-
 <PropertyList>
  
  <path>kr87.ac</path>
- <texture-path>../KX165/</texture-path>
+ <texture-path>Aircraft/ZLT-NT/DualControl/Instruments/KX165/</texture-path>
 
  <animation>
   <type>select</type>

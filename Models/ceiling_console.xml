@@ -1,19 +1,13 @@
-<!-- $Id$ -->
+<?xml version="1.0"?>
 <!--
   Zeppelin NT07 airship.
 
-  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
 
  <!-- No main model. -->
- <path>../../../Models/Geometry/null.ac</path>
- <offsets>
-  <!-- x/y/z == back/right/up -->
-  <x-m> 0.0 </x-m>
-  <y-m> 0.0 </y-m>
-  <z-m> 0.0 </z-m>
- </offsets>
+ <!-- x/y/z == back/right/up -->
 
 </PropertyList>

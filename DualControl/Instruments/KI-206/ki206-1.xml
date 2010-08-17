@@ -6,8 +6,8 @@ Anders Gidenstam (pick animations)
 -->
 <PropertyList>
 
- <path>../../../../Instruments-3d/ki206/ki206.ac</path>
- <texture-path>../../../../Instruments-3d/ki206/</texture-path>
+ <path>Aircraft/Instruments-3d/ki206/ki206.ac</path>
+ <texture-path>Aircraft/Instruments-3d/ki206/</texture-path>
  <animation>
   <type>material</type>
   <object-name>KI206.gsflag</object-name>
