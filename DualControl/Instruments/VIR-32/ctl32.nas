@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a VIR 32 Nav radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -30,7 +29,7 @@ var nav_base = ["instrumentation/nav[0]",
 ###########################################################################
 var master_ctl32 = {
   new : func(n) {
-    obj = {};
+    var obj = {};
     obj.parents = [master_ctl32];
     obj.nav_base = props.globals.getNode(nav_base[n]);
     return obj;
@@ -110,14 +109,14 @@ var make_slave_to = func(n, airoot) {
 
 ###########################################################################
 # n - Nav#
-swap = func(n) {
+var swap = func(n) {
   ctl32[n].swap();
 }
 
 ###########################################################################
 # n - Nav#
 # d - adjustment
-adjust_frequency = func(n, d) {
+var adjust_frequency = func(n, d) {
   ctl32[n].adjust_frequency(d);
 }
 

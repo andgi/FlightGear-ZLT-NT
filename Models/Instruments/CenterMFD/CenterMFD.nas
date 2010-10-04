@@ -66,7 +66,7 @@ var l_elevator = "surface-positions/elevator-pos-norm";
 ###########################################################################
 var master_CenterMFD = {
     new : func() {
-        obj = {};
+        var obj = {};
         obj.parents = [master_CenterMFD];
         obj.loopid = 0;
         obj.base = props.globals.getNode(l_base, 1);

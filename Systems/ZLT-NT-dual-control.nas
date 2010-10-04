@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of the ZLT-NT over the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -384,14 +383,14 @@ var pilot_disconnect_copilot = func {
 ###############################################################################
 # Copilot MP property mappings and specific pilot connect/disconnect actions.
 
-l_flap_up_cmd   = "controls/flight/flaps-up";
-l_flap_down_cmd = "controls/flight/flaps-down";
-l_gear_up_cmd   = "controls/flight/gear-up";
-l_gear_down_cmd = "controls/flight/gear-down";
-l_ballonet_cmd_inc = ["controls/ballonet/inc[0]",
-                      "controls/ballonet/inc[1]"];
-l_ballonet_cmd_dec = ["controls/ballonet/dec[0]",
-                      "controls/ballonet/dec[1]"];
+var l_flap_up_cmd   = "controls/flight/flaps-up";
+var l_flap_down_cmd = "controls/flight/flaps-down";
+var l_gear_up_cmd   = "controls/flight/gear-up";
+var l_gear_down_cmd = "controls/flight/gear-down";
+var l_ballonet_cmd_inc = ["controls/ballonet/inc[0]",
+                          "controls/ballonet/inc[1]"];
+var l_ballonet_cmd_dec = ["controls/ballonet/dec[0]",
+                          "controls/ballonet/dec[1]"];
 
 ######################################################################
 # Used by dual_control to set up the mappings for the copilot.

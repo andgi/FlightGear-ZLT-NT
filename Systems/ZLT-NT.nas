@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -128,9 +127,9 @@ setlistener("/sim/signals/fdm-initialized", func {
 ###############################################################################
 # controls.nas overrides.
 
-engine_swivel_p = ["fdm/jsbsim/fcs/side-engine-swivel-cmd-norm[0]",
-                   "fdm/jsbsim/fcs/side-engine-swivel-cmd-norm[1]",
-                   "fdm/jsbsim/fcs/rear-engine-swivel-cmd-norm[0]"];
+var engine_swivel_p = ["fdm/jsbsim/fcs/side-engine-swivel-cmd-norm[0]",
+                       "fdm/jsbsim/fcs/side-engine-swivel-cmd-norm[1]",
+                       "fdm/jsbsim/fcs/rear-engine-swivel-cmd-norm[0]"];
 
 # The flap control controls side engine swivel.
 controls.flapsDown = func(step) {

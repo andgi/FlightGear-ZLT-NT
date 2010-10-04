@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a VHF 22 Comm radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license.
 ##
 ###############################################################################
@@ -30,7 +29,7 @@ var comm_base = ["instrumentation/comm[0]",
 ###########################################################################
 var master_ctl22 = {
   new : func(n) {
-    obj = {};
+    var obj = {};
     obj.parents = [master_ctl22];
     obj.comm_base = props.globals.getNode(comm_base[n]);
     return obj;
@@ -110,14 +109,14 @@ var make_slave_to = func(n, airoot) {
 
 ###########################################################################
 # n - Comm#
-swap = func(n) {
+var swap = func(n) {
   ctl22[n].swap();
 }
 
 ###########################################################################
 # n - Comm#
 # d - adjustment
-adjust_frequency = func(n, d) {
+var adjust_frequency = func(n, d) {
   ctl22[n].adjust_frequency(d);
 }
 

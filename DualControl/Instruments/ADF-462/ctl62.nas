@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a ADF 462 radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -30,7 +29,7 @@ var adf_base = ["instrumentation/adf[0]",
 ###########################################################################
 var master_ctl62 = {
   new : func(n) {
-    obj = {};
+    var obj = {};
     obj.parents = [master_ctl62];
     obj.adf_base = props.globals.getNode(adf_base[n]);
     return obj;
@@ -110,14 +109,14 @@ var make_slave_to = func(n, airoot) {
 
 ###########################################################################
 # n - Adf#
-swap = func(n) {
+var swap = func(n) {
   ctl62[n].swap();
 }
 
 ###########################################################################
 # n - Adf#
 # d - adjustment
-adjust_frequency = func(n, d) {
+var adjust_frequency = func(n, d) {
   ctl62[n].adjust_frequency(d);
 }
 
