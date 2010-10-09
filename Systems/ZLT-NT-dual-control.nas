@@ -194,49 +194,49 @@ var pilot_connect_copilot = func (copilot) {
          (props.globals.getNode(l_pilot_rpm_cmd[0]),
           copilot.getNode(copilot_rpm_cmd_mpp[0]),
           props.globals.getNode(l_shared_rpm_cmd[0], 1),
-          threshold = 0.02),
+          0.02),
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_rpm_cmd[1]),
           copilot.getNode(copilot_rpm_cmd_mpp[1]),
           props.globals.getNode(l_shared_rpm_cmd[1], 1),
-          threshold = 0.02),
+          0.02),
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_rpm_cmd[2]),
           copilot.getNode(copilot_rpm_cmd_mpp[2]),
           props.globals.getNode(l_shared_rpm_cmd[2], 1),
-          threshold = 0.02),
+          0.02),
          # Thrust sharing
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_thrust_cmd[0]),
           copilot.getNode(copilot_thrust_cmd_mpp[0]),
           props.globals.getNode(l_shared_thrust_cmd[0]),
-          threshold = 0.02),
+          0.02),
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_thrust_cmd[1]),
           copilot.getNode(copilot_thrust_cmd_mpp[1]),
           props.globals.getNode(l_shared_thrust_cmd[1]),
-          threshold = 0.02),
+          0.02),
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_thrust_cmd[2]),
           copilot.getNode(copilot_thrust_cmd_mpp[2]),
           props.globals.getNode(l_shared_thrust_cmd[2]),
-          threshold = 0.02),
+          0.02),
          # Mixture sharing
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_mixture_cmd[0]),
           copilot.getNode(copilot_mixture_cmd_mpp[0]),
           props.globals.getNode(l_shared_mixture_cmd[0]),
-          threshold = 0.02),
+          0.02),
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_mixture_cmd[1]),
           copilot.getNode(copilot_mixture_cmd_mpp[1]),
           props.globals.getNode(l_shared_mixture_cmd[1]),
-          threshold = 0.02),
+          0.02),
          DCT.MostRecentSelector.new
          (props.globals.getNode(l_pilot_mixture_cmd[2]),
           copilot.getNode(copilot_mixture_cmd_mpp[2]),
           props.globals.getNode(l_shared_mixture_cmd[2]),
-          threshold = 0.02),
+          0.02),
          ##################################################
          # Decode copilot cockpit switch states.
          #   NOTE: Actions are only triggered on change.
@@ -360,7 +360,8 @@ var pilot_connect_copilot = func (copilot) {
          ##################################################
          # Set up TDM transmission of slow state properties.
          DCT.TDMEncoder.new
-         (CenterMFD.master_send_state(),
+         (CenterMFD.master_send_state() ~
+          EPI.master_send_state(),
           props.globals.getNode(pilot_TDM3_mpp),
          )
         ];
@@ -418,6 +419,8 @@ var copilot_connect_pilot = func (pilot) {
     ADF462.animate_aimodel(0, pilot);
     # Center MFD. Owned by the pilot.
     CenterMFD.animate_aimodel(pilot);
+    # EPI. Owned by the pilot.
+    EPI.animate_aimodel(pilot);
 
     return
         [
@@ -572,7 +575,8 @@ var copilot_connect_pilot = func (pilot) {
          # Set up TDM reception of slow state properties.
          DCT.TDMDecoder.new
          (pilot.getNode(pilot_TDM3_mpp),
-          CenterMFD.slave_receive_master_state()
+          CenterMFD.slave_receive_master_state() ~
+          EPI.slave_receive_master_state()
          ),
 
          ######################################################################
@@ -582,7 +586,7 @@ var copilot_connect_pilot = func (pilot) {
          # Map copilot flight controls to MP properties.
          DCT.Translator.new
          (props.globals.getNode(l_aileron_cmd),
-          props.globals.getNode(copilot_rudder_mpp), factor = 1),
+          props.globals.getNode(copilot_rudder_mpp), 1),
          DCT.Translator.new
          (props.globals.getNode(l_elevator_cmd),
           props.globals.getNode(copilot_elevator_mpp)),
@@ -635,7 +639,7 @@ var copilot_disconnect_pilot = func {
     VIR32.make_master(0);
 
     # Silence the pressure alarm.
-    setprop("/fdm/jsbsim/instrumentation/gas-pressure-psf", -1);
+    setprop("instrumentation/envelope-pressure-indicator/indicated-gas-pressure-psf", -1);
 }
 
 ######################################################################

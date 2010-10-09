@@ -23,7 +23,14 @@
 -->
 <system name="Instrumentation">
 
- <channel name="">
+ <channel name="Envelope Pressure Indicator">
+
+  <documentation>
+   According to [FAA:2008:E8-6600] the ZLT envelope pressure indicator (EPI)
+   instrument provides "annunciation of the Helium and Ballonet Pressure
+   as well as indication of the aft and forward Fan and Sensor Fail status
+   using LED columns".
+  </documentation>
 
   <fcs_function name="instrumentation/gas-pressure-psf">
    <function>
@@ -31,7 +38,8 @@
      <property> buoyant_forces/gas-cell/pressure-psf </property>
      <property> atmosphere/P-psf </property>
     </difference>
-   </function>   
+   </function>
+   <output>/instrumentation/envelope-pressure-indicator/indicated-gas-pressure-psf</output>
   </fcs_function>
 
   <fcs_function name="instrumentation/ballonet-pressure-psf[0]">
@@ -41,6 +49,7 @@
      <property> atmosphere/P-psf </property>
     </difference>
    </function>   
+   <output>/instrumentation/envelope-pressure-indicator/indicated-fwd-ballonet-pressure-psf</output>
   </fcs_function>
 
   <fcs_function name="instrumentation/ballonet-pressure-psf[1]">
@@ -50,6 +59,7 @@
      <property> atmosphere/P-psf </property>
     </difference>
    </function>   
+   <output>/instrumentation/envelope-pressure-indicator/indicated-aft-ballonet-pressure-psf</output>
   </fcs_function>
 
  </channel>

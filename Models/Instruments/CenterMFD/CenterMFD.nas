@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control Zeppelin NT Center MFD.
 ##
-##  Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2009 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -86,10 +85,10 @@ var master_CenterMFD = {
         me.loopid += 1;
     },
     update : func {
-        me.base.getNode("controls/abs-rudder-pos-norm").
-            setValue(abs(props.globals.getNode(l_rudder).getValue()));
         me.base.getNode("controls/rudder-pos-norm").
             setValue(props.globals.getNode(l_rudder).getValue());
+        me.base.getNode("controls/abs-rudder-pos-norm").
+            setValue(abs(props.globals.getNode(l_rudder).getValue()));
         me.base.getNode("controls/abs-elevator-pos-norm").
             setValue(abs(props.globals.getNode(l_elevator).getValue()));
         me.base.getNode("controls/elevator-pos-norm").
@@ -105,7 +104,7 @@ var master_CenterMFD = {
 ###########################################################################
 var slave_CenterMFD = {
     new : func(airoot) {
-        obj = {};
+        var obj = {};
         obj.parents = [slave_CenterMFD];
         obj.loopid = 0;
         obj.root = airoot;
@@ -126,10 +125,10 @@ var slave_CenterMFD = {
         me.loopid += 1;
     },
     update : func {
-        me.base.getNode("controls/abs-rudder-pos-norm").
-            setValue(abs(me.root.getNode(l_rudder).getValue()));
         me.base.getNode("controls/rudder-pos-norm").
             setValue(me.root.getNode(l_rudder).getValue());
+        me.base.getNode("controls/abs-rudder-pos-norm").
+            setValue(abs(me.root.getNode(l_rudder).getValue()));
         me.base.getNode("controls/abs-elevator-pos-norm").
             setValue(abs(me.root.getNode(l_elevator).getValue()));
         me.base.getNode("controls/elevator-pos-norm").

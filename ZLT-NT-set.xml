@@ -12,7 +12,7 @@
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.47 2010-06-05 10:18:09 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.49 2010-10-09 18:55:16 anders Exp $</aircraft-version>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
@@ -244,6 +244,12 @@
   </lighting>
  </controls>
 
+ <instrumentation>
+  <envelope-pressure-indicator>
+   <serviceable type="bool">1</serviceable>
+  </envelope-pressure-indicator>
+ </instrumentation>
+
  <payload>
   <weight>
    <name type="string">Pilot (left)</name>
@@ -303,6 +309,9 @@
   <CenterMFD>
    <file>Aircraft/ZLT-NT/Models/Instruments/CenterMFD/CenterMFD.nas</file>
   </CenterMFD>
+  <EPI>
+   <file>Aircraft/ZLT-NT/Models/Instruments/EnvelopePressureIndicator/EPI.nas</file>
+  </EPI>
   <citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
   </citation>
@@ -336,5 +345,11 @@
  <input>
   <keyboard include="Systems/ZLT-NT-keys.xml"/>
  </input>
+
+ <!-- Temporary workaround for a FG/git bug -->
+ <surface-positions>
+  <elevator-pos-norm type="double"/>
+  <rudder-pos-norm type="double"/>
+ </surface-positions>
 
 </PropertyList>

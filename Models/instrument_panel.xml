@@ -37,8 +37,8 @@
   <path>Aircraft/Instruments-3d/primus-1000/PFD/PFD.xml</path>
   <offsets>
    <x-m> 0.015</x-m>
-   <y-m>-0.300</y-m>
-   <z-m> 0.620</z-m>
+   <y-m>-0.355</y-m>
+   <z-m> 0.650</z-m>
   </offsets>
  </model>
 
@@ -47,8 +47,18 @@
   <path>Aircraft/CitationX/Models/Instruments/fmc.xml</path>
   <offsets>
    <x-m> 0.015</x-m>
-   <y-m>-0.120</y-m>
+   <y-m>-0.180</y-m>
    <z-m> 0.725</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Envelope Pressure Indicator</name>
+  <path>Aircraft/ZLT-NT/Models/Instruments/EnvelopePressureIndicator/pressure_indicator.xml</path>
+  <offsets>
+   <x-m> 0.015</x-m>
+   <y-m>-0.220</y-m>
+   <z-m> 0.635</z-m>
   </offsets>
  </model>
 

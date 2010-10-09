@@ -169,11 +169,11 @@
    <condition>
     <and>
      <less-than>
-      <property>fdm/jsbsim/instrumentation/gas-pressure-psf</property>
+      <property>instrumentation/envelope-pressure-indicator/indicated-gas-pressure-psf</property>
       <value>6.5</value>
      </less-than>
      <greater-than-equals>
-      <property>fdm/jsbsim/instrumentation/gas-pressure-psf</property>
+      <property>instrumentation/envelope-pressure-indicator/indicated-gas-pressure-psf</property>
       <value>0.0</value>
      </greater-than-equals>
     </and>
