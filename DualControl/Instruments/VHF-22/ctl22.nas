@@ -52,7 +52,7 @@ var master_ctl22 = {
 ###########################################################################
 var slave_ctl22 = {
   new : func(n, airoot) {
-    obj = {};
+    var obj = {};
     obj.parents = [slave_ctl22];
     obj.root = airoot;
     obj.comm_base = props.globals.getNode(comm_base[n]);

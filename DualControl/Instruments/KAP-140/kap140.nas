@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a KAP 140 autopilot over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -109,7 +108,7 @@ var master_kap140 =
 ###########################################################################
 var slave_kap140 = {
   new : func(airoot) {
-    obj = {};
+    var obj = {};
     obj.parents = [slave_kap140];
     obj.root = airoot;
     obj.base = props.globals.getNode("/autopilot/kap140/buttons", 1);

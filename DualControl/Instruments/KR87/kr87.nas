@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a KR-87 ADF radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -32,7 +31,7 @@ var base = ["instrumentation/adf[0]",
 ###########################################################################
 var master_kr87 = {
   new : func(n) {
-    obj = {};
+    var obj = {};
     obj.parents = [master_kr87];
     obj.base    = props.globals.getNode(base[n]);
     if (obj.base == nil) return;
@@ -68,7 +67,7 @@ var master_kr87 = {
 ###########################################################################
 var slave_kr87 = {
   new : func(n, airoot) {
-    obj = {};
+    var obj = {};
     obj.parents = [slave_kr87];
     obj.airoot  = airoot;
     obj.base    = props.globals.getNode(base[n]);

@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a KX165 NavComm radio over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -32,7 +31,7 @@ var nav_base = ["instrumentation/nav[0]",
 ###########################################################################
 var master_kx165tso = {
   new : func(n) {
-    obj = {};
+    var obj = {};
     obj.parents = [master_kx165tso];
     obj.nav_base  = props.globals.getNode("instrumentation/nav[" ~ n ~ "]");
     obj.comm_base = props.globals.getNode("instrumentation/comm[" ~ n ~ "]");
@@ -69,7 +68,7 @@ var master_kx165tso = {
 ###########################################################################
 var slave_kx165tso = {
   new : func(n, airoot) {
-    obj = {};
+    var obj = {};
     obj.parents = [slave_kx165tso];
     obj.root = airoot;
     obj.nav_base  = props.globals.getNode("instrumentation/nav[" ~ n ~ "]");

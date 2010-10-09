@@ -52,7 +52,7 @@ var master_ctl32 = {
 ###########################################################################
 var slave_ctl32 = {
   new : func(n, airoot) {
-    obj = {};
+    var obj = {};
     obj.parents = [slave_ctl32];
     obj.root = airoot;
     obj.nav_base = props.globals.getNode(nav_base[n]);

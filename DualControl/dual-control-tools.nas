@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal module for dual control over the multiplayer network.
 ##
-##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -32,11 +31,11 @@ var MessageChannel = mp_broadcast.MessageChannel;
 #   offset -             : double
 var Translator = {};
 Translator.new = func (src = nil, dest = nil, factor = 1, offset = 0) {
-  obj = { parents   : [Translator],
-          src       : src,
-          dest      : dest,
-          factor    : factor,
-          offset    : offset };
+  var obj = { parents   : [Translator],
+              src       : src,
+              dest      : dest,
+              factor    : factor,
+              offset    : offset };
   if (obj.src == nil or obj.dest == nil) {
     print("Translator[");
     print("  ", debug.string(obj.src));
@@ -66,11 +65,11 @@ Translator.update = func () {
 #   on_negative_flank - action : func (v)
 var EdgeTrigger = {};
 EdgeTrigger.new = func (n, on_positive_flank, on_negative_flank) {
-  obj = { parents   : [EdgeTrigger],
-          old       : 0,
-          node      : n, 
-          pos_flank : on_positive_flank,
-          neg_flank : on_negative_flank };
+  var obj = { parents   : [EdgeTrigger],
+              old       : 0,
+              node      : n, 
+              pos_flank : on_positive_flank,
+              neg_flank : on_negative_flank };
   if (obj.node == nil) {
     print("EdgeTrigger[");
     print("  ", debug.string(obj.node));
@@ -112,13 +111,13 @@ EdgeTrigger.update = func {
 # An action is triggered when value has stabilized.
 var StableTrigger = {};
 StableTrigger.new = func (src, action) {
-  obj = { parents      : [StableTrigger],
-          src          : src,
-          action       : action,
-          old          : 0,
-          stable_since : 0,
-          wait         : 0,
-          MIN_STABLE   : 0.01 };
+  var obj = { parents      : [StableTrigger],
+              src          : src,
+              action       : action,
+              old          : 0,
+              stable_since : 0,
+              wait         : 0,
+              MIN_STABLE   : 0.01 };
   # Error checking.
   var bad = (obj.src == nil) or (action = nil);
 
@@ -160,13 +159,13 @@ StableTrigger.update = func () {
 #   threshold -  : double
 var MostRecentSelector = {};
 MostRecentSelector.new = func (src1, src2, dest, threshold) {
-  obj = { parents   : [MostRecentSelector],
-          old1      : 0,
-          old2      : 0,
-          src1      : src1,
-          src2      : src2,
-          dest      : dest,
-          thres     : threshold };
+  var obj = { parents   : [MostRecentSelector],
+              old1      : 0,
+              old2      : 0,
+              src1      : src1,
+              src2      : src2,
+              dest      : dest,
+              thres     : threshold };
   if (obj.src1 == nil or obj.src2 == nil or obj.dest == nil) {
     print("MostRecentSelector[");
     print("  ", debug.string(obj.src1));
@@ -202,10 +201,10 @@ MostRecentSelector.update = func {
 #   dest      -  : property node
 var Adder = {};
 Adder.new = func (src1, src2, dest) {
-  obj = { parents : [DeltaAccumulator],
-          src1    : src1,
-          src2    : src2,
-          dest    : dest };
+  var obj = { parents : [DeltaAccumulator],
+              src1    : src1,
+              src2    : src2,
+              dest    : dest };
   if (obj.src1 == nil or obj.src2 == nil or obj.dest == nil) {
     print("Adder[");
     print("  ", debug.string(obj.src1));
@@ -230,10 +229,10 @@ Adder.update = func () {
 #   dest      -  : property node
 var DeltaAdder = {};
 DeltaAdder.new = func (src, dest) {
-  obj = { parents : [DeltaAdder],
-          old     : 0,
-          src     : src,
-          dest    : dest };
+  var obj = { parents : [DeltaAdder],
+              old     : 0,
+              src     : src,
+              dest    : dest };
   if (obj.src == nil or obj.dest == nil) {
     print("DeltaAdder[", debug.string(obj.src), ", ",
           debug.string(obj.dest), "]");
@@ -256,9 +255,9 @@ DeltaAdder.update = func () {
 #   dest      - where the bitmask is stored : property node
 var SwitchEncoder = {};
 SwitchEncoder.new = func (inputs, dest) {
-  obj = { parents : [SwitchEncoder],
-          inputs  : inputs,
-          dest    : dest };
+  var obj = { parents : [SwitchEncoder],
+              inputs  : inputs,
+              dest    : dest };
   # Error checking.
   var bad = (obj.dest == nil);
   foreach (var i; inputs) {
@@ -280,7 +279,7 @@ SwitchEncoder.new = func (inputs, dest) {
 SwitchEncoder.update = func () {
   var v = 0;
   var b = 1;
-  forindex (i; me.inputs) {
+  forindex (var i; me.inputs) {
     if (me.inputs[i].getBoolValue()) {
       v = v + b;
     }
@@ -298,15 +297,15 @@ SwitchEncoder.update = func () {
 # stable input value.
 var SwitchDecoder = {};
 SwitchDecoder.new = func (src, actions) {
-  obj = { parents : [SwitchDecoder],
-          wait         : 0,
-          old          : 0,
-          old_stable   : 0,
-          stable_since : 0,
-          reset        : 1,
-          src          : src,
-          actions      : actions,
-          MIN_STABLE   : 0.1 };
+  var obj = { parents : [SwitchDecoder],
+              wait         : 0,
+              old          : 0,
+              old_stable   : 0,
+              stable_since : 0,
+              reset        : 1,
+              src          : src,
+              actions      : actions,
+              MIN_STABLE   : 0.1 };
   # Error checking.
   var bad = (obj.src == nil);
   foreach (var a; obj.actions) {
@@ -335,7 +334,7 @@ SwitchDecoder.update = func () {
     var ov = me.old_stable;
 # Use this to improve.
 #<cptf> here's the boring version:  var bittest = func(u, b) { while (b) { u = int(u / 2); b -= 1; } u != int(u / 2) * 2; }
-    forindex (i; me.actions) {
+    forindex (var i; me.actions) {
       var m  = math.mod(v, 2);
       var om = math.mod(ov, 2);
       if ((m != om or me.reset)) { me.actions[i](m?1:0); }
@@ -364,16 +363,16 @@ SwitchDecoder.update = func () {
 # non-time critical properties.
 var TDMEncoder = {};
 TDMEncoder.new = func (inputs, dest) {
-  obj = { parents   : [TDMEncoder],
-          inputs    : inputs,
-          channel   : MessageChannel.new(dest,
-                                         func (msg) {
-                                           print("This should not happen!");
-                                         }),
-          MIN_INT   : 0.25,
-          last_time : 0,
-          next_item : 0,
-          old       : [] };
+  var obj = { parents   : [TDMEncoder],
+              inputs    : inputs,
+              channel   : MessageChannel.new(dest,
+                                             func (msg) {
+                                               print("This should not happen!");
+                                             }),
+              MIN_INT   : 0.25,
+              last_time : 0,
+              next_item : 0,
+              old       : [] };
   # Error checking.
   var bad = (dest == nil) or (obj.channel == nil);
   foreach (var i; inputs) {
@@ -431,8 +430,8 @@ TDMEncoder.update = func () {
 # non-time critical properties.
 var TDMDecoder = {};
 TDMDecoder.new = func (src, actions) {
-  obj = { parents      : [TDMDecoder],
-          actions      : actions };
+  var obj = { parents      : [TDMDecoder],
+              actions      : actions };
   obj.channel = MessageChannel.new(src,
                                    func (msg) {
                                      obj.process(msg);

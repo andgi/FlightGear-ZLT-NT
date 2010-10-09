@@ -1,10 +1,9 @@
 ###############################################################################
-## $Id$
 ##
 ## Nasal for dual control of a KI-206 VOR indicator over the multiplayer
 ## network.
 ##
-##  Copyright (C) 2007 - 2008  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -24,7 +23,7 @@ var base = ["instrumentation/nav[0]",
 ###########################################################################
 var master_ki206 = {
   new : func(n) {
-    obj = {};
+    var obj = {};
     obj.parents = [master_ki206];
     obj.base = props.globals.getNode(base[n]);
     return obj;
@@ -41,7 +40,7 @@ var master_ki206 = {
 ###########################################################################
 var slave_ki206 = {
   new : func(n, airoot) {
-    obj = {};
+    var obj = {};
     obj.parents = [slave_ki206];
     obj.root = airoot;
     obj.base = props.globals.getNode(base[n]);
