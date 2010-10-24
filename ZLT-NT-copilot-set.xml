@@ -15,7 +15,7 @@
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.27 2010-10-24 14:49:33 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.28 2010-10-24 17:41:12 anders Exp $</aircraft-version>
   
   <flight-model>null</flight-model>
 
@@ -249,6 +249,38 @@
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
    <file>Aircraft/CitationX/Nasal/Primus1000.nas</file>
   </citation -->
+  <systems>
+   <file>Aircraft/Instruments-3d/kns80/KNS80.nas</file>
+   <script>
+###########################################################################
+# Create aliases to drive a KNS-80 3d model in an AI/MP model. 
+var l_base = "instrumentation/kns-80";
+
+var animate_aimodel = func(airoot) {
+    # Assume the instrument is serviceable.
+    props.globals.initNode(l_base ~ "/serviceable", 1, "BOOL");
+    # Connect local nodes to aliases for the 3d model.
+    foreach (var p;
+             [l_base ~ "/serviceable",
+              l_base ~ "/data-mode",
+              l_base ~ "/displayed-distance",
+              l_base ~ "/displayed-radial",
+              l_base ~ "/display",
+              l_base ~ "/dme-hold",
+              l_base ~ "/flash",
+              l_base ~ "/nav-mode",
+              l_base ~ "/rnav/indicated-distance-nm",
+              l_base ~ "/use",
+              "systems/electrical/outputs/KNS80",
+              "instrumentation/nav/has-gs",
+              "instrumentation/nav/ident",
+              "instrumentation/nav/in-range"]) {
+        airoot.getNode(p, 1).alias(props.globals.getNode(p, 1));
+    }
+}
+###########################################################################
+   </script>
+  </systems>
   <dual_control_tools>
    <file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
   </dual_control_tools>

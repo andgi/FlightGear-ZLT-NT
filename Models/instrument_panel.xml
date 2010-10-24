@@ -130,6 +130,17 @@
   </offsets>
  </model>
 
+ <model>
+  <name>GPS and Navigation system</name>
+  <path>Aircraft/Instruments-3d/kns80/kns80.xml</path>
+  <offsets>
+   <x-m> 0.010</x-m>
+   <y-m>-0.230</y-m>
+   <z-m> 0.460</z-m>
+  </offsets>
+ </model>
+
+
  <!-- Radios. Left to right -->
  <model>
   <name>Comm 1 radio</name>

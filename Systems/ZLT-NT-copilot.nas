@@ -79,6 +79,7 @@ var fake_electrical = func {
     setprop("/systems/electrical/outputs/transponder", 24.0);
     setprop("/systems/electrical/outputs/instrument-lights", 24.0);
     setprop("/systems/electrical/outputs/gps", 24.0);
+    setprop("/systems/electrical/outputs/KNS80", 24.0);
 
     setprop("/instrumentation/clock/flight-meter-hour",0);
 }

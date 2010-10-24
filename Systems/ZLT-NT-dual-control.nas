@@ -424,6 +424,8 @@ var copilot_connect_pilot = func (pilot) {
     EPI.animate_aimodel(pilot);
     # OAT and superheat. Owned by the pilot.
     OAT_superheat.animate_aimodel(pilot);
+    # KNS-80 Integrated NAV System.
+    systems.animate_aimodel(pilot);
 
     return
         [
