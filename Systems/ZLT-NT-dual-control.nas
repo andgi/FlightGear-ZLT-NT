@@ -361,7 +361,8 @@ var pilot_connect_copilot = func (copilot) {
          # Set up TDM transmission of slow state properties.
          DCT.TDMEncoder.new
          (CenterMFD.master_send_state() ~
-          EPI.master_send_state(),
+          EPI.master_send_state() ~
+          OAT_superheat.master_send_state(),
           props.globals.getNode(pilot_TDM3_mpp),
          )
         ];
@@ -421,6 +422,8 @@ var copilot_connect_pilot = func (pilot) {
     CenterMFD.animate_aimodel(pilot);
     # EPI. Owned by the pilot.
     EPI.animate_aimodel(pilot);
+    # OAT and superheat. Owned by the pilot.
+    OAT_superheat.animate_aimodel(pilot);
 
     return
         [
@@ -576,7 +579,8 @@ var copilot_connect_pilot = func (pilot) {
          DCT.TDMDecoder.new
          (pilot.getNode(pilot_TDM3_mpp),
           CenterMFD.slave_receive_master_state() ~
-          EPI.slave_receive_master_state()
+          EPI.slave_receive_master_state() ~
+          OAT_superheat.slave_receive_master_state()
          ),
 
          ######################################################################

@@ -64,6 +64,38 @@
 
  </channel>
 
+ <channel name="OAT and Superheat Indicator">
+
+  <documentation>
+   Provide outside air temperatur and superheat in degF.
+
+   From photos of the cockpit it can be determined that the OAT and superheat
+   indicator shows relative superheat with the range -8 to +20 degC and
+   outside air temperture with the range -20 to +50 degC. 
+  </documentation>
+
+  <fcs_function name="instrumentation/oat-degf">
+   <function>
+    <difference>
+     <property> atmosphere/T-R </property>
+     <value> 459.67 </value>
+    </difference>
+   </function>   
+   <output>/instrumentation/oat-indicator/indicated-oat-degf</output>
+  </fcs_function>
+
+  <fcs_function name="instrumentation/superheat-degf">
+   <function>
+    <difference>
+     <property> buoyant_forces/gas-cell/temp-R </property>
+     <property> atmosphere/T-R </property>
+    </difference>
+   </function>   
+   <output>/instrumentation/superheat-indicator/indicated-superheat-degf</output>
+  </fcs_function>
+
+ </channel>
+
  <documentation>
   Provide exhaust gas temperature in degC.
   The scale of the EGT instrument does not agree well with the EGT computed

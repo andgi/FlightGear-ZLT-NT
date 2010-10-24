@@ -12,7 +12,7 @@
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.49 2010-10-09 18:55:16 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.50 2010-10-24 14:49:33 anders Exp $</aircraft-version>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
@@ -248,6 +248,12 @@
   <envelope-pressure-indicator>
    <serviceable type="bool">1</serviceable>
   </envelope-pressure-indicator>
+  <superheat-indicator>
+   <serviceable type="bool">1</serviceable>
+  </superheat-indicator>
+  <oat-indicator>
+   <serviceable type="bool">1</serviceable>
+  </oat-indicator>
  </instrumentation>
 
  <payload>
@@ -312,6 +318,9 @@
   <EPI>
    <file>Aircraft/ZLT-NT/Models/Instruments/EnvelopePressureIndicator/EPI.nas</file>
   </EPI>
+  <OAT_superheat>
+   <file>Aircraft/ZLT-NT/Models/Instruments/Thermometer/OAT_superheat.nas</file>
+  </OAT_superheat>
   <citation>
    <file>Aircraft/CitationX/Nasal/flightdirector.nas</file>
   </citation>
