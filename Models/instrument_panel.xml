@@ -16,9 +16,9 @@
   <name>DME</name>
   <path>Aircraft/ZLT-NT/DualControl/Instruments/KDI-572/kdi572.xml</path>
   <offsets>
-   <x-m> 0.010</x-m>
-   <y-m> 0.209</y-m>
-   <z-m> 0.725</z-m>
+   <x-m> 0.002</x-m>
+   <y-m> 0.215</y-m>
+   <z-m> 0.730</z-m>
   </offsets>
  </model>
 
@@ -26,7 +26,7 @@
   <name>Backup Attitude Indicator</name>
   <path>Aircraft/Instruments-3d/ai/ai.xml</path>
   <offsets>
-   <x-m> 0.010</x-m>
+   <x-m> 0.005</x-m>
    <y-m> 0.300</y-m>
    <z-m> 0.729</z-m>
   </offsets>
@@ -36,9 +36,9 @@
   <name>PFD</name>
   <path>Aircraft/Instruments-3d/primus-1000/PFD/PFD.xml</path>
   <offsets>
-   <x-m> 0.015</x-m>
+   <x-m> 0.000</x-m>
    <y-m>-0.355</y-m>
-   <z-m> 0.650</z-m>
+   <z-m> 0.645</z-m>
   </offsets>
  </model>
 
@@ -46,9 +46,9 @@
   <name>PFD Nav buttons</name>
   <path>Aircraft/CitationX/Models/Instruments/fmc.xml</path>
   <offsets>
-   <x-m> 0.015</x-m>
+   <x-m> 0.000</x-m>
    <y-m>-0.180</y-m>
-   <z-m> 0.725</z-m>
+   <z-m> 0.720</z-m>
   </offsets>
  </model>
 
@@ -56,7 +56,7 @@
   <name>Envelope Pressure Indicator</name>
   <path>Aircraft/ZLT-NT/Models/Instruments/EnvelopePressureIndicator/pressure_indicator.xml</path>
   <offsets>
-   <x-m> 0.015</x-m>
+   <x-m> 0.000</x-m>
    <y-m>-0.220</y-m>
    <z-m> 0.635</z-m>
   </offsets>
@@ -78,7 +78,7 @@
   <offsets>
    <x-m> 0.010</x-m>
    <y-m> 0.205</y-m>
-   <z-m> 0.632</z-m>
+   <z-m> 0.642</z-m>
   </offsets>
  </model>
  <model>
@@ -87,16 +87,16 @@
   <offsets>
    <x-m> 0.000</x-m>
    <y-m> 0.302</y-m>
-   <z-m> 0.632</z-m>
+   <z-m> 0.642</z-m>
   </offsets>
  </model>
  <model>
   <name>Altimeter</name>
   <path>Aircraft/Instruments-3d/alt-2/alt2-3d.xml</path>
   <offsets>
-   <x-m> 0.010</x-m>
+   <x-m> 0.002</x-m>
    <y-m> 0.391</y-m>
-   <z-m> 0.632</z-m>
+   <z-m> 0.642</z-m>
   </offsets>
  </model>
 
@@ -104,7 +104,7 @@
   <name>OAT and Superheat Indicator</name>
   <path>Aircraft/ZLT-NT/Models/Instruments/Thermometer/thermometer.xml</path>
   <offsets>
-   <x-m> 0.005</x-m>
+   <x-m> 0.002</x-m>
    <y-m>-0.213</y-m>
    <z-m> 0.541</z-m>
   </offsets>
@@ -114,9 +114,9 @@
   <name>Vertical Velocity Indicator</name>
   <path>Aircraft/Instruments-3d/vsi/vsi.xml</path>
   <offsets>
-   <x-m> 0.010</x-m>
+   <x-m> 0.005</x-m>
    <y-m> 0.388</y-m>
-   <z-m> 0.543</z-m>
+   <z-m> 0.553</z-m>
   </offsets>
  </model>
 
@@ -124,9 +124,10 @@
   <name>Chronometer</name>
   <path>Aircraft/Instruments-3d/clock/M877/m877.xml</path>
   <offsets>
-   <x-m> 0.010</x-m>
+   <x-m> 0.000</x-m>
    <y-m>-0.431</y-m>
-   <z-m> 0.505</z-m>
+   <!-- z-m> 0.505</z-m -->
+   <z-m> 0.480</z-m>
   </offsets>
  </model>
 
@@ -134,7 +135,7 @@
   <name>GPS and Navigation system</name>
   <path>Aircraft/Instruments-3d/kns80/kns80.xml</path>
   <offsets>
-   <x-m> 0.010</x-m>
+   <x-m> 0.000</x-m>
    <y-m>-0.230</y-m>
    <z-m> 0.460</z-m>
   </offsets>
