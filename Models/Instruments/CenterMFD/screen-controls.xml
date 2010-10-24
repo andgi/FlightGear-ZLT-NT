@@ -286,7 +286,7 @@
   <type>translate</type>
   <object-name>left_elevator_bar</object-name>
   <property>instrumentation/CenterMFD/controls/elevator-pos-norm</property>
-  <factor>0.00425</factor>
+  <factor>-0.00425</factor>
   <axis>
    <x>0.0</x>
    <y>-0.423</y>
@@ -332,7 +332,7 @@
   <type>translate</type>
   <object-name>right_elevator_bar</object-name>
   <property>instrumentation/CenterMFD/controls/elevator-pos-norm</property>
-  <factor>0.00425</factor>
+  <factor>-0.00425</factor>
   <axis>
    <x>0.0</x>
    <y>0.423</y>

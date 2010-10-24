@@ -346,10 +346,4 @@
   <keyboard include="Systems/ZLT-NT-keys.xml"/>
  </input>
 
- <!-- Temporary workaround for a FG/git bug -->
- <surface-positions>
-  <elevator-pos-norm type="double"/>
-  <rudder-pos-norm type="double"/>
- </surface-positions>
-
 </PropertyList>
