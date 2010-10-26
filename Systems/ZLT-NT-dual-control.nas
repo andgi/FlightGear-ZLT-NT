@@ -26,6 +26,7 @@ var pilot_switches1_mpp  = "sim/multiplay/generic/int[0]";
 var pilot_TDM1_mpp       = "sim/multiplay/generic/string[1]";
 var pilot_TDM2_mpp       = "sim/multiplay/generic/string[2]";
 var pilot_TDM3_mpp       = "sim/multiplay/generic/string[3]";
+var pilot_TDM4_mpp       = "sim/multiplay/generic/string[4]";
 var pilot_hsi_head_mpp   = "sim/multiplay/generic/float[3]";
 var pilot_ai_pitch_mpp   = "sim/multiplay/generic/float[4]";
 var pilot_ai_roll_mpp    = "sim/multiplay/generic/float[5]";
@@ -360,10 +361,15 @@ var pilot_connect_copilot = func (copilot) {
          ##################################################
          # Set up TDM transmission of slow state properties.
          DCT.TDMEncoder.new
-         (CenterMFD.master_send_state() ~
-          EPI.master_send_state() ~
-          OAT_superheat.master_send_state(),
+         (CenterMFD.master_send_state(),
           props.globals.getNode(pilot_TDM3_mpp),
+         ),
+         ##################################################
+         # Set up TDM transmission of slow state properties.
+         DCT.TDMEncoder.new
+         (EPI.master_send_state() ~
+          OAT_superheat.master_send_state(),
+          props.globals.getNode(pilot_TDM4_mpp),
          )
         ];
 }
@@ -580,7 +586,12 @@ var copilot_connect_pilot = func (pilot) {
          # Set up TDM reception of slow state properties.
          DCT.TDMDecoder.new
          (pilot.getNode(pilot_TDM3_mpp),
-          CenterMFD.slave_receive_master_state() ~
+          CenterMFD.slave_receive_master_state()
+         ),
+         ##################################################
+         # Set up TDM reception of slow state properties.
+         DCT.TDMDecoder.new
+         (pilot.getNode(pilot_TDM4_mpp),
           EPI.slave_receive_master_state() ~
           OAT_superheat.slave_receive_master_state()
          ),

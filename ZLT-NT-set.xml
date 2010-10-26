@@ -12,7 +12,7 @@
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.51 2010-10-24 17:41:12 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.52 2010-10-26 18:23:49 anders Exp $</aircraft-version>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
@@ -176,6 +176,7 @@
     <string n="1" type="string"></string> <!-- MP TDM1 -->
     <string n="2" type="string"></string> <!-- MP TDM2 -->
     <string n="3" type="string"></string> <!-- MP TDM3 -->
+    <string n="4" type="string"></string> <!-- MP TDM4 -->
    </generic>
   </multiplay>
 
