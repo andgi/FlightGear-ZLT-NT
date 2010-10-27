@@ -15,7 +15,7 @@
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.28 2010-10-24 17:41:12 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.29 2010-10-27 17:52:10 anders Exp $</aircraft-version>
   
   <flight-model>null</flight-model>
 
@@ -253,6 +253,9 @@
    <file>Aircraft/Instruments-3d/kns80/KNS80.nas</file>
    <script>
 ###########################################################################
+# Make the KNS 80 silent by default.
+props.globals.getNode("instrumentation/nav/ident").setValue(0);
+
 # Create aliases to drive a KNS-80 3d model in an AI/MP model. 
 var l_base = "instrumentation/kns-80";
 

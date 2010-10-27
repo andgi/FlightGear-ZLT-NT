@@ -12,7 +12,7 @@
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.52 2010-10-26 18:23:49 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.53 2010-10-27 17:52:10 anders Exp $</aircraft-version>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
@@ -335,6 +335,10 @@
   </efis>
   <systems>
    <file>Aircraft/Instruments-3d/kns80/KNS80.nas</file>
+   <script>
+    # Make the KNS 80 silent by default.
+    props.globals.getNode("instrumentation/nav/ident").setValue(0);
+   </script>
   </systems>
   <!-- Dual control. -->
   <dual_control_tools>
