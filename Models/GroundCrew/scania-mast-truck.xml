@@ -1,4 +1,4 @@
-<!-- $Id$ -->
+<?xml version="1.0"?>
 <!--
   Mast truck for Zeppelin NT07 airship.
 
@@ -19,6 +19,10 @@
 
   <!-- Currently assumed to be the reverse to the truck heading. -->
   <truck-heading-deg type="string">sim/model/mast-truck/truck-heading-deg</truck-heading-deg>
+
+  <!-- Make the wheels spin and turn when appropriate. -->
+  <speed-kt>sim/model/mast-truck/speed-kt</speed-kt>
+  <steer-angle-norm>sim/model/mast-truck/steer-angle-norm</steer-angle-norm>
  </params>
 
  <path>scania-mast-truck.ac</path>
@@ -282,6 +286,108 @@
   </axis>
  </animation>
 
+ <animation>
+  <type>rotate</type>
+  <object-name>front-wheel-L</object-name>
+  <property alias="../../params/steer-angle-norm"/>
+  <factor>30.0</factor>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m>-3.293</x-m>
+   <y-m>-0.950</y-m>
+   <z-m> 0.501</z-m>
+  </center>
+ </animation>
+ <animation>
+  <type>rotate</type>
+  <object-name>front-wheel-R</object-name>
+  <property alias="../../params/steer-angle-norm"/>
+  <factor>30.0</factor>
+  <axis>
+   <x>0.0</x>
+   <y>0.0</y>
+   <z>1.0</z>
+  </axis>
+  <center>
+   <x-m>-3.293</x-m>
+   <y-m> 0.950</y-m>
+   <z-m> 0.501</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>spin</type>
+  <object-name>front-wheel-L</object-name>
+  <property alias="../../params/speed-kt"/>
+  <factor>-9.0973751</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>-3.293</x-m>
+   <y-m> 0.000</y-m>
+   <z-m> 0.501</z-m>
+  </center>
+ </animation>
+ <animation>
+  <type>spin</type>
+  <object-name>front-wheel-R</object-name>
+  <property alias="../../params/speed-kt"/>
+  <factor>-9.0973751</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m>-3.293</x-m>
+   <y-m> 0.000</y-m>
+   <z-m> 0.501</z-m>
+  </center>
+ </animation>
+
+
+ <animation>
+  <type>spin</type>
+  <object-name>back-wheels-1</object-name>
+  <property alias="../../params/speed-kt"/>
+  <factor>-9.0973751</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m> 0.945</x-m>
+   <y-m> 0.000</y-m>
+   <z-m> 0.502</z-m>
+  </center>
+ </animation>
+
+ <animation>
+  <type>spin</type>
+  <object-name>back-wheels-2</object-name>
+  <property alias="../../params/speed-kt"/>
+  <factor>-9.0973751</factor>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+  <center>
+   <x-m> 2.064</x-m>
+   <y-m> 0.000</y-m>
+   <z-m> 0.502</z-m>
+  </center>
+ </animation>
+
+
  <!-- LOD for the model as a whole =========================================-->
  <animation>
   <type>range</type>
@@ -308,7 +414,10 @@ rplayer.getNode("sim/model/mast-truck/mast-head-heading-deg").
     alias(rplayer.getNode("sim/multiplay/generic/float[3]"));
 rplayer.getNode("sim/model/mast-truck/mast-head-pitch-deg").
     alias(rplayer.getNode("sim/multiplay/generic/float[4]"));
-
+rplayer.getNode("sim/model/mast-truck/speed-kt").
+    alias(rplayer.getNode("sim/multiplay/generic/float[5]"));
+rplayer.getNode("sim/model/mast-truck/steer-angle-norm").
+    alias(rplayer.getNode("surface-positions/rudder-pos-norm"));
 rplayer.getNode("sim/model/mast-truck/truck-heading-deg").
     alias(rplayer.getNode("orientation/true-heading-deg"));
 ##############################################################################
