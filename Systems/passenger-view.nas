@@ -13,14 +13,14 @@ var carConstraint =
     walkview.makeUnionConstraint(
         [
          # Cockpit area.
-         walkview.slopingYAlignedPlane.new([19.1, -0.3, -8.85],
+         walkview.SlopingYAlignedPlane.new([19.1, -0.3, -8.85],
                                            [19.5,  0.3, -8.85]),
          # Passenger cabin.
-         walkview.slopingYAlignedPlane.new([19.5, -0.7, -9.08], 
+         walkview.SlopingYAlignedPlane.new([19.5, -0.7, -9.08], 
                                            [26.4,  0.7, -9.08]),
          # Rear coach. Sit down when entering.
-         walkview.actionConstraint.new
-             (walkview.slopingYAlignedPlane.new([26.4, -0.5, -8.42], 
+         walkview.ActionConstraint.new
+             (walkview.SlopingYAlignedPlane.new([26.4, -0.5, -8.42], 
                                                 [26.7,  0.5, -8.42]),
               func {
                   print("Seated!");
@@ -35,5 +35,5 @@ var carConstraint =
         ]);
 
 # The view manager.
-var walker = walkview.walker.new("Passenger View", carConstraint);
+var walker = walkview.Walker.new("Passenger View", carConstraint);
 
