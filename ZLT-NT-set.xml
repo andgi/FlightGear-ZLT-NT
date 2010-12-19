@@ -302,16 +302,16 @@
    <file>Aircraft/Instruments-3d/clock/M877/M877.nas</file>
   </m877>
   <VHF22>
-   <file>Aircraft/ZLT-NT/DualControl/Instruments/VHF-22/ctl22.nas</file>
+   <file>Aircraft/Generic/DualControl/Instruments/VHF-22/ctl22.nas</file>
   </VHF22>
   <VIR32>
-   <file>Aircraft/ZLT-NT/DualControl/Instruments/VIR-32/ctl32.nas</file>
+   <file>Aircraft/Generic/DualControl/Instruments/VIR-32/ctl32.nas</file>
   </VIR32>
   <KDI572>
-   <file>Aircraft/ZLT-NT/DualControl/Instruments/KDI-572/kdi572.nas</file>
+   <file>Aircraft/Generic/DualControl/Instruments/KDI-572/kdi572.nas</file>
   </KDI572>
   <ADF462>
-   <file>Aircraft/ZLT-NT/DualControl/Instruments/ADF-462/ctl62.nas</file>
+   <file>Aircraft/Generic/DualControl/Instruments/ADF-462/ctl62.nas</file>
   </ADF462>
   <CenterMFD>
    <file>Aircraft/ZLT-NT/Models/Instruments/CenterMFD/CenterMFD.nas</file>
@@ -342,13 +342,13 @@
   </systems>
   <!-- Dual control. -->
   <dual_control_tools>
-   <file>Aircraft/ZLT-NT/DualControl/dual-control-tools.nas</file>
+   <file>Aircraft/Generic/DualControl/dual-control-tools.nas</file>
   </dual_control_tools>
   <aircraft_dual_control>
    <file>Aircraft/ZLT-NT/Systems/ZLT-NT-dual-control.nas</file>
   </aircraft_dual_control>
   <dual_control>
-   <file>Aircraft/ZLT-NT/DualControl/pilot-dual-control.nas</file>
+   <file>Aircraft/Generic/DualControl/pilot-dual-control.nas</file>
   </dual_control>
   <!-- Walk View -->
   <walkview>
