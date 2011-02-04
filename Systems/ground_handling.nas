@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -119,7 +118,7 @@ var mooring = {
     attach_mooring_wire : func {
         var dist = me.active_mooring.getNode("total-distance-ft").getValue();
         if ((dist < MAX_WIRE_LENGTH/FT2M) and
-            (getprop("/position/altitude-agl-ft") < 45.0)) {
+            (getprop("/position/altitude-agl-ft") < MAX_WIRE_LENGTH/2)) {
             me.active_mooring.getNode("winch-speed-fps").setValue(0);
             me.active_mooring.getNode("initial-wire-length-ft").setValue(dist);
             me.active_mooring.getNode("wire-connected").setValue(1.0);

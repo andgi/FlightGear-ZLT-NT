@@ -15,7 +15,7 @@
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.29 2010-10-27 17:52:10 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.30 2011-02-04 21:54:51 anders Exp $</aircraft-version>
   
   <flight-model>null</flight-model>
 
