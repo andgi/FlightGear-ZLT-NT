@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -12,7 +12,7 @@
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
   <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.54 2011-02-04 21:54:51 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.55 2011-02-05 18:41:04 anders Exp $</aircraft-version>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
@@ -22,7 +22,7 @@
    <!-- altitude-agl-ft type="double">6.0</altitude-agl-ft -->
   </presets>
   <startup>
-   <splash-texture>Aircraft/ZLT-NT/ZLT-NT-splash.jpg</splash-texture>
+   <splash-texture>Aircraft/ZLT-NT/splash.png</splash-texture>
   </startup>
 
   <!-- 3d model -->
