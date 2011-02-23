@@ -118,7 +118,7 @@ var mooring = {
     attach_mooring_wire : func {
         var dist = me.active_mooring.getNode("total-distance-ft").getValue();
         if ((dist < MAX_WIRE_LENGTH/FT2M) and
-            (getprop("/position/altitude-agl-ft") < MAX_WIRE_LENGTH/2)) {
+            (getprop("/position/altitude-agl-ft")*FT2M < MAX_WIRE_LENGTH)) {
             me.active_mooring.getNode("winch-speed-fps").setValue(0);
             me.active_mooring.getNode("initial-wire-length-ft").setValue(dist);
             me.active_mooring.getNode("wire-connected").setValue(1.0);
