@@ -11,8 +11,15 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <status>development</status>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.55 2011-02-05 18:41:04 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.56 2011-05-26 18:52:56 anders Exp $</aircraft-version>
+
+  <status type="string">beta</status>
+  <rating>
+   <FDM type="int">2</FDM>
+   <systems type="int">3</systems>
+   <cockpit type="int">3</cockpit>
+   <model type="int">3</model>
+  </rating>
 
   <flight-model>jsb</flight-model>
   <aero>ZLT-NT</aero>
