@@ -1,8 +1,8 @@
-<!-- $Id$ -->
+<?xml version="1.0"?>
 <!--
   Zeppelin NT07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -797,9 +797,14 @@ var strobe =
 ############################################################
 # Load the needed modules if it hasn't been done yet.
 if (!contains(globals, "ZLTNT")) {
-  io.load_nasal(getprop("/sim/fg-root") ~
-                "/Aircraft/ZLT-NT/Systems/mp-network.nas",
-                "ZLTNT");
+  var base = "/ZLT-NT/Systems/mp-network.nas";
+  foreach (var d; props.globals.getNode("/sim").getChildren("fg-aircraft")) {
+    var file = d.getValue() ~ base;
+    if (io.stat(file) != nil) {
+      io.load_nasal(file, "ZLTNT");
+      break;
+    }
+  }
   # Use the minimal remote_mooring instead of mooring.
   ZLTNT.mooring = ZLTNT.remote_mooring;
   # Initialize scenario network as observer.
