@@ -134,9 +134,6 @@
    <electrical>
     <path/>
    </electrical>
-   <autopilot>
-    <path/>
-   </autopilot>
 
    <pitot>
     <name>pitot</name>
