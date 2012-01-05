@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -798,11 +798,17 @@ var strobe =
 # Load the needed modules if it hasn't been done yet.
 if (!contains(globals, "ZLTNT")) {
   var base = "/ZLT-NT/Systems/mp-network.nas";
-  foreach (var d; props.globals.getNode("/sim").getChildren("fg-aircraft")) {
-    var file = d.getValue() ~ base;
-    if (io.stat(file) != nil) {
+  var file = props.globals.getNode("/sim/fg-root").getValue() ~
+             "/Aircraft" ~ base;
+  if (io.stat(file) != nil) {
       io.load_nasal(file, "ZLTNT");
-      break;
+  } else {
+    foreach (var d; props.globals.getNode("/sim").getChildren("fg-aircraft")) {
+      var file = d.getValue() ~ base;
+      if (io.stat(file) != nil) {
+        io.load_nasal(file, "ZLTNT");
+        break;
+      }
     }
   }
   # Use the minimal remote_mooring instead of mooring.
@@ -822,9 +828,8 @@ livery_update.stop();
 beacon.del();
 strobe.del();
 
-# This is done automatically. However, the the module should be shut down
-# if this was its last user.
-#SubmarineScout.ground_crew.remove_remote_ground_crew(rplayer.getPath());
+# The mast truck is removed automatically. However, the the ZLTNT module
+# itself should be shut down if this was its last user.
 
 ##############################################################################
   </unload>
