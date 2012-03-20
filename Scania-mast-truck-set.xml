@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!--
+  Scania mast truck model for FlightGear.
+
+  Copyright (C) 2009 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2009 - 2010  Alexis Bory, author of the 3d model.
+  This file is licensed under the GPL license version 2 or later.
+
+-->
+<PropertyList>
+
+ <sim>
+
+  <description>Scania mast truck</description>
+  <author>Anders Gidenstam, Alexis Bory (3d model)</author>
+  <aircraft-version>$Id: Scania-mast-truck-set.xml,v 1.7 2012/03/20 20:41:13 anders Exp $</aircraft-version>
+
+  <status type="string">alpha</status>
+  <rating>
+   <FDM type="int">1</FDM>
+   <systems type="int">0</systems>
+   <cockpit type="int">0</cockpit>
+   <model type="int">3</model>
+  </rating>
+
+  <flight-model>jsb</flight-model>
+  <aero>Scania-mast-truck</aero>
+
+  <presets>
+   <onground>true</onground>
+  </presets>
+  <startup>
+   <splash-texture>Aircraft/ZLT-NT/splash.png</splash-texture>
+  </startup>
+
+  <sound>
+   <audible>false</audible>
+   <path/>
+  </sound>
+
+  <model>
+   <path>Aircraft/ZLT-NT/Models/GroundCrew/scania-mast-truck.xml</path>
+   <mast-truck>
+    <legs-fold-norm type="double"/>
+    <mast-fold-norm type="double"/>
+    <mast-head-height-m type="double"/>
+    <mast-head-heading-deg type="double"/>
+    <mast-head-pitch-deg type="double"/>
+   </mast-truck>
+  </model>
+
+  <systems>
+
+   <electrical>
+    <path/>
+   </electrical>
+
+   <static>
+   </static>
+
+  </systems>
+  <instrumentation>
+   <path/>
+  </instrumentation>
+
+  <view n="0">
+   <internal archive="y">true</internal>
+   <config>
+    <!-- x/y/z == right/up/back -->
+    <x-offset-m archive="y">-0.7</x-offset-m>
+    <y-offset-m archive="y"> 2.4</y-offset-m>
+    <z-offset-m archive="y">-4.45</z-offset-m>
+    <pitch-offset-deg>-5</pitch-offset-deg>
+    <default-field-of-view-deg type="double">65.0</default-field-of-view-deg>
+   </config>
+  </view>
+
+  <chase-distance-m type="double" archive="y">-25.0</chase-distance-m>
+
+  <multiplay>
+   <generic>
+    <float n="0" alias="/sim/model/mast-truck/legs-fold-norm"/>
+    <float n="1" alias="/sim/model/mast-truck/mast-fold-norm"/>
+    <float n="2" alias="/sim/model/mast-truck/mast-head-height-m"/>
+    <float n="3" alias="/sim/model/mast-truck/mast-head-heading-deg"/>
+    <float n="4" alias="/sim/model/mast-truck/mast-head-pitch-deg"/>
+    <float n="5" alias="/velocities/groundspeed-kt"/>
+   </generic>
+  </multiplay>
+
+  <help>
+   <title>Scania mast truck</title>
+   <key>
+    <name>,</name>
+    <desc>Brakes.</desc>
+   </key>
+   <key>
+    <name>.</name>
+    <desc>Accelerator.</desc>
+   </key>
+   <key>
+    <name>shift+B</name>
+    <desc>Toggle parking brake / legs.</desc>
+   </key>
+   <key>
+    <name>g/G</name>
+    <desc>Fold/unfold mast.</desc>
+   </key>
+   <key>
+    <name>[/]</name>
+    <desc>Extend/retract mast.</desc>
+   </key>
+   <key>
+    <name>R</name>
+    <desc>Toggle reverse gear.</desc>
+   </key>
+  </help>
+
+ </sim>
+
+ <controls>
+  <engines>
+   <engine n="0">
+    <magnetos>3</magnetos>
+   </engine>
+  </engines>
+  <legs>
+   <fold-norm type="double">1.0</fold-norm>
+  </legs>
+  <mast>
+   <fold-norm type="double">1.0</fold-norm>
+   <height-norm type="double">0.0</height-norm>
+  </mast>
+ </controls>
+
+ <engines>
+  <engine>
+   <rpm type="double">700</rpm>
+  </engine>
+ </engines>
+
+ <nasal>
+  <MastTruck>
+   <script><![CDATA[
+###############################################################################
+var mastFold = aircraft.door.new("sim/model/mast-truck/mast", 30, 1.0);
+var legsFold = aircraft.door.new("sim/model/mast-truck/legs", 30, 1.0);
+props.globals.getNode("sim/model/mast-truck/mast-head-height-m").
+    setDoubleValue(8.42);
+
+props.globals.getNode("sim/model/mast-truck/mast-fold-norm").
+    alias(props.globals.getNode("sim/model/mast-truck/mast/position-norm"));
+props.globals.getNode("sim/model/mast-truck/legs-fold-norm").
+    alias(props.globals.getNode("sim/model/mast-truck/legs/position-norm"));
+props.globals.getNode("sim/model/mast-truck/truck-heading-deg").
+    alias(props.globals.getNode("orientation/heading-deg"));
+props.globals.getNode("sim/model/mast-truck/speed-kt").
+    alias(props.globals.getNode("velocities/groundspeed-kt"));
+props.globals.getNode("sim/model/mast-truck/steer-angle-norm").
+    alias(props.globals.getNode("surface-positions/rudder-pos-norm"));
+
+
+var applyParkingBrake = controls.applyParkingBrake;
+controls.applyParkingBrake = func(v) {
+    if (applyParkingBrake(v)) {
+        legsFold.close();
+    } else {
+        legsFold.open();
+    }
+}
+
+controls.gearDown = func(v) {
+    if (v < 0) {
+        mastFold.open();
+    } elsif (v > 0) {
+        mastFold.close();
+    }
+}
+
+var MAX_HEIGHT = 11.92;
+var MIN_HEIGHT = 8.42;
+var cmdId = 0;
+
+var moveMast = func(id, d) {
+    if (id != cmdId) return;
+    var p = "sim/model/mast-truck/mast-head-height-m";
+    var n = controls.slewProp(p, d);
+    n = max(n, MIN_HEIGHT);
+    n = min(n, MAX_HEIGHT);
+    setprop(p, n);
+    settimer(func { moveMast(id, d); }, 0.0);
+}
+
+controls.flapsDown = func(step) {
+    cmdId += 1;
+    if (step != 0) {
+        moveMast(cmdId, -0.1*step);
+    }
+}
+
+var max = func(a, b) { return a >= b ? a : b; }
+var min = func(a, b) { return a <= b ? a : b; }
+
+###############################################################################
+# Debug display - stand in instrumentation.
+var debug_display_view_handler = {
+    init : func {
+        if (contains(me, "left")) return;
+
+        me.left  = screen.display.new(20, 10);
+        me.right = screen.display.new(-250, 20);
+        # Left side displays.
+        me.left.add
+            ("/velocities/groundspeed-kt");
+        me.left.add
+            ("/controls/gear/brake-parking",
+             "sim/model/mast-truck/legs-fold-norm");
+        me.left.add
+            ("/sim/model/mast-truck/mast-fold-norm",
+             "/sim/model/mast-truck/mast-head-height-m");
+        # Right side displays.
+        #me.right.add("",
+        #             "");
+        me.shown = 1;
+        me.stop();
+    },
+    start  : func {
+        if (!me.shown) {
+            me.left.toggle();
+            me.right.toggle();
+        }
+        me.shown = 1;
+    },
+    stop   : func {
+        if (me.shown) {
+            me.left.toggle();
+            me.right.toggle();
+        }
+        me.shown = 0;
+    }
+};
+
+# Install the debug display for some views.
+setlistener("/sim/signals/fdm-initialized", func {
+    view.manager.register("Cockpit View", debug_display_view_handler);
+    print("Debug instrumentation ... check");
+});
+
+###############################################################################
+   ]]>
+   </script>
+  </MastTruck>
+ </nasal>
+
+ <input>
+  <keyboard>
+   <key n="82">
+    <name>R</name>
+    <desc>Toggle reverse gear.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+      var dir = "/fdm/jsbsim/propulsion/engine/yaw-angle-rad";
+      setprop(dir, (getprop(dir) == 0) ? 3.14159265 : 0.0);
+     </script>
+    </binding>
+   </key>
+  </keyboard>
+ </input>
+
+</PropertyList>
