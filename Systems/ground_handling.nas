@@ -2,7 +2,7 @@
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -14,7 +14,6 @@ var LOCAL_MOORING_ALT_OFFSET = 11.8;
 var MAX_WIRE_LENGTH = 100.0 * FT2M;
 
 var init = func(reinit=0) {
-    mooring.init(reinit);
     if (getprop("/sim/presets/onground")) {
         settimer(func {
             # Set up an initial mooring location.
@@ -43,13 +42,10 @@ var init = func(reinit=0) {
     setprop("/sim/model/crew-chief/right-elbow-joint-deg", 90.0);
 }
 
+var _ground_handling_initialized = 0;
 setlistener("/sim/signals/fdm-initialized", func {
-    init();
-    setlistener("/sim/signals/reinit", func(reinit) {
-        if (!reinit.getValue()) {
-            init(reinit=1);
-        }
-    });
+    init(_ground_handling_initialized);
+    _ground_handling_initialized = 1;
 });
 
 ###########################################################################
@@ -57,19 +53,54 @@ setlistener("/sim/signals/fdm-initialized", func {
 var mooring = {
     ##################################################
     init : func(reinit) {
-        me.UPDATE_INTERVAL = 0.0;
-        me.MP_ANNOUNCE_INTERVAL = 60.0;
-        me.loopid = 0;
-        me.last_mp_announce = systime(); 
-        ## Hash containing all supported mooring locations.
-        ## Format:
-        ##   Fixed {position : <coord>, alt_offset : <m>}
-        ##   AI    {base : <node>, alt_offset : <m>}
-        me.moorings = {};
+        if (!reinit) {
+            me.UPDATE_INTERVAL = 0.0;
+            me.MP_ANNOUNCE_INTERVAL = 60.0;
+            # Catalog of possible MP mast carriers.
+            # Format: <model path> : <alt_offset>
+            me.MP_MAST_CARRIERS = {
+                "Aircraft/ZLT-NT/Models/GroundCrew/scania-mast-truck.xml" :
+                    "sim/model/mast-truck/mast-head-height-m",
+            };
+            me.loopid = 0;
+            ## Hash containing all supported mooring locations.
+            ## Format:
+            ##   Fixed {position : <coord>, alt_offset : <m>}
+            ##   AI    {base : <node>, alt_offset : <m>}
+            me.moorings = {};
+            me.model = {local : nil};
+            me.mast_truck_base =
+                props.globals.getNode("/sim/model/mast-truck", 1);
+            # Attach listeners for new MP/AI models
+            setlistener
+                (props.globals.getNode("/ai/models/model-added", 1),
+                 func (path) {
+                     var node = props.globals.getNode(path.getValue());
+                     if (nil == node.getNode("sim/model/path")) return;
+                     var model =
+                         node.getNode("sim/model/path").getValue();
+                     if (contains(mooring.MP_MAST_CARRIERS, model)) {
+                         settimer
+                             (func {
+                                 mooring.add_ai_mooring
+                                     (node,
+                                      mooring.MP_MAST_CARRIERS[model]);
+                                 #print("Added: " ~ path.getValue());
+                              }, 0.0);
+                         
+                     }
+                 });
+            setlistener
+                (props.globals.getNode("/ai/models/model-removed"),
+                 func (path) {
+                     var node = props.globals.getNode(path.getValue());
+                     mooring.remove_ai_mooring(node);
+                     #print("Removed: " ~ path.getValue());
+                 });
+        }
+        me.last_mp_announce = systime();
         me.active_mooring = props.globals.getNode("/fdm/jsbsim/mooring");
-        me.model = {local : nil};
         me.selected = "";
-        me.mast_truck_base = props.globals.getNode("/sim/model/mast-truck", 1);
         me.reset();
         print("ZLT-NT Mooring ... Standing by.");
     },
@@ -89,6 +120,7 @@ var mooring = {
         if (name == "local") {
             announce_fixed_mooring(pos, alt_offset);
         }
+        #print("ZLT-NT Mooring: New fixed mooring " ~ name ~ ".");
     },
     ##################################################
     remove_fixed_mooring : func(name) {
@@ -102,6 +134,7 @@ var mooring = {
         if (name == "") { name = ai.getNode("name").getValue(); }
         me.moorings[name] = { base       : ai,
                               alt_offset : alt_offset };
+        #print("ZLT-NT Mooring: New MP/AI mooring " ~ name ~ ".");
     },
     ##################################################
     remove_ai_mooring : func(ai) {
@@ -213,9 +246,12 @@ var mooring = {
                 if (dual_control_tools.is_num(me.moorings[name].alt_offset)) {
                     offset = me.moorings[name].alt_offset;
                 } else {
+                    # Read the offset property but guard against it still being
+                    # uninitialized.
                     offset =
                         me.moorings[name].base.
-                            getNode(me.moorings[name].alt_offset).getValue();
+                            getNode(me.moorings[name].alt_offset, 1).getValue()
+                        or 0;
                 }
                 me.active_mooring.getNode("altitude-ft").
                     setValue(M2FT * (pos.alt() + offset));
@@ -253,3 +289,6 @@ var mooring = {
         settimer(func { me._loop_(id); }, me.UPDATE_INTERVAL);
     }
 };
+
+# Initialize the mooring singleton right away.
+mooring.init(0);

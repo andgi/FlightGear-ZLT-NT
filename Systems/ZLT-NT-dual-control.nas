@@ -2,7 +2,7 @@
 ##
 ## Nasal for dual control of the ZLT-NT over the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################

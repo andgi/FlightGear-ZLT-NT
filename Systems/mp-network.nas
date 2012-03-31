@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2007 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -90,6 +89,7 @@ remote_mooring.init();
 ###############################################################################
 # Initialization.
 var mp_network_init = func (active_participant=0) {
+    if (broadcast != nil) return; # Already initialized.
     Binary = mp_broadcast.Binary;
     broadcast =
         mp_broadcast.BroadcastChannel.new

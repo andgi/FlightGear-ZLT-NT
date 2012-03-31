@@ -46,16 +46,13 @@ var initial_weighoff = func {
     }, 0.8);
 }
 
-var mp_mast_carriers =
-    ["Aircraft/ZLT-NT/Models/GroundCrew/scania-mast-truck.xml"];
-
 var init_all = func(reinit=0) {
     setprop(static_trim_p, 0.3);
     setprop(ballonet_cmd_p[0], 1.0);
     setprop(ballonet_cmd_p[1], 1.0);
     initial_weighoff();
 
-    fake_electrical();
+    fake_electrical(reinit);
     # Disable the autopilot menu.
     gui.menuEnable("autopilot", 0);
 
@@ -79,49 +76,25 @@ var init_all = func(reinit=0) {
         setprop("controls/engines/engine[2]/propeller-pitch", 0);
     }
 
-    # Timed initialization.
-    settimer(func {
-        # Add some AI moorings.
-        mooring.add_ai_mooring(props.globals.getNode("/ai/models/carrier[0]"),
-                               160.0);
-        mooring.add_ai_mooring(props.globals.getNode("/ai/models/carrier[1]"),
-                               160.0);
-        mooring.add_ai_mooring(props.globals.getNode("/ai/models/carrier[2]"),
-                               160.0);
-        setlistener(props.globals.getNode("/ai/models/model-added", 1),
-                    func (path) {
-                        var node = props.globals.getNode(path.getValue());
-                        if (nil == node.getNode("sim/model/path")) return;
-                        var model = node.getNode("sim/model/path").getValue();
-                        foreach (var c; mp_mast_carriers) {
-                            if (model == c) {
-                                settimer(func {
-                                  mooring.add_ai_mooring
-                                    (node,
-                                     "sim/model/mast-truck/mast-head-height-m");
-                                  print("Added: " ~ path.getValue());
-                                }, 0.0);
-                                return;
-                            }
-                        }
-                    });
-        setlistener(props.globals.getNode("/ai/models/model-removed"),
-                    func (path) {
-                        var node = props.globals.getNode(path.getValue());
-                        mooring.remove_ai_mooring(node);
-                        #print("Removed: " ~ path.getValue());
-                    });
-    }, 1.0);
+    # Add some AI moorings.
+    if (!reinit) {
+        # Timed initialization - the mooring module needs to load first.
+        settimer(func {
+            # Add some AI moorings.
+            foreach (var c;
+                     props.globals.getNode("/ai/models").
+                         getChildren("carrier")) {
+                mooring.add_ai_mooring(c, 160.0);
+            }
+        }, 0.0);
+    }
     print("ZLT-NT Systems ... Check");
 }
 
+var _ZLTNT_initialized = 0;
 setlistener("/sim/signals/fdm-initialized", func {
-    init_all();
-    setlistener("/sim/signals/reinit", func(reinit) {
-        if (!reinit.getValue()) {
-            init_all(reinit=1);
-        }
-    });
+    init_all(_ZLTNT_initialized);
+    _ZLTNT_initialized = 1;
 });
 
 ###############################################################################
@@ -236,7 +209,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 
 ###############################################################################
 # fake part of the electrical system.
-var fake_electrical = func {
+var fake_electrical = func (reinit) {
     setprop("systems/electrical/ac-volts", 24);
     setprop("systems/electrical/volts", 24);
 
@@ -254,16 +227,18 @@ var fake_electrical = func {
 
     setprop("/instrumentation/clock/flight-meter-hour",0);
 
-    var beacon_switch =
-        props.globals.initNode("controls/lighting/beacon", 1, "BOOL");
-    var beacon = aircraft.light.new("sim/model/lights/beacon",
-                                    [0.05, 1.2],
-                                    "/controls/lighting/beacon");
-    var strobe_switch =
-        props.globals.initNode("controls/lighting/strobe", 1, "BOOL");
-    var strobe = aircraft.light.new("sim/model/lights/strobe",
-                                    [0.05, 3],
-                                    "/controls/lighting/strobe");
+    if (!reinit) {
+        var beacon_switch =
+            props.globals.initNode("controls/lighting/beacon", 1, "BOOL");
+        var beacon = aircraft.light.new("sim/model/lights/beacon",
+                                        [0.05, 1.2],
+                                        "/controls/lighting/beacon");
+        var strobe_switch =
+            props.globals.initNode("controls/lighting/strobe", 1, "BOOL");
+        var strobe = aircraft.light.new("sim/model/lights/strobe",
+                                        [0.05, 3],
+                                        "/controls/lighting/strobe");
+    }
 }
 ###############################################################################
 
