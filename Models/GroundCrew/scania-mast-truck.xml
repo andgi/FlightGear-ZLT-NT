@@ -3,7 +3,7 @@
   Mast truck for Zeppelin NT07 airship.
 
   Copyright (C) 2009 - 2010  Alexis Bory, author of the 3d model
-  Copyright (C) 2009 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2009 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -32,6 +32,12 @@
   <y-m> 0.00  </y-m>
   <z-m> 0.00  </z-m>
  </offsets>
+
+ <!-- Rembrandt transparency markup. -->
+ <effect>
+  <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>glass</object-name>
+ </effect>
 
  <animation>
   <type>rotate</type>

@@ -16,6 +16,25 @@
   <z-m> 0.0 </z-m>
  </offsets>
 
+ <!-- Rembrandt transparency markup. -->
+ <effect>
+  <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>window.1</object-name>
+  <object-name>window.2</object-name>
+  <object-name>window.3</object-name>
+  <object-name>window.4</object-name>
+  <object-name>window.5</object-name>
+  <object-name>window.7</object-name>
+  <object-name>Propeller.Fast.1</object-name>
+  <object-name>Propeller.Fast.2</object-name>
+  <object-name>Propeller.Fast.3</object-name>
+  <object-name>Propeller.Fast.4</object-name>
+  <object-name>Propeller.Slow.1</object-name>
+  <object-name>Propeller.Slow.2</object-name>
+  <object-name>Propeller.Slow.3</object-name>
+  <object-name>Propeller.Slow.4</object-name>
+ </effect>
+
  <!-- Livery selection =====================================================-->
  <animation>
   <type>material</type>

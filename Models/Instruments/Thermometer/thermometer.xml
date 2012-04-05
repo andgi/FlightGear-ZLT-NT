@@ -2,7 +2,7 @@
 <!--
   OAT and superheat indicator for Zeppelin NT07 airship.
 
-  Copyright (C) 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2010 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -16,6 +16,12 @@
  </params>
 
  <path>thermometer.ac</path>
+
+ <!-- Rembrandt transparency markup. -->
+ <effect>
+  <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>glass</object-name>
+ </effect>
 
  <animation>
   <type>material</type>
@@ -37,7 +43,7 @@
   <property alias="../../params/indicated-superheat-degf"/>
   <interpolation>
    <entry><ind>36.0</ind><dep>70.0</dep></entry>    <!-- +20.0 degC delta -->
-   <entry><ind>-14.4</ind><dep>-70.0</dep></entry>  <!--  -8.0 degC delat -->
+   <entry><ind>-14.4</ind><dep>-70.0</dep></entry>  <!--  -8.0 degC delta -->
   </interpolation>
   <condition>
    <property alias="../../../params/superheat-serviceable"/>
