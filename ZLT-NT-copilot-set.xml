@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship multiplayer copilot for FlightGear.
 
-  Copyright (C) 2008 - 2011 Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2012 Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <!--
@@ -14,7 +14,7 @@
 
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.32 2011-05-26 18:52:56 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.33 2012/06/10 11:05:17 anders Exp $</aircraft-version>
   
   <status type="string">beta</status>
   <rating>
@@ -261,6 +261,9 @@ var animate_aimodel = func(airoot) {
 ###########################################################################
    </script>
   </systems>
+  <garmin196>
+   <file>Aircraft/Instruments-3d/garmin196/garmin196.nas</file>
+  </garmin196>
   <dual_control_tools>
    <file>Aircraft/Generic/DualControl/dual-control-tools.nas</file>
   </dual_control_tools>

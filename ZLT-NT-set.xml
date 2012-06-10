@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -11,7 +11,7 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.56 2011-05-26 18:52:56 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.57 2012/06/10 11:05:17 anders Exp $</aircraft-version>
 
   <status type="string">beta</status>
   <rating>
@@ -344,6 +344,9 @@
     props.globals.getNode("instrumentation/nav/ident").setValue(0);
    </script>
   </systems>
+  <garmin196>
+   <file>Aircraft/Instruments-3d/garmin196/garmin196.nas</file>
+  </garmin196>
   <!-- Dual control. -->
   <dual_control_tools>
    <file>Aircraft/Generic/DualControl/dual-control-tools.nas</file>

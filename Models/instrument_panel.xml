@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT07 airship.
 
-  Copyright (C) 2008 - 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -141,6 +141,16 @@
   </offsets>
  </model>
 
+ <model>
+  <name>Garmin 196 GPS</name>
+  <path>Aircraft/Instruments-3d/garmin196/garmin196.xml</path>
+  <offsets> 
+   <x-m> 0.050</x-m>
+   <y-m>-0.400</y-m>
+   <z-m> 0.430</z-m>
+   <pitch-deg>-45.0</pitch-deg>
+  </offsets>
+ </model>
 
  <!-- Radios. Left to right -->
  <model>
