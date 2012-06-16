@@ -30,6 +30,18 @@
    <y-m> 0.300</y-m>
    <z-m> 0.729</z-m>
   </offsets>
+  <overlay>
+   <!-- Preliminary instrument lighting. -->
+   <animation n="0">
+    <type>material</type>
+    <emission>
+     <factor-prop>controls/lighting/panel-norm</factor-prop>
+     <red>0.8</red>
+     <green>0.8</green>
+     <blue>0.8</blue>
+    </emission>
+   </animation>
+  </overlay>
  </model>
 
  <model>
@@ -80,7 +92,20 @@
    <y-m> 0.205</y-m>
    <z-m> 0.642</z-m>
   </offsets>
+  <overlay>
+   <!-- Preliminary instrument lighting. -->
+   <animation n="0">
+    <type>material</type>
+    <emission>
+     <factor-prop>controls/lighting/panel-norm</factor-prop>
+     <red>0.8</red>
+     <green>0.8</green>
+     <blue>0.8</blue>
+    </emission>
+   </animation>
+  </overlay>
  </model>
+
  <model>
   <name>Radio Magnetic Indicator</name>
   <path>Aircraft/ZLT-NT/Models/Instruments/RadioMagneticIndicator/rmi.xml</path>
@@ -90,6 +115,7 @@
    <z-m> 0.642</z-m>
   </offsets>
  </model>
+
  <model>
   <name>Altimeter</name>
   <path>Aircraft/Instruments-3d/alt-2/alt2-3d.xml</path>
@@ -98,6 +124,18 @@
    <y-m> 0.391</y-m>
    <z-m> 0.642</z-m>
   </offsets>
+  <overlay>
+   <!-- Preliminary instrument lighting. -->
+   <animation n="0">
+    <type>material</type>
+    <emission>
+     <factor-prop>controls/lighting/panel-norm</factor-prop>
+     <red>0.8</red>
+     <green>0.8</green>
+     <blue>0.8</blue>
+    </emission>
+   </animation>
+  </overlay>
  </model>
 
  <model>
@@ -118,6 +156,18 @@
    <y-m> 0.388</y-m>
    <z-m> 0.553</z-m>
   </offsets>
+  <overlay>
+   <!-- Preliminary instrument lighting. -->
+   <animation n="0">
+    <type>material</type>
+    <emission>
+     <factor-prop>controls/lighting/panel-norm</factor-prop>
+     <red>0.8</red>
+     <green>0.8</green>
+     <blue>0.8</blue>
+    </emission>
+   </animation>
+  </overlay>
  </model>
 
  <model>
@@ -139,6 +189,18 @@
    <y-m>-0.230</y-m>
    <z-m> 0.460</z-m>
   </offsets>
+  <overlay>
+   <!-- Preliminary instrument lighting. -->
+   <animation n="0">
+    <type>material</type>
+    <emission>
+     <factor-prop>controls/lighting/panel-norm</factor-prop>
+     <red>0.8</red>
+     <green>0.8</green>
+     <blue>0.8</blue>
+    </emission>
+   </animation>
+  </overlay>
  </model>
 
  <model>
