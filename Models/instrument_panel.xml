@@ -83,7 +83,7 @@
  </model>
  <model>
   <name>Radio Magnetic Indicator</name>
-  <path>Aircraft/ZLT-NT/Models/Instruments/rmi.xml</path>
+  <path>Aircraft/ZLT-NT/Models/Instruments/RadioMagneticIndicator/rmi.xml</path>
   <offsets>
    <x-m> 0.000</x-m>
    <y-m> 0.302</y-m>
