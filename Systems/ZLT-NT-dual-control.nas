@@ -785,12 +785,17 @@ var copilot_alias_aimodel = func(pilot) {
     # Map some more instrument related properties.
     var panel_props =
         [
-         "systems/electrical/outputs/instrument-lights",
+         "controls/lighting/panel-norm",
          "instrumentation/nav[0]/heading-deg",
-         "instrumentation/adf[0]/indicated-bearing-deg"
+         "instrumentation/nav[1]/heading-deg",
+         "instrumentation/adf[0]/indicated-bearing-deg",
+         "instrumentation/rmi/button[0]",
+         "instrumentation/rmi/button[1]"
         ];
     foreach (var p; panel_props) {
-        pilot.getNode(p, 1).alias(props.globals.getNode(p));
+        pilot.getNode(p, 1).alias(props.globals.getNode(p, 1));
     }
+    # Hide the RMI warning flag.
+    pilot.getNode("instrumentation/heading-indicator/spin").setValue(1.0);
 }
 

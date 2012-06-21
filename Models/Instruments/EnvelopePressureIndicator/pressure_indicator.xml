@@ -3,7 +3,7 @@
   Envelope Pressure Indicator for Zeppelin NT07 airship.
 
   Copyright (C) 2010  Robert Leda
-  Copyright (C) 2010  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2010 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -14,6 +14,8 @@
   <indicated-fwd-ballonet-pressure-psf>instrumentation/envelope-pressure-indicator/indicated-fwd-ballonet-pressure-psf</indicated-fwd-ballonet-pressure-psf>
   <indicated-aft-ballonet-pressure-psf>instrumentation/envelope-pressure-indicator/indicated-aft-ballonet-pressure-psf</indicated-aft-ballonet-pressure-psf>
   <serviceable>instrumentation/envelope-pressure-indicator/serviceable</serviceable>
+
+  <lighting-norm>controls/lighting/panel-norm</lighting-norm>  
  </params>
 
  <!--
@@ -40,10 +42,10 @@
   <object-name>face</object-name>
   <object-name>helium_bar</object-name>
   <emission>
-   <red>0.05</red>
-   <green>0.05</green>
-   <blue>0.05</blue>
-   <factor-prop>systems/electrical/outputs/instrument-lights</factor-prop>
+   <factor-prop alias="../../../params/lighting-norm"/>
+   <red>0.8</red>
+   <green>0.8</green>
+   <blue>0.8</blue>
   </emission>
  </animation>
 
