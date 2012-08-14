@@ -1,9 +1,8 @@
 ###############################################################################
-## $Id$
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2008 - 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -82,6 +81,8 @@ var fake_electrical = func {
     setprop("/systems/electrical/outputs/KNS80", 24.0);
 
     setprop("/instrumentation/clock/flight-meter-hour",0);
+
+    setprop("/controls/lighting/panel-norm", 1.0);
 }
 
 setlistener("/sim/signals/fdm-initialized", func {

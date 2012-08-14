@@ -3,7 +3,7 @@
   Textron-Lycoming IO-360-C(1G6) for JSBSim
 
     Copyright (C) 2004 - 2009  JSBSim
-    Copyright (C) 2009  Anders Gidenstam  (anders(at)gidenstam.org)
+    Copyright (C) 2009 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
     This file is licensed under the GPL license version 2 or later.
 
   <reference
@@ -29,7 +29,7 @@
 
   <sparkfaildrop>             0.1 </sparkfaildrop>
 
-  <minmp unit="INHG">         6.5 </minmp>	<!-- Deprecated -->
+  <minmp unit="INHG">        10.0 </minmp>
   <maxmp unit="INHG">        28.5 </maxmp>	
   <maxthrottle>               1.0  </maxthrottle>
   <minthrottle>               0.1  </minthrottle>

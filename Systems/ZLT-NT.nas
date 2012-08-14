@@ -227,6 +227,8 @@ var fake_electrical = func (reinit) {
 
     setprop("/instrumentation/clock/flight-meter-hour",0);
 
+    setprop("/controls/lighting/panel-norm", 1.0);
+
     if (!reinit) {
         var beacon_switch =
             props.globals.initNode("controls/lighting/beacon", 1, "BOOL");
