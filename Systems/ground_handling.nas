@@ -97,6 +97,22 @@ var mooring = {
                      mooring.remove_ai_mooring(node);
                      #print("Removed: " ~ path.getValue());
                  });
+            # FIXME WORKAROUND: Find the mast truck model.
+            var base = "/ZLT-NT/Models/mooring_truck.xml";
+            var file = props.globals.getNode("/sim/fg-root").getValue() ~
+                "/Aircraft" ~ base;
+            me.model_path = file;
+            if (io.stat(file) == nil) {
+                foreach (var d;
+                         props.globals.getNode("/sim").
+                             getChildren("fg-aircraft")) {
+                    file = d.getValue() ~ base;
+                    if (io.stat(file) != nil) {
+                        me.model_path = file;
+                        break;
+                    }
+                }
+            }
         }
         me.last_mp_announce = systime();
         me.active_mooring = props.globals.getNode("/fdm/jsbsim/mooring");
@@ -114,7 +130,7 @@ var mooring = {
         # Put a mooring mast model here. Note the model specific offset.
         if (me.model[name] != nil) me.model[name].remove();
         me.model[name] =
-            geo.put_model("Aircraft/ZLT-NT/Models/mooring_truck.xml", pos);
+            geo.put_model(me.model_path, pos);
         me.mast_truck_base.getNode("mast-head-height-m", 1).
             setValue(alt_offset);
         if (name == "local") {
