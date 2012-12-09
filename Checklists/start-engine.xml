@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  Zeppelin NT-07 airship for FlightGear.
+
+  Copyright (C) 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+ <!-- Disclaimer: These instructions are derived only from common
+      sense together with certain data from the certificate of
+      airworthiness and have no connection whatsoever to any
+      instructions for the real Zeppelin NT.
+ -->
+ <title>Start Engine List</title>
+ <item>
+  <name>Mixture</name>
+  <value>Rich</value>
+ </item>
+ <item>
+  <name>Engine Speed</name>
+  <value>Low RPM</value>
+ </item>
+ <item>
+  <name>Thrust</name>
+  <value>No thrust (propeller blade angle close to 0)</value>
+ </item>
+ <item>
+  <name>Beacon</name>
+  <value>On</value>
+ </item>
+ <item>
+  <name>Magnetos</name>
+  <value>Both On</value>
+ </item>
+ <item>
+  <name>Engine Starter</name>
+  <value>Start to 500 RPM</value>
+ </item>
+ <item>
+  <name>Engine Speed</name>
+  <value>800-1000RPM</value>
+ </item>
+</PropertyList>

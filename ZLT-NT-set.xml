@@ -11,7 +11,7 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.57 2012/06/10 11:05:17 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.58 2012/12/09 19:47:32 anders Exp $</aircraft-version>
 
   <status type="string">beta</status>
   <rating>
@@ -185,6 +185,8 @@
   </multiplay>
 
   <max-simtime-per-frame n="0" type="double">0.1</max-simtime-per-frame>
+
+  <checklists include="Checklists/checklists.xml"/>
 
   <menubar>
    <default>
