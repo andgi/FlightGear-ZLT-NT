@@ -156,10 +156,14 @@ var debug_display_view_handler = {
         if (contains(me, "left")) return;
 
         me.left  = screen.display.new(20, 10);
+        me.left.format  = "%.5g";
         me.right = screen.display.new(-250, 20);
+        me.right.format = "%.4g";
         # Static condition
         me.left.add
             ("/fdm/jsbsim/instrumentation/gas-pressure-psf");
+        me.left.add
+            ("/fdm/jsbsim/instrumentation/gas-pressure-Pa");
         me.left.add
             ("/fdm/jsbsim/buoyant_forces/gas-cell/ballonet[0]/volume-ft3",
              "/fdm/jsbsim/buoyant_forces/gas-cell/ballonet[1]/volume-ft3");
@@ -183,6 +187,11 @@ var debug_display_view_handler = {
 #                     "/fdm/jsbsim/fcs/throttle-pos-norm[2]");
         me.shown = 1;
         me.stop();
+    },
+    update : func {
+        setprop("/fdm/jsbsim/instrumentation/gas-pressure-Pa",
+                47.880259 *
+                getprop("/fdm/jsbsim/instrumentation/gas-pressure-psf"));
     },
     start  : func {
         if (!me.shown) {
