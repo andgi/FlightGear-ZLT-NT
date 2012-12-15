@@ -34,10 +34,10 @@
  </offsets>
 
  <!-- Rembrandt transparency markup. -->
- <effect>
+ <!-- effect>
   <inherits-from>Effects/model-transparent</inherits-from>
   <object-name>glass</object-name>
- </effect>
+ </effect -->
 
  <animation>
   <type>rotate</type>
