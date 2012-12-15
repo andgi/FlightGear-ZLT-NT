@@ -19,7 +19,9 @@ var debug_display_view_handler = {
         if (contains(me, "left")) return;
 
         me.left  = screen.display.new(20, 10);
+        me.left.format  = "%.5g";
         me.right = screen.display.new(-250, 20);
+        me.right.format = "%.4g";
         # Static condition
         me.left.add
             ("/fdm/jsbsim/instrumentation/gas-pressure-psf");
