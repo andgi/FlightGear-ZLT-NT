@@ -98,7 +98,7 @@ var mooring = {
                      #print("Removed: " ~ path.getValue());
                  });
             me.model_path =
-                getprop("/sim/aircraft-dir") ~ "/Models/mooring_truck.xml";
+                me.find_model_path("ZLT-NT/Models/mooring_truck.xml");
         }
         me.last_mp_announce = systime();
         me.active_mooring = props.globals.getNode("/fdm/jsbsim/mooring");
@@ -283,6 +283,24 @@ var mooring = {
     reset : func {
         me.loopid += 1;
         me._loop_(me.loopid);
+    },
+    ##################################################
+    # filename should include the aircraft's directory.
+    find_model_path : func (filename) {
+        # FIXME WORKAROUND: Search for the model in all aircraft dirs.
+        var base = "/" ~ filename;
+        var file = props.globals.getNode("/sim/fg-root").getValue() ~
+            "/Aircraft" ~ base;
+        if (io.stat(file) != nil) {
+            return file;
+        }
+        foreach (var d;
+                 props.globals.getNode("/sim").getChildren("fg-aircraft")) {
+            file = d.getValue() ~ base;
+            if (io.stat(file) != nil) {
+                return file;
+            }
+        }
     },
     ##################################################
     _loop_ : func(id) {
