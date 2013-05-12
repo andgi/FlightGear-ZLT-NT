@@ -18,7 +18,7 @@
  </item>
  <item>
   <name>Static heaviness</name>
-  <value>Check (between 882 lbs and -441 lbs)x</value>
+  <value>Check (between 882 lbs and -441 lbs)</value>
  </item>
  <item>
   <name>Center of Gravity</name>
@@ -33,11 +33,11 @@
   <value>As needed</value>
  </item>
  <item>
-  <name>Engine Speed</name>
-  <value>2600 - 2700 RPM</value>
- </item>
- <item>
   <name>Mixture</name>
   <value>Rich</value>
+ </item>
+ <item>
+  <name>Engine Speed</name>
+  <value>2600 - 2700 RPM</value>
  </item>
 </PropertyList>

@@ -2,7 +2,7 @@
 ##
 ## Nasal for dual control of the ZLT-NT over the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -27,7 +27,7 @@ var pilot_TDM1_mpp       = "sim/multiplay/generic/string[1]";
 var pilot_TDM2_mpp       = "sim/multiplay/generic/string[2]";
 var pilot_TDM3_mpp       = "sim/multiplay/generic/string[3]";
 var pilot_TDM4_mpp       = "sim/multiplay/generic/string[4]";
-var pilot_hsi_head_mpp   = "sim/multiplay/generic/float[3]";
+var pilot_rmi_head_mpp   = "sim/multiplay/generic/float[3]";
 var pilot_ai_pitch_mpp   = "sim/multiplay/generic/float[4]";
 var pilot_ai_roll_mpp    = "sim/multiplay/generic/float[5]";
 #var pilot_ai_hoffset_mpp = "sim/multiplay/generic/float[6]";
@@ -99,14 +99,14 @@ var l_fuel_flow =
      "engines/engine[2]/fuel-flow-gph"];
 
 # Instruments
-var l_altimeter_setting = "instrumentation/altimeter/setting-inhg";
+var l_altimeter_setting = "instrumentation/altimeter[1]/setting-inhg";
 var l_gas_pressure      = "fdm/jsbsim/instrumentation/gas-pressure-psf";
 var l_ballonet_volume   =
     ["fdm/jsbsim/buoyant_forces/gas-cell/ballonet[0]/volume-ft3",
      "fdm/jsbsim/buoyant_forces/gas-cell/ballonet[1]/volume-ft3"];
 var l_net_lift          = "/fdm/jsbsim/static-condition/net-lift-lbs";
 var l_cg_position       = "/fdm/jsbsim/inertia/cg-x-in";
-var l_hsi_heading = "instrumentation/heading-indicator/indicated-heading-deg";
+var l_rmi_heading = "instrumentation/rmi/indicated-heading-deg";
 var l_ai_pitch    = "instrumentation/attitude-indicator/indicated-pitch-deg";
 var l_ai_roll     = "instrumentation/attitude-indicator/indicated-roll-deg";
 #var l_ai_hoffset  = "instrumentation/attitude-indicator/horizon-offset-deg";
@@ -739,13 +739,16 @@ var copilot_alias_aimodel = func(pilot) {
 
     # Map airspeed for airspeed indicator. This is cheating!
     props.globals.
-        getNode("/instrumentation/airspeed-indicator/indicated-speed-kt", 1).
+        getNode("/instrumentation/airspeed-indicator[0]/indicated-speed-kt", 1).
+            alias(pilot.getNode("velocities/true-airspeed-kt"));
+    props.globals.
+        getNode("/instrumentation/airspeed-indicator[1]/indicated-speed-kt", 1).
             alias(pilot.getNode("velocities/true-airspeed-kt"));
 
-    # Map HSI indicated heading for animation and other uses.
-    pilot.getNode(l_hsi_heading, 1).alias(pilot.getNode(pilot_hsi_head_mpp));
-    props.globals.getNode(l_hsi_heading, 1).
-        alias(pilot.getNode(pilot_hsi_head_mpp));
+    # Map RMI indicated heading for animation and other uses.
+    pilot.getNode(l_rmi_heading, 1).alias(pilot.getNode(pilot_rmi_head_mpp));
+    props.globals.getNode(l_rmi_heading, 1).
+        alias(pilot.getNode(pilot_rmi_head_mpp));
 
     # Map Attitude Indicator for animation. NOTE: global properties.
     props.globals.getNode(l_ai_pitch, 1).
@@ -786,6 +789,7 @@ var copilot_alias_aimodel = func(pilot) {
     var panel_props =
         [
          "controls/lighting/panel-norm",
+         # For the RMI.
          "instrumentation/nav[0]/heading-deg",
          "instrumentation/nav[1]/heading-deg",
          "instrumentation/adf[0]/indicated-bearing-deg",
@@ -796,6 +800,6 @@ var copilot_alias_aimodel = func(pilot) {
         pilot.getNode(p, 1).alias(props.globals.getNode(p, 1));
     }
     # Hide the RMI warning flag.
-    pilot.getNode("instrumentation/heading-indicator/spin").setValue(1.0);
+    pilot.getNode("instrumentation/rmi/spin").setValue(1.0);
 }
 

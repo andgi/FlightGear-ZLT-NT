@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -11,7 +11,7 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.58 2012/12/09 19:47:32 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.59 2013/05/12 12:37:37 anders Exp $</aircraft-version>
 
   <status type="string">beta</status>
   <rating>
@@ -168,7 +168,7 @@
     <float n="1" alias="/fdm/jsbsim/propulsion/engine[1]/pitch-angle-rad"/>
     <float n="2" alias="/fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad"/>
     <float n="3"
-           alias="/instrumentation/heading-indicator/indicated-heading-deg"/>
+           alias="/instrumentation/rmi/indicated-heading-deg"/>
     <float n="4"
            alias="/instrumentation/attitude-indicator/indicated-pitch-deg"/>
     <float n="5"
@@ -252,6 +252,21 @@
  </controls>
 
  <instrumentation>
+  <airspeed-indicator n="0">
+   <serviceable type="bool">1</serviceable>
+  </airspeed-indicator>
+  <airspeed-indicator n="1">
+   <serviceable type="bool">1</serviceable>
+  </airspeed-indicator>
+  <altimeter n="0">
+   <serviceable type="bool">1</serviceable>
+  </altimeter>
+  <altimeter n="1">
+   <serviceable type="bool">1</serviceable>
+  </altimeter>
+  <encoder n="0">
+   <serviceable type="bool">1</serviceable>
+  </encoder>
   <envelope-pressure-indicator>
    <serviceable type="bool">1</serviceable>
   </envelope-pressure-indicator>
@@ -261,6 +276,9 @@
   <oat-indicator>
    <serviceable type="bool">1</serviceable>
   </oat-indicator>
+  <rmi n="0">
+   <serviceable type="bool">1</serviceable>
+  </rmi>
  </instrumentation>
 
  <payload>
