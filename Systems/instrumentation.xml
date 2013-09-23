@@ -125,7 +125,7 @@
   <number>0</number>
   <encoder-path>/instrumentation/encoder</encoder-path>
   <mode>1</mode> <!-- Mode-C. -->
-  <kt70-compatability>true</kt70-compatability> <!-- For the 3d model. -->
+  <kt70-compatibility>true</kt70-compatibility> <!-- For the 3d model. -->
  </transponder>
 
 </PropertyList>
