@@ -10,6 +10,11 @@
 var Binary = nil;
 var broadcast = nil;
 var message_id = nil;
+var MOORING_OWNERS = {
+    "Aircraft/ZLT-NT/Models/ZLT-NT.xml":         1,
+    "Aircraft/ZNP-K/Models/ZNP-K.xml":           1,
+    "Aircraft/Nordstern/Models/Nordstern.xml":   1
+};
 
 ###############################################################################
 # Send message wrappers.
@@ -44,12 +49,11 @@ var handle_message = func (sender, msg) {
 # MP Accept and disconnect handlers.
 var listen_to = func (pilot) {
     if (pilot.getNode("sim/model/path") != nil and
-        streq("Aircraft/ZLT-NT/Models/ZLT-NT.xml",
-              pilot.getNode("sim/model/path").getValue())) {
-#        print("Accepted " ~ pilot.getPath());
+        contains(MOORING_OWNERS, pilot.getNode("sim/model/path").getValue())) {
+#        print("mp-network.nas: Accepted " ~ pilot.getPath());
         return 1;
     } else {
-#        print("Rejected " ~ pilot.getPath());
+#        print("mp-network.nas: Rejected " ~ pilot.getPath());
         return 0;
     }
 }

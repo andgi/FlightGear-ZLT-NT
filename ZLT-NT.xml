@@ -31,7 +31,7 @@
   <email>anders at gidenstam dot org</email>
 
   <filecreationdate>2008-06-10</filecreationdate>
-  <version>$Id: ZLT-NT.xml,v 1.44 2010-07-16 20:20:09 anders Exp $</version>
+  <version>$Id: ZLT-NT.xml,v 1.45 2013/05/12 12:37:37 anders Exp $</version>
 
   <description>JSBSim model of a Zeppelin NT-07 airship.</description>
 
