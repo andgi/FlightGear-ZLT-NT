@@ -2,7 +2,7 @@
 ##
 ## Zeppelin NT-07 airship
 ##
-##  Copyright (C) 2007 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2014  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -68,7 +68,7 @@ var remote_mooring = {
     ##################################################
     init : func {
         me.model = {};
-        me.model_path = me.find_model_path("ZLT-NT/Models/mooring_truck.xml");
+        me.model_path = "Aircraft/ZLT-NT/Models/mooring_truck.xml";
     },
     ##################################################
     add_fixed_mooring : func(pos, alt_offset, key) {
@@ -85,24 +85,6 @@ var remote_mooring = {
     remove_fixed_mooring : func(key) {
         if (!contains(me.model, key)) return;
         if (me.model[key] != nil) me.model[key].remove();
-    },
-    ##################################################
-    # filename should include the aircraft's directory.
-    find_model_path : func (filename) {
-        # FIXME WORKAROUND: Search for the model in all aircraft dirs.
-        var base = "/" ~ filename;
-        var file = props.globals.getNode("/sim/fg-root").getValue() ~
-            "/Aircraft" ~ base;
-        if (io.stat(file) != nil) {
-            return file;
-        }
-        foreach (var d;
-                 props.globals.getNode("/sim").getChildren("fg-aircraft")) {
-            file = d.getValue() ~ base;
-            if (io.stat(file) != nil) {
-                return file;
-            }
-        }
     }
 };
 
