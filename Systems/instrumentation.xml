@@ -132,7 +132,7 @@
  </encoder>
 
  <transponder>
-  <name>kt-70</name>
+  <name>transponder</name>
   <number>0</number>
   <encoder-path>/instrumentation/encoder</encoder-path>
   <mode>1</mode> <!-- Mode-C. -->
