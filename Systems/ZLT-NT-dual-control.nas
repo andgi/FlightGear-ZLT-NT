@@ -2,7 +2,7 @@
 ##
 ## Nasal for dual control of the ZLT-NT over the multiplayer network.
 ##
-##  Copyright (C) 2008 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license version 2 or later.
 ##
 ###############################################################################
@@ -30,7 +30,7 @@ var pilot_TDM4_mpp       = "sim/multiplay/generic/string[4]";
 var pilot_rmi_head_mpp   = "sim/multiplay/generic/float[3]";
 var pilot_ai_pitch_mpp   = "sim/multiplay/generic/float[4]";
 var pilot_ai_roll_mpp    = "sim/multiplay/generic/float[5]";
-#var pilot_ai_hoffset_mpp = "sim/multiplay/generic/float[6]";
+var pilot_ai_hoffset_mpp = "sim/multiplay/generic/float[6]";
 
 var copilot_rudder_mpp   = "surface-positions/rudder-pos-norm";
 var copilot_elevator_mpp = "surface-positions/elevator-pos-norm";
@@ -109,7 +109,7 @@ var l_cg_position       = "/fdm/jsbsim/inertia/cg-x-in";
 var l_rmi_heading = "instrumentation/rmi/indicated-heading-deg";
 var l_ai_pitch    = "instrumentation/attitude-indicator/indicated-pitch-deg";
 var l_ai_roll     = "instrumentation/attitude-indicator/indicated-roll-deg";
-#var l_ai_hoffset  = "instrumentation/attitude-indicator/horizon-offset-deg";
+var l_ai_hoffset  = "instrumentation/attitude-indicator/horizon-offset-deg";
 
 ######################################################################
 # Slow state properties for replication.
@@ -755,8 +755,8 @@ var copilot_alias_aimodel = func(pilot) {
         alias(pilot.getNode(pilot_ai_pitch_mpp));
     props.globals.getNode(l_ai_roll, 1).
         alias(pilot.getNode(pilot_ai_roll_mpp));
-#    props.globals.getNode(l_ai_hoffset, 1).
-#        alias(pilot.getNode(pilot_ai_hoffset_mpp));
+    props.globals.getNode(l_ai_hoffset, 1).
+        alias(pilot.getNode(pilot_ai_hoffset_mpp));
 
     # Map M877 clock properties to pilot 3d model. Local replica.
     var m877_props =

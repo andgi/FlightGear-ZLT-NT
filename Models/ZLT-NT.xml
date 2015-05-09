@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2014  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -17,7 +17,7 @@
  </offsets>
 
  <!-- Rembrandt transparency markup. -->
- <effect>
+ <!-- effect>
   <inherits-from>Effects/model-transparent</inherits-from>
   <object-name>window.1</object-name>
   <object-name>window.2</object-name>
@@ -33,7 +33,19 @@
   <object-name>Propeller.Slow.2</object-name>
   <object-name>Propeller.Slow.3</object-name>
   <object-name>Propeller.Slow.4</object-name>
- </effect>
+ </effect -->
+
+ <!-- Volumetric shadow object =============================================-->
+ <model>
+  <name>shadow</name>
+  <path>Aircraft/ZLT-NT/Models/shadow.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m> 0.00 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> 0.00 </z-m>
+  </offsets>
+ </model>
 
  <!-- Livery selection =====================================================-->
  <animation>
@@ -798,6 +810,9 @@ rplayer.getNode("fdm/jsbsim/propulsion/engine[1]/pitch-angle-rad", 1).
   alias(rplayer.getNode("sim/multiplay/generic/float[1]"));
 rplayer.getNode("fdm/jsbsim/propulsion/engine[2]/pitch-angle-rad", 1).
   alias(rplayer.getNode("sim/multiplay/generic/float[2]"));
+# The shadow-vol effect appears to not yet work over MP.
+#rplayer.getNode("position/altitude-agl-m", 1).
+#  alias(rplayer.getNode("sim/multiplay/generic/float[7]"));
 
 # Set up livery support.
 var livery_update =

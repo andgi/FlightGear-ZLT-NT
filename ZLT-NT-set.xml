@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -11,7 +11,7 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.59 2013/05/12 12:37:37 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.60 2015/05/09 21:26:20 anders Exp $</aircraft-version>
 
   <status type="string">beta</status>
   <rating>
@@ -156,6 +156,11 @@
     <rpm>engines/engine[1]/rpm</rpm>
     <scale>1.0</scale>
    </vacuum>
+
+   <property-rule n="100">
+    <name>altitude-agl-m</name>
+    <path>Aircraft/ZLT-NT/Systems/shadow-pr.xml</path>
+   </property-rule>
   </systems>
 
   <instrumentation>
@@ -173,8 +178,12 @@
            alias="/instrumentation/attitude-indicator/indicated-pitch-deg"/>
     <float n="5"
            alias="/instrumentation/attitude-indicator/indicated-roll-deg"/>
-    <!-- float n="6"
-           alias="/instrumentation/attitude-indicator/horizon-offset-deg"/ -->
+    <float n="6"
+           alias="/instrumentation/attitude-indicator/horizon-offset-deg"/>
+    <!-- The shadow-vol effect appears to not yet work over MP. -->
+    <!-- float n="7"
+           alias="/position/altitude-agl-m"/>
+    -->
     <int n="0" type="int">0</int>         <!-- MP switches 1 -->
     <string n="0" type="string"></string> <!-- MP events -->
     <string n="1" type="string"></string> <!-- MP TDM1 -->
