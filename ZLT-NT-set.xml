@@ -11,7 +11,7 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.60 2015/05/09 21:26:20 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.61 2015/05/13 07:40:14 anders Exp $</aircraft-version>
 
   <status type="string">beta</status>
   <rating>
@@ -156,11 +156,6 @@
     <rpm>engines/engine[1]/rpm</rpm>
     <scale>1.0</scale>
    </vacuum>
-
-   <property-rule n="100">
-    <name>altitude-agl-m</name>
-    <path>Aircraft/ZLT-NT/Systems/shadow-pr.xml</path>
-   </property-rule>
   </systems>
 
   <instrumentation>
