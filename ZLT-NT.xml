@@ -31,7 +31,7 @@
   <email>anders at gidenstam dot org</email>
 
   <filecreationdate>2008-06-10</filecreationdate>
-  <version>$Id: ZLT-NT.xml,v 1.46 2015/05/13 07:40:14 anders Exp $</version>
+  <version>$Id: ZLT-NT.xml,v 1.47 2015/05/19 20:26:53 anders Exp $</version>
 
   <description>JSBSim model of a Zeppelin NT-07 airship.</description>
 
@@ -1317,8 +1317,8 @@
 
  </external_reactions>
 
- <!-- system file="fgfs4jsbsim"/ -->
- <system file="mooring-jsbsim">     <!-- Mooring setup for FlightGear. -->
+ <system file="visual-reference-point-extensions"/>
+ <system file="mooring-jsbsim">
 
   <!--  Mooring -->
   <property value="4000.0"> mooring/mooring-spring-coeff-lbs_ft </property>
@@ -1347,6 +1347,7 @@
   <!-- Added mass constants. -->
   <property value="-0.05"> aero/constants/added-mass/k-axial </property>
   <property value="-0.90"> aero/constants/added-mass/k-traverse </property>
+  <property value="-0.90"> aero/constants/added-mass/k-transverse </property>
   <property value="-0.72"> aero/constants/added-mass/k-rotational </property>
 
   <channel name="Temporary hack to prevent oscillations.">
