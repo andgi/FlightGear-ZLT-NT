@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship multiplayer copilot for FlightGear.
 
-  Copyright (C) 2008 - 2013 Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2017 Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <!--
@@ -14,8 +14,24 @@
 
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.35 2013/05/12 12:37:37 anders Exp $</aircraft-version>
-  
+  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.36 2017/03/23 22:24:19 anders Exp $</aircraft-version>
+  <variant-of>ZLT-NT</variant-of>
+
+  <long-description>
+The Zeppelin NT07 airship is a semi-rigid pressure airship capable of carrying up to 13 passengers.
+  </long-description>
+
+  <tags>
+   <tag>airship</tag>
+   <tag>passenger</tag>
+   <tag>piston</tag>
+   <tag>3-engine</tag>
+   <tag>fixed-gear</tag>
+   <tag>1990s</tag>
+   <tag>2000s</tag>
+   <tag>dual-controls</tag>
+  </tags>
+
   <status type="string">beta</status>
   <rating>
    <FDM type="int">2</FDM>

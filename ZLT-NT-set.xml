@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <PropertyList>
@@ -11,7 +11,22 @@
 
   <description>Zeppelin NT07 airship</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.61 2015/05/13 07:40:14 anders Exp $</aircraft-version>
+  <aircraft-version>$Id: ZLT-NT-set.xml,v 1.62 2017/03/23 22:24:19 anders Exp $</aircraft-version>
+
+  <long-description>
+The Zeppelin NT07 airship is a semi-rigid pressure airship capable of carrying up to 13 passengers.
+  </long-description>
+
+  <tags>
+   <tag>airship</tag>
+   <tag>passenger</tag>
+   <tag>piston</tag>
+   <tag>3-engine</tag>
+   <tag>fixed-gear</tag>
+   <tag>1990s</tag>
+   <tag>2000s</tag>
+   <tag>dual-controls</tag>
+  </tags>
 
   <status type="string">beta</status>
   <rating>
