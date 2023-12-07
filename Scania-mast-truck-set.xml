@@ -2,7 +2,7 @@
 <!--
   Scania mast truck model for FlightGear.
 
-  Copyright (C) 2009 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2009 - 2023  Anders Gidenstam  (anders(at)gidenstam.org)
   Copyright (C) 2009 - 2010  Alexis Bory, author of the 3d model.
   This file is licensed under the GPL license version 2 or later.
 
@@ -13,7 +13,7 @@
 
   <description>Scania mast truck</description>
   <author>Anders Gidenstam, Alexis Bory (3d model)</author>
-  <aircraft-version>$Id: Scania-mast-truck-set.xml,v 1.7 2012/03/20 20:41:13 anders Exp $</aircraft-version>
+  <aircraft-version>2023-12-07</aircraft-version>
 
   <status type="string">alpha</status>
   <rating>
@@ -245,6 +245,9 @@ setlistener("/sim/signals/fdm-initialized", func {
     view.manager.register("Cockpit View", debug_display_view_handler);
     print("Debug instrumentation ... check");
 });
+
+# Disable terrain modelling.
+setprop("sim/fdm/surface/override-level", 1);
 
 ###############################################################################
    ]]>

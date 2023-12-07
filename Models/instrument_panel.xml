@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT07 airship.
 
-  Copyright (C) 2008 - 2013  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2023  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -54,7 +54,7 @@
   </offsets>
  </model>
 
- <model>
+ <!-- model>
   <name>PFD Nav buttons</name>
   <path>Aircraft/CitationX/Models/Instruments/fmc.xml</path>
   <offsets>
@@ -62,7 +62,7 @@
    <y-m>-0.180</y-m>
    <z-m> 0.720</z-m>
   </offsets>
- </model>
+ </model -->
 
  <model>
   <name>Envelope Pressure Indicator</name>

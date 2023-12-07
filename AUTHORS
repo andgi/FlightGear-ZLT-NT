@@ -17,6 +17,8 @@ Syd Adams
   - TDR-94 transponder.
   - Primus-1000 PFD and associated scripts.
   - KDI-572 DME indicator
+  - Flight director (Aircraft/CitationX/Nasal/flightdirector.nas)
+  - FMC             (Aircraft/CitationX/Models/Instruments/fmc.xml)
 
 Jon S. Berndt et. al.
   - FDM engine and original propeller definition. (From JSBSim-CVS)
@@ -26,7 +28,3 @@ David Megginson
 
 Gijs de Rooy
   - Models/Lights/ navigation, beacon and strobe lights. (From 747-400)
-
-Dependencies:
-
-Aircraft/CitationX       (Nasal/flightdirector.nas,Models/Instruments/fmc.xml)
