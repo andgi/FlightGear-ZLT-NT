@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT07 airship for FlightGear.
 
-  Copyright (C) 2008 - 2015  Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2025  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license v2 or later.
 -->
 <PropertyList>
@@ -784,6 +784,113 @@
    <x>0.0</x>
    <y>0.0</y>
    <z>1.0</z>
+  </axis>
+ </animation>
+
+ <!-- Crew =================================================================-->
+ <!-- Pilot -->
+ <model>
+  <name>Pilot</name>
+  <path>Crew/female-pilot.xml</path>
+  <!-- path>Aircraft/Nordstern/Models/Crew/Cursors/cursors.xml</path -->
+  <!-- path>Aircraft/Generic/Human/Models/amelia.xml</path -->
+  <!-- path>Aircraft/Generic/Human/Models/walker-inc.xml</path -->
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m type="double"> 18.90 </x-m>
+   <y-m type="double"> -0.45 </y-m>
+   <z-m type="double"> -9.55 </z-m>
+  </offsets>
+  <overlay>
+  </overlay>
+ </model>
+ <!-- Copilot -->
+ <model>
+  <name>Copilot</name>
+  <path>Crew/male-copilot.xml</path>
+  <!-- path>Aircraft/Nordstern/Models/Crew/Cursors/cursors.xml</path -->
+  <!-- path>Aircraft/Generic/Human/Models/amelia.xml</path -->
+  <!-- path>Aircraft/Generic/Human/Models/walker-inc.xml</path -->
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m type="double"> 18.90 </x-m>
+   <y-m type="double">  0.45 </y-m>
+   <z-m type="double"> -9.55 </z-m>
+  </offsets>
+  <overlay>
+  </overlay>
+ </model>
+ <!-- Passenger -->
+ <model>
+  <name>Passenger View</name>
+  <!-- path>Crew/crew-base.xml</path -->
+  <path>Crew/passenger.xml</path>
+  <offsets>
+   <!-- x/y/z == back/right/up -->
+   <x-m type="double"> 0.00 </x-m>
+   <y-m type="double"> 0.00 </y-m>
+   <z-m type="double"> 0.00 </z-m>
+  </offsets>
+  <overlay>
+   <params>
+    <view-name>Passenger View</view-name>
+    <visible>crew/passenger-view/visible</visible>
+   </params>
+  </overlay>
+ </model>
+ <!-- Connect the Passenger view model with the WalkView stuff. -->
+ <animation>
+  <type>translate</type>
+  <object-name>Passenger View</object-name>
+  <property>crew/passenger-view/position-Z-norm</property>
+  <factor>50</factor>
+  <offset-m>0</offset-m>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>Passenger View</object-name>
+  <property>crew/passenger-view/position-Y-norm</property>
+  <factor>50</factor>
+  <offset-m>0</offset-m>
+  <axis>
+   <x>0</x>
+   <y>1</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>Passenger View</object-name>
+  <property>crew/passenger-view/position-X-norm</property>
+  <factor>50</factor>
+  <offset-m>0</offset-m>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <object-name>Passenger View</object-name>
+  <type>rotate</type>
+  <property>/crew/passenger-view/heading-offset-deg</property>
+  <factor>1</factor>
+  <offset-deg>0</offset-deg>
+  <center>
+   <x-m> 0.00 </x-m>
+   <y-m> 0.00 </y-m>
+   <z-m> 0.00 </z-m>
+  </center>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
   </axis>
  </animation>
 

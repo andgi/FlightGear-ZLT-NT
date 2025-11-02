@@ -2,7 +2,7 @@
 <!--
   Zeppelin NT-07 airship multiplayer copilot for FlightGear.
 
-  Copyright (C) 2008 - 2017 Anders Gidenstam  (anders(at)gidenstam.org)
+  Copyright (C) 2008 - 2017  Anders Gidenstam  (anders(at)gidenstam.org)
   This file is licensed under the GPL license version 2 or later.
 -->
 <!--
@@ -14,7 +14,7 @@
 
   <description>Zeppelin NT07 multiplayer copilot</description>
   <author>Anders Gidenstam</author>
-  <aircraft-version>$Id: ZLT-NT-copilot-set.xml,v 1.36 2017/03/23 22:24:19 anders Exp $</aircraft-version>
+  <aircraft-version>2017-03-23</aircraft-version>
   <variant-of>ZLT-NT</variant-of>
 
   <long-description>
