@@ -793,8 +793,6 @@
   <name>Pilot</name>
   <path>Crew/female-pilot.xml</path>
   <!-- path>Aircraft/Nordstern/Models/Crew/Cursors/cursors.xml</path -->
-  <!-- path>Aircraft/Generic/Human/Models/amelia.xml</path -->
-  <!-- path>Aircraft/Generic/Human/Models/walker-inc.xml</path -->
   <offsets>
    <!-- x/y/z == back/right/up -->
    <x-m type="double"> 18.90 </x-m>
@@ -809,8 +807,6 @@
   <name>Copilot</name>
   <path>Crew/male-copilot.xml</path>
   <!-- path>Aircraft/Nordstern/Models/Crew/Cursors/cursors.xml</path -->
-  <!-- path>Aircraft/Generic/Human/Models/amelia.xml</path -->
-  <!-- path>Aircraft/Generic/Human/Models/walker-inc.xml</path -->
   <offsets>
    <!-- x/y/z == back/right/up -->
    <x-m type="double"> 18.90 </x-m>
@@ -823,8 +819,8 @@
  <!-- Passenger -->
  <model>
   <name>Passenger View</name>
-  <!-- path>Crew/crew-base.xml</path -->
   <path>Crew/passenger.xml</path>
+  <!-- path>Aircraft/Nordstern/Models/Crew/Cursors/cursors.xml</path -->
   <offsets>
    <!-- x/y/z == back/right/up -->
    <x-m type="double"> 0.00 </x-m>
